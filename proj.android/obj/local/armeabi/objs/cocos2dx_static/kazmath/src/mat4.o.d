@@ -1,0 +1,137 @@
+obj/local/armeabi/objs/cocos2dx_static/kazmath/src/mat4.o: \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/src/mat4.c \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/memory.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/assert.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs_elf.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/android/api-level.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdlib.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/string.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/malloc.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/alloca.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/strings.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/types.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdint.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/_types.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/_types.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/_wchar_limits.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/posix_types.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/stddef.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/compiler.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/posix_types.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/types.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/types.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/kernel.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/sysmacros.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformMacros.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/include/ccConfig.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/android/log.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/math.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/limits.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/limits.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/limits.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/internal_types.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/limits.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/syslimits.h \
+ /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/page.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/vec3.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat4.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat3.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/quaternion.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/plane.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/neon_matrix_impl.h
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/memory.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/assert.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs_elf.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/android/api-level.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdlib.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/string.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/malloc.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/alloca.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/strings.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/types.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdint.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/_types.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/_types.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/_wchar_limits.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/posix_types.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/stddef.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/compiler.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/posix_types.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/types.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/types.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/kernel.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/sysmacros.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformMacros.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/include/ccConfig.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/android/log.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/math.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/limits.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/limits.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/limits.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/internal_types.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/limits.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/syslimits.h:
+
+/c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/page.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/vec3.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat4.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat3.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/quaternion.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/plane.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/neon_matrix_impl.h:

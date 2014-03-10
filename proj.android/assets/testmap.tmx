@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="9" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="35747048" tilewidth="32" tileheight="32">
+  <image source="35747048.jpg" width="1000" height="1642"/>
+ </tileset>
+ <tileset firstgid="1582" name="41127228" tilewidth="32" tileheight="32">
+  <image source="../../../warframe/41127228.jpg" width="1151" height="1500"/>
+ </tileset>
+ <layer name="Floor" width="100" height="9">
+  <data encoding="base64" compression="zlib">
+   eJztzjUSQkEQRdFJ/v5XgLtDjvNxzXF32AJ31kDXRH2rTvq6jdE0TdM0TdMkC3vGRBBFDHEkkEQKaWSQRQ55FFBECWUEEETI+39Pcsv+VnG4KXGngSZaaKMDH1300McAQ4wwxgRTzDBHFTXUBfYkt+xvC4ebEnc22GKHPQ444oQzLrjihjseeOKFNz5YYoW1wJ7klv3t63BT4s4PnvXtAQ==
+  </data>
+ </layer>
+ <layer name="Wall" width="100" height="9">
+  <data encoding="base64" compression="zlib">
+   eJzt0lVTlVEUgOFz7MbuQLADuwNBRbE7EcXCRsVuUTCxfx2K3YqJnc/3A77rrTNnzX6u35m1V1UikbjNHaq5yz3u84CHPOIxT3jKM57zgpe84jU1vOEt73jPBz5Syyc+84WvfKMqYP9fbEc7+c4PfvKL3/whkfSoQ13qUZ8GNKQRjWlCU5rRnBak0ZJWtKYNbWlHezrQMRm2H7Id9x/RTjrRmS50pRvd6UE6Pckgk170pg996Ud/BjCQQQwmiyEMZRjDGcFIRjGaMcmw/ZDtuFuIdjKWcYxnAhOZxGSymUIOuUxlGtPJYwYzyWcWs5nDXOYxnwUsZBGLWcJSliXD9kO2424h2slyVrCSVaymgDUUspZ1FLGeDWxkE5spZgtb2cZ2drCTXZSwmz3spZR97A/cD9mOu4VoJwc4yCEOc4SjHOM4JzjJKU5TxhnOUk4F5zjPBS5yictUcoWrXOM6N7jJrcD9kO24W0hNalKTmv9l/gIJygGb
+  </data>
+ </layer>
+</map>
