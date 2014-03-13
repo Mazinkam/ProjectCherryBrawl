@@ -41,7 +41,7 @@ bool EnemyFemale::init()
 		for (i = 1; i < 18; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("Fenemy_attack%03d.png", i)->getCString());
-			frame->setOffset(ccp(13,0));
+			frame->setOffset(ccp(18,0));
 			attackFrames->addObject(frame);
 //			cocos2d::CCLog("Fenemy_attack%02d.png", i);
 

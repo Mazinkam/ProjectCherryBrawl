@@ -7,6 +7,7 @@
 #define SCREEN CCDirector::sharedDirector()->getWinSize()
 #define CENTER ccp(SCREEN.width / 2, SCREEN.height / 2)
 #define CURTIME GetCurTime()
+#define LOG cocos2d::CCLog
 
 // 2 - convenience functions
 #ifndef UINT64_C

@@ -22,7 +22,7 @@ ActionSprite::ActionSprite(void)
 	//attacks
 	_attackAction = NULL;
 	_circleAttackAction = NULL;
-
+	_projectileAttackAction = NULL;
 
 }
 
@@ -51,12 +51,32 @@ void ActionSprite::attack()
 	}
 }
 
+void ActionSprite::circleAttack()
+{
+	if (_actionState == kActionStateIdle || _actionState == kActionStateAttack || _actionState == kActionStateWalk)
+	{
+		this->stopAllActions();
+		this->runAction(_attackAction);
+		_actionState = kActionStateAttack;
+	}
+}
+
+void ActionSprite::projectileAttack()
+{
+	if (_actionState == kActionStateIdle || _actionState == kActionStateAttack || _actionState == kActionStateWalk)
+	{
+		this->stopAllActions();
+		this->runAction(_attackAction);
+		_actionState = kActionStateAttack;
+	}
+}
+
 void ActionSprite::hurtWithDamage(float damage)
 {
 	if (_actionState != kActionStateKnockedOut)
 	{
 		int randomSound = random_range(0, 1);
-	//	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(CCString::createWithFormat("hit%d.wav", randomSound)->getCString());
+		//	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(CCString::createWithFormat("hit%d.wav", randomSound)->getCString());
 		this->stopAllActions();
 		this->runAction(_hurtAction);
 		_actionState = kActionStateHurt;
@@ -120,13 +140,16 @@ BoundingBox ActionSprite::createBoundingBoxWithOrigin(CCPoint origin, CCSize siz
 void ActionSprite::transformBoxes()
 {
 	_hitBox.actual.origin = ccpAdd(this->getPosition(), ccp(_hitBox.original.origin.x, _hitBox.original.origin.y));
+
 	_attackBox.actual.origin = ccpAdd(this->getPosition(), ccp(_attackBox.original.origin.x +
 					(this->getScaleX() == -1 ? (- _attackBox.original.size.width - _hitBox.original.size.width) : 0),
 					_attackBox.original.origin.y));
-	_circleAttackBox.actual.origin = ccpAdd(this->getPosition(), ccp(_circleAttackBox.original.origin.x +
-			(this->getScaleX() == -1 ? (- _circleAttackBox.original.size.width - _hitBox.original.size.width) : 0),
-			_circleAttackBox.original.origin.y));
+
+	_circleAttackBox.actual.origin = ccpAdd(this->getPosition(), ccp(_circleAttackBox.original.origin.x ,
+					_circleAttackBox.original.origin.y));
+
 }
+
 
 void ActionSprite::setPosition(CCPoint position)
 {

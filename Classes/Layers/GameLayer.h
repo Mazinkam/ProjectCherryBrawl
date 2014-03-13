@@ -30,6 +30,9 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 
 		void circleSkill();
 		void firstSkill();
+		void projectileSkill();
+
+
 		void keyBackClicked();
 
 
@@ -40,13 +43,20 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 
 		void mainMenu();
 
+		void draw();
+
 		void update(float dt);
 		void updatePositions();
-		void setViewpointCenter(cocos2d::CCPoint position);
-		void reorderActors();
+		void updateProjectiles();
 		void updateEnemies(float dt);
+		void setViewpointCenter(cocos2d::CCPoint position);
+
+		void reorderActors();
 
 		void endGame();
+
+		void projectileMoveFinished(cocos2d::CCNode* sender);
+
 		void restartGame(cocos2d::CCObject* pSender);
 
 		cocos2d::CCTMXTiledMap *_tileMap;
@@ -54,10 +64,16 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 
 		CC_SYNTHESIZE(HudLayer*, _hud, Hud);
 		CC_SYNTHESIZE(Cherry*, _cherry, Cherry);
+
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
 
-	private:
+		CC_SYNTHESIZE(cocos2d::CCSprite*, _hpBlip, HpBlip);
+
+	protected:
 		bool _bInit;
+	    cocos2d::CCArray *_targets;
+	    cocos2d::CCArray *_projectiles;
+	    cocos2d::CCParticleSystemQuad* m_emitter;
 
 };
 

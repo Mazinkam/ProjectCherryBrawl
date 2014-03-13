@@ -19,10 +19,14 @@ class ActionSprite: public cocos2d::CCSprite
 
 		//action methods
 		void idle();
-		void attack();
 		void hurtWithDamage(float damage);
 		virtual void knockout();
 		void walkWithDirection(cocos2d::CCPoint direction);
+
+		void attack();
+		void circleAttack();
+		void projectileAttack();
+
 
 		//scheduled methods
 		void update(float dt);
@@ -39,6 +43,7 @@ class ActionSprite: public cocos2d::CCSprite
 
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _attackAction, AttackAction);
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _circleAttackAction, CircleAttackAction);
+		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _projectileAttackAction, ProjectileAttackAction);
 
 		//states
 		CC_SYNTHESIZE(ActionState, _actionState, ActionState);
@@ -46,6 +51,7 @@ class ActionSprite: public cocos2d::CCSprite
 		//attributes
 		CC_SYNTHESIZE(float, _walkSpeed, WalkSpeed);
 		CC_SYNTHESIZE(float, _hitPoints, HitPoints);
+		CC_SYNTHESIZE(float, _life, Life);
 		CC_SYNTHESIZE(float, _damage, Damage); //needs different damages for differnet skills
 		CC_SYNTHESIZE(float, _manaPool, ManaPool);
 
@@ -62,6 +68,7 @@ class ActionSprite: public cocos2d::CCSprite
 		//attacks
 		CC_SYNTHESIZE(BoundingBox, _attackBox, AttackBox);
 		CC_SYNTHESIZE(BoundingBox, _circleAttackBox, CircleAttackBox);
+		CC_SYNTHESIZE(BoundingBox, _projectileAttackBox, ProjectileAttackBox);
 };
 
 #endif /* ACTIONSPRITE_H_ */
