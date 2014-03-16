@@ -31,7 +31,6 @@ bool EnemyFemale::init()
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("fenemy_idle%03d.png", i)->getCString());
 			idleFrames->addObject(frame);
-//			cocos2d::CCLog("1 fenemy_idle%03d.png", i);
 		}
 		CCAnimation *idleAnimation = CCAnimation::createWithSpriteFrames(idleFrames, float(1.0 / 12.0));
 		this->setIdleAction(CCRepeatForever::create(CCAnimate::create(idleAnimation)));
@@ -43,8 +42,6 @@ bool EnemyFemale::init()
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("Fenemy_attack%03d.png", i)->getCString());
 			frame->setOffset(ccp(18,0));
 			attackFrames->addObject(frame);
-//			cocos2d::CCLog("Fenemy_attack%02d.png", i);
-
 		}
 		CCAnimation *attackAnimation = CCAnimation::createWithSpriteFrames(attackFrames, float(1.0 / 24.0));
 		this->setAttackAction(CCSequence::create(CCAnimate::create(attackAnimation), CCCallFunc::create(this, callfunc_selector(EnemyFemale::idle)), NULL));
@@ -55,18 +52,16 @@ bool EnemyFemale::init()
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("fenemy_walk%03d.png", i)->getCString());
 			walkFrames->addObject(frame);
-//			cocos2d::CCLog("fenemy_walk%02d.png", i);
 		}
 		CCAnimation *walkAnimation = CCAnimation::createWithSpriteFrames(walkFrames, float(1.0 / 12.0));
 		this->setWalkAction(CCRepeatForever::create(CCAnimate::create(walkAnimation)));
 
 		//hurt animation
-		CCArray *hurtFrames = CCArray::createWithCapacity(1);
-		for (i = 1; i < 2; i++)
+		CCArray *hurtFrames = CCArray::createWithCapacity(2);
+		for (i = 1; i < 3; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("Fenemy_hit%03d.png", i)->getCString());
 			hurtFrames->addObject(frame);
-//			cocos2d::CCLog("Fenemy_hit%02d.png", i);
 
 		}
 		CCAnimation *hurtAnimation = CCAnimation::createWithSpriteFrames(hurtFrames, float(1.0 / 12.0));
@@ -80,8 +75,6 @@ bool EnemyFemale::init()
 			if(i > 3)
 				frame->setOffset(ccp(0,-10));
 			knockedOutFrames->addObject(frame);
-//			cocos2d::CCLog("Fenemy_hit%02d.png", i);
-
 		}
 		CCAnimation *knockedOutAnimation = CCAnimation::createWithSpriteFrames(knockedOutFrames, float(1.0 / 12.0));
 		this->setKnockedOutAction(CCSequence::create(CCAnimate::create(knockedOutAnimation), CCBlink::create(2.0, 10.0), CCRemoveSelf::create(), NULL));

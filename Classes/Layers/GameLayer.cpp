@@ -171,7 +171,7 @@ void GameLayer::updateProjectiles()
 			{
 				if (projectileRect.intersectsRect(enemy->getHitbox().actual))
 				{
-					enemy->hurtWithDamage(_cherry->getDamage());
+					enemy->hurtWithDamage(_cherry->getProjectileDamage());
 					projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::projectileMoveFinished)), NULL));
 					cocos2d::CCLog("enemy->hurtWithDamage(_cherry->getDamage());");
 				}
@@ -268,7 +268,7 @@ void GameLayer::setViewpointCenter(CCPoint position)
 
 void GameLayer::initEnemies()
 {
-	int enemyCount = 5;
+	int enemyCount = 25;
 	this->setEnemies(CCArray::createWithCapacity(enemyCount));
 
 	for (int i = 0; i < enemyCount; i++)
@@ -392,22 +392,6 @@ void GameLayer::initSkillBar()
 {
 	if (_hud != NULL && _hud->getChildByTag(10) == NULL && _bInit == false)
 	{
-		int _skillButtonSize = 76;
-		int _betweenButtons = 60;
-		int _sizeFromSide = 52;
-		int _sidePadding = 20;
-		int _horizPadding = 10;
-
-		int _blipSize = 32;
-		int _blipSpaceSize = 7;
-
-		int _manaSize = 48;
-		int _manaPadding = 15;
-		int _manaSpaceSize = 13;
-
-		int _lifeSize = 50;
-		int _lifeSpaceSize = 10;
-
 		CCMenuItemImage *_goBack = CCMenuItemImage::create(s_PauseOff, s_PauseOn, this, menu_selector(GameLayer::mainMenu));
 
 		_goBack->setPosition(ccp(SCREEN.width - 20, SCREEN.height-20));
@@ -532,6 +516,7 @@ void GameLayer::firstSkill()
 					if (_cherry->getAttackBox().actual.intersectsRect(enemy->getHitbox().actual))
 					{
 						enemy->hurtWithDamage(_cherry->getDamage());
+						_cherry->setManaPool(_cherry->getManaPool() + 0.5f);
 					}
 				}
 			}
@@ -633,7 +618,7 @@ void GameLayer::circleSkill()
 	{
 		_cherry->setManaPool(_cherry->getManaPool() - 3);
 		updateUI();
-		_cherry->attack();
+		_cherry->circleAttack();
 
 		int x = _cherry->getPosition().x;
 		int y = _cherry->getPosition().y;
@@ -683,7 +668,7 @@ void GameLayer::circleSkill()
 				{
 					if (_cherry->getCircleAttackBox().actual.intersectsRect(enemy->getHitbox().actual))
 					{
-						enemy->hurtWithDamage(_cherry->getDamage());
+						enemy->hurtWithDamage(_cherry->getCircleDamage());
 					}
 				}
 			}

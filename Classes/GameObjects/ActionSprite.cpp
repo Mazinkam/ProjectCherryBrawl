@@ -56,17 +56,17 @@ void ActionSprite::circleAttack()
 	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack || _actionState == kActionStateWalk)
 	{
 		this->stopAllActions();
-		this->runAction(_attackAction);
+		this->runAction(_circleAttackAction);
 		_actionState = kActionStateAttack;
 	}
 }
 
 void ActionSprite::projectileAttack()
 {
-	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack  || _actionState == kActionStateWalk)
+	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack || _actionState == kActionStateWalk)
 	{
 		this->stopAllActions();
-		this->runAction(_attackAction);
+		this->runAction(_projectileAttackAction);
 		_actionState = kActionStateAttack;
 	}
 }
@@ -149,7 +149,6 @@ void ActionSprite::transformBoxes()
 					_circleAttackBox.original.origin.y));
 
 }
-
 
 void ActionSprite::setPosition(CCPoint position)
 {
