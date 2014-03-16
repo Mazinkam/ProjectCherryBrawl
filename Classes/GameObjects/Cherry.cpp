@@ -7,10 +7,12 @@
 
 #include "Cherry.h"
 #include "SimpleAudioEngine.h"
+#include "../GameResources.h"
 using namespace cocos2d;
 
 Cherry::Cherry(void)
 {
+
 }
 
 Cherry::~Cherry(void)
@@ -88,6 +90,8 @@ bool Cherry::init()
 		this->setManaPool(3);
 		this->setLife(3);
 		this->setDamage(20.0);
+		this->setProjectileDamage(80.0);
+		this->setCircleDamage(40.0);
 		this->setWalkSpeed(120.0);
 
 		this->setHitbox(this->createBoundingBoxWithOrigin(ccp(-this->getCenterToSides(),
@@ -95,7 +99,7 @@ bool Cherry::init()
 
 		this->setAttackBox(this->createBoundingBoxWithOrigin(ccp(this->getCenterToSides(), -this->getCenterToBottom()), CCSizeMake(40, this->getCenterToBottom()*2)));
 
-		this->setCircleAttackBox(this->createBoundingBoxWithOrigin(ccp(-this->getCenterToSides()*4, -this->getCenterToBottom()*3), CCSizeMake(this->getCenterToSides()*8, this->getCenterToBottom()*6)));
+		this->setCircleAttackBox(this->createBoundingBoxWithOrigin(ccp(-this->getCenterToSides()*6, -this->getCenterToBottom()*6), CCSizeMake(this->getCenterToSides()*13, this->getCenterToBottom()*10)));
 
 		bRet = true;
 	} while (0);

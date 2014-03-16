@@ -208,6 +208,7 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Layers/HudLayer.o: \
  jni/../../Classes/Layers/../GameObjects/Cherry.h \
  jni/../../Classes/Layers/../GameObjects/ActionSprite.h \
  jni/../../Classes/Layers/../GameObjects/../Defines.h \
+ jni/../../Classes/Layers/../GameObjects/../GameResources.h \
  jni/../../Classes/Layers/../GameObjects/EnemyFemale.h \
  jni/../../Classes/Layers/../Scenes/MenuScene.h \
  jni/../../Classes/Layers/../Defines.h
@@ -627,6 +628,8 @@ jni/../../Classes/Layers/../GameObjects/Cherry.h:
 jni/../../Classes/Layers/../GameObjects/ActionSprite.h:
 
 jni/../../Classes/Layers/../GameObjects/../Defines.h:
+
+jni/../../Classes/Layers/../GameObjects/../GameResources.h:
 
 jni/../../Classes/Layers/../GameObjects/EnemyFemale.h:
 

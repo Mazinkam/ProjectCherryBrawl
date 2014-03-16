@@ -10,6 +10,7 @@
 
 #include "cocos2d.h"
 #include "../Defines.h"
+#include "../GameResources.h"
 
 class ActionSprite: public cocos2d::CCSprite
 {
@@ -53,6 +54,8 @@ class ActionSprite: public cocos2d::CCSprite
 		CC_SYNTHESIZE(float, _hitPoints, HitPoints);
 		CC_SYNTHESIZE(float, _life, Life);
 		CC_SYNTHESIZE(float, _damage, Damage); //needs different damages for differnet skills
+		CC_SYNTHESIZE(float, _projectileDamage, ProjectileDamage); //needs different damages for differnet skills
+		CC_SYNTHESIZE(float, _circleDamage, CircleDamage); //needs different damages for differnet skills
 		CC_SYNTHESIZE(float, _manaPool, ManaPool);
 
 		//movement
@@ -69,6 +72,8 @@ class ActionSprite: public cocos2d::CCSprite
 		CC_SYNTHESIZE(BoundingBox, _attackBox, AttackBox);
 		CC_SYNTHESIZE(BoundingBox, _circleAttackBox, CircleAttackBox);
 		CC_SYNTHESIZE(BoundingBox, _projectileAttackBox, ProjectileAttackBox);
+
+
 };
 
 #endif /* ACTIONSPRITE_H_ */

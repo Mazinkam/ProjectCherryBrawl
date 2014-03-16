@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 
+
 // 1 - convenience measurements
 #define SCREEN CCDirector::sharedDirector()->getWinSize()
 #define CENTER ccp(SCREEN.width / 2, SCREEN.height / 2)

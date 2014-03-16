@@ -13,6 +13,7 @@
 #include "../GameObjects/EnemyFemale.h"
 #include "../GameObjects/SimpleDPad.h"
 #include "../Layers/HudLayer.h"
+#include "../GameResources.h"
 
 class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 {
@@ -31,6 +32,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void circleSkill();
 		void firstSkill();
 		void projectileSkill();
+
 
 
 		void keyBackClicked();
@@ -65,15 +67,17 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		CC_SYNTHESIZE(HudLayer*, _hud, Hud);
 		CC_SYNTHESIZE(Cherry*, _cherry, Cherry);
 
-		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
+		CC_SYNTHESIZE(cocos2d::CCArray*, _targets, Targets);
+		CC_SYNTHESIZE(cocos2d::CCArray*, _projectiles, Projectiles);
 
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _hpBlip, HpBlip);
 
+		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
+		CC_SYNTHESIZE_RETAIN( cocos2d::CCParticleSystemQuad*, m_emitter, ParticleSystemQuad);
+
 	protected:
 		bool _bInit;
-	    cocos2d::CCArray *_targets;
-	    cocos2d::CCArray *_projectiles;
-	    cocos2d::CCParticleSystemQuad* m_emitter;
+
 
 };
 

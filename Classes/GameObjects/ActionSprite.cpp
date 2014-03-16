@@ -43,7 +43,7 @@ void ActionSprite::idle()
 //add more states for different atks and sword movements
 void ActionSprite::attack()
 {
-	if (_actionState == kActionStateIdle || _actionState == kActionStateAttack || _actionState == kActionStateWalk)
+	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack || _actionState == kActionStateWalk)
 	{
 		this->stopAllActions();
 		this->runAction(_attackAction);
@@ -53,7 +53,7 @@ void ActionSprite::attack()
 
 void ActionSprite::circleAttack()
 {
-	if (_actionState == kActionStateIdle || _actionState == kActionStateAttack || _actionState == kActionStateWalk)
+	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack || _actionState == kActionStateWalk)
 	{
 		this->stopAllActions();
 		this->runAction(_attackAction);
@@ -63,7 +63,7 @@ void ActionSprite::circleAttack()
 
 void ActionSprite::projectileAttack()
 {
-	if (_actionState == kActionStateIdle || _actionState == kActionStateAttack || _actionState == kActionStateWalk)
+	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack  || _actionState == kActionStateWalk)
 	{
 		this->stopAllActions();
 		this->runAction(_attackAction);

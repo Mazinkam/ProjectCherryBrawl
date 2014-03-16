@@ -208,6 +208,7 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Scenes/GameScene.o: \
  jni/../../Classes/Scenes/../Layers/../GameObjects/Cherry.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/ActionSprite.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/../Defines.h \
+ jni/../../Classes/Scenes/../Layers/../GameObjects/../GameResources.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/EnemyFemale.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/SimpleDPad.h \
  jni/../../Classes/Scenes/../Layers/../Layers/HudLayer.h \
@@ -215,6 +216,7 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Scenes/GameScene.o: \
  jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/Cherry.h \
  jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/EnemyFemale.h \
  jni/../../Classes/Scenes/../Layers/../Layers/../Scenes/MenuScene.h \
+ jni/../../Classes/Scenes/../Layers/../GameResources.h \
  jni/../../Classes/Scenes/../Layers/HudLayer.h
 
 jni/../../Classes/Scenes/GameScene.h:
@@ -633,6 +635,8 @@ jni/../../Classes/Scenes/../Layers/../GameObjects/ActionSprite.h:
 
 jni/../../Classes/Scenes/../Layers/../GameObjects/../Defines.h:
 
+jni/../../Classes/Scenes/../Layers/../GameObjects/../GameResources.h:
+
 jni/../../Classes/Scenes/../Layers/../GameObjects/EnemyFemale.h:
 
 jni/../../Classes/Scenes/../Layers/../GameObjects/SimpleDPad.h:
@@ -646,5 +650,7 @@ jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/Cherry.h:
 jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/EnemyFemale.h:
 
 jni/../../Classes/Scenes/../Layers/../Layers/../Scenes/MenuScene.h:
+
+jni/../../Classes/Scenes/../Layers/../GameResources.h:
 
 jni/../../Classes/Scenes/../Layers/HudLayer.h:
