@@ -7,12 +7,29 @@
 using namespace cocos2d;
 bool showHitBox = true;
 
+int _skillButtonSize = 76;
+int _betweenButtons = 60;
+int _sizeFromSide = 52;
+int _sidePadding = 20;
+int _horizPadding = 10;
+
+int _blipSize = 32;
+int _blipSpaceSize = 7;
+
+int _manaSize = 48;
+int _manaPadding = 15;
+int _manaSpaceSize = 13;
+
+int _lifeSize = 50;
+int _lifeSpaceSize = 10;
+
 GameLayer::GameLayer(void) :
 		_projectiles(NULL)
 {
 	_tileMap = NULL;
 	_cherry = NULL;
 	_enemies = NULL;
+	_manaPool = NULL;
 	_bInit = false;
 
 }
@@ -40,7 +57,12 @@ bool GameLayer::init()
 		// Load audio
 //		CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("superd_theme.ogg");
 //		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("superd_theme.ogg", true);
+		_manaEmptyBall = CCTextureCache::sharedTextureCache()->addImage(s_ManaEmpty);
+		_manaFullBall = CCTextureCache::sharedTextureCache()->addImage(s_ManaFull);
+
 		_projectiles = new CCArray;
+		_manaPool = new CCArray;
+		_hpPool = new CCArray;
 
 		this->setTouchEnabled(true);
 
@@ -123,6 +145,8 @@ void GameLayer::update(float dt)
 	this->setViewpointCenter(_cherry->getPosition());
 
 	this->updateProjectiles();
+	updateUI();
+
 }
 void GameLayer::updateProjectiles()
 {
@@ -185,6 +209,45 @@ void GameLayer::updatePositions()
 		posY = MIN(3 * _tileMap->getTileSize().height + enemy->getCenterToBottom(),
 				MAX(enemy->getCenterToBottom(), enemy->getDesiredPosition().y));
 		enemy->setPosition(ccp(posX, posY));
+	}
+}
+
+void GameLayer::updateUI()
+{
+	CCObject *item;
+	int i = 0;
+	CCARRAY_FOREACH(_manaPool, item)
+	{
+		i++;
+		CCSprite *s = ((cocos2d::CCSprite*) item);
+		if (s != NULL)
+		{
+			if (i <= _cherry->getManaPool())
+			{
+				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaFull));
+			} else
+			{
+				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaEmpty));
+			}
+		}
+	}
+
+	i = 0;
+	CCARRAY_FOREACH(_hpPool, item)
+	{
+		i++;
+		CCSprite *s = ((cocos2d::CCSprite*) item);
+		if (s != NULL)
+		{
+			if (i * 10 <= _cherry->getHitPoints())
+			{
+				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_HpBlip));
+			} else
+			{
+				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_HpBlip));
+				s->setOpacity(10);
+			}
+		}
 	}
 }
 
@@ -369,39 +432,32 @@ void GameLayer::initSkillBar()
 
 		for (int i = 0; i < 6; i++)
 		{
-			CCSprite *_manaOrb = NULL;
+			CCSprite *_manaOrb = CCSprite::create();
 			if (i < _cherry->getManaPool())
 			{
-				_manaOrb = CCSprite::create("MANA_full.png");
+				_manaOrb->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaFull));
 			} else
 			{
-				_manaOrb = CCSprite::create("MANA_empty.png");
+				_manaOrb->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaEmpty));
 			}
 			_manaOrb->setPosition(ccp(SCREEN.width/3.35+ ((_manaSize * i) + (_manaSpaceSize*i)), SCREEN.height/11));
+			_manaOrb->setTag(i);
+			_manaPool->addObject(_manaOrb);
 			_hud->addChild(_manaOrb, 11);
 		}
 
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i <= _cherry->getHitPoints() / 10; i++)
 		{
-			CCSprite *_hpBlip = NULL;
-			if (i * 10 < _cherry->getHitPoints())
+			CCSprite *_hpBlip = CCSprite::create();
+			if (i * 10 <= _cherry->getHitPoints())
 			{
-				_hpBlip = CCSprite::create("HP_blip.png");
+				_hpBlip->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_HpBlip));
 			}
 			_hpBlip->setPosition(ccp(SCREEN.width/3.29+ ((_blipSize * i) + (_blipSpaceSize*i)) - _horizPadding, SCREEN.height/4.8));
+			_hpBlip->setTag(i);
+			_hpPool->addObject(_hpBlip);
 			_hud->addChild(_hpBlip, 7);
 		}
-
-//		for (int i = 0; i < 9; i++)
-//		{
-//			CCSprite *_hpBlip = NULL;
-//			if (i * 10 < _cherry->getHitPoints())
-//			{
-//				_hpBlip = CCSprite::create("HP_blip.png");
-//			}
-//			_hpBlip->setPosition(ccp(SCREEN.width/3.29+ ((_blipSize * i) + (_blipSpaceSize*i)) - _horizPadding, SCREEN.height/4.8));
-//			_hud->addChild(_hpBlip, 7);
-//		}
 
 //		for (int i = 0; i < 6; i++)
 //		{
@@ -484,116 +540,156 @@ void GameLayer::firstSkill()
 
 }
 
+//void GameLayer::projectileSkill()
+//{
+//	if (_cherry->getManaPool() >= 2)
+//	{
+//		_cherry->setManaPool(_cherry->getManaPool() - 2);
+//		_cherry->projectileAttack();
+//
+//		updateUI();
+//
+//		m_emitter = new CCParticleSystemQuad();
+//		std::string filename = "Particles/Phoenix.plist";
+//		m_emitter->initWithFile(filename.c_str());
+//
+//		// texture
+//		m_emitter->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
+//
+//		// additive
+//		m_emitter->setBlendAdditive(true);
+//		m_emitter->setDuration(1.2f);
+//
+//		m_emitter->setPosition(_cherry->getScaleX() == -1 ? (projectile->getPositionX() - 20) : (projectile->getPositionX() + 50), projectile->getPositionY());
+//		m_emitter->setAutoRemoveOnFinish(true);
+//
+//		this->addChild(m_emitter, 20);
+//		m_emitter->runAction(CCSequence::create(CCMoveTo::create(realMoveDuration, realDest), NULL));
+//	}
+//
+//}
+
 void GameLayer::projectileSkill()
 {
-	_cherry->projectileAttack();
+	if (_cherry->getManaPool() >= 2)
+	{
+		_cherry->setManaPool(_cherry->getManaPool() - 2);
+		_cherry->projectileAttack();
 
-	CCSprite *projectile = CCSprite::create("stars-grayscale.png");
-	projectile->setPosition(ccp(_cherry->getPositionX(), _cherry->getPositionY()));
+		updateUI();
+		CCSprite *projectile = CCSprite::create("stars-grayscale.png");
+		projectile->setPosition(ccp(_cherry->getPositionX(), _cherry->getPositionY()));
 
-	// Ok to add now - we've double checked position
-	this->addChild(projectile);
+		// Ok to add now - we've double checked position
+		this->addChild(projectile);
 
-	// Determine where we wish to shoot the projectile to
-	int realX = _cherry->getPositionX() + (_cherry->getScaleX() == -1 ? (-SCREEN.width) : SCREEN.width);
-	int realY = _cherry->getPositionY();
+		// Determine where we wish to shoot the projectile to
+		int realX = _cherry->getPositionX() + (_cherry->getScaleX() == -1 ? (-SCREEN.width) : SCREEN.width);
+		int realY = _cherry->getPositionY();
 
-	CCPoint realDest = ccp(realX, realY);
+		CCPoint realDest = ccp(realX, realY);
 
-	// Determine the length of how far we're shooting
-	int offRealX = realX - _cherry->getPositionX();
-	int offRealY = realY - _cherry->getPositionY();
+		// Determine the length of how far we're shooting
+		int offRealX = realX - _cherry->getPositionX();
+		int offRealY = realY - _cherry->getPositionY();
 
-	float length = sqrtf((offRealX * offRealX) + (offRealY * offRealY));
+		float length = sqrtf((offRealX * offRealX) + (offRealY * offRealY));
 
-	float velocity = 480 / 1; // 480pixels/1sec
+		float velocity = 480 / 1; // 480pixels/1sec
 
-	float realMoveDuration = length / velocity;
+		float realMoveDuration = length / velocity;
 
-	// Move projectile to actual endpoint
-	projectile->runAction(CCSequence::create(CCMoveTo::create(realMoveDuration, realDest), CCBlink::create(1.0, 3.0), CCCallFuncN::create(this, callfuncN_selector(GameLayer::projectileMoveFinished)), NULL));
+		// Move projectile to actual endpoint
+		projectile->runAction(CCSequence::create(CCMoveTo::create(realMoveDuration, realDest), CCBlink::create(1.0, 3.0), CCCallFuncN::create(this, callfuncN_selector(GameLayer::projectileMoveFinished)), NULL));
 
-	// Add to projectiles array
-	projectile->setTag(2);
+		// Add to projectiles array
+		projectile->setTag(2);
 
-	_projectiles->addObject(projectile);
+		_projectiles->addObject(projectile);
 
-	m_emitter = new CCParticleSystemQuad();
-	std::string filename = "Particles/Phoenix.plist";
-	m_emitter->initWithFile(filename.c_str());
+		m_emitter = new CCParticleSystemQuad();
+		std::string filename = "Particles/Phoenix.plist";
+		m_emitter->initWithFile(filename.c_str());
 
-	// texture
-	m_emitter->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
+		// texture
+		m_emitter->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
 
-	// additive
-	m_emitter->setBlendAdditive(true);
-	m_emitter->setDuration(1.2f);
+		// additive
+		m_emitter->setBlendAdditive(true);
+		m_emitter->setDuration(1.2f);
 
-	m_emitter->setPosition(projectile->getPositionX(), projectile->getPositionY());
-	m_emitter->setAutoRemoveOnFinish(true);
+		m_emitter->setPosition(_cherry->getScaleX() == -1 ? (projectile->getPositionX() - 20) : (projectile->getPositionX() + 50), projectile->getPositionY());
+		m_emitter->setAutoRemoveOnFinish(true);
 
-	this->addChild(m_emitter, 20);
-	m_emitter->runAction(CCSequence::create(CCMoveTo::create(realMoveDuration, realDest), NULL));
+		this->addChild(m_emitter, 20);
+		m_emitter->runAction(CCSequence::create(CCMoveTo::create(realMoveDuration, realDest), NULL));
+	}
 
 }
 
 void GameLayer::circleSkill()
 {
-	_cherry->attack();
-
-	int x = _cherry->getPosition().x;
-	int y = _cherry->getPosition().y;
-
-	m_emitter = CCParticleFlower::create();
-
-	m_emitter->setPosVar(CCPointZero);
-
-	m_emitter->initWithTotalParticles(300);
-
-	m_emitter->setLifeVar(0);
-	m_emitter->setLife(0.5f);
-	m_emitter->setSpeed(400);
-	m_emitter->setSpeedVar(20);
-	m_emitter->setEmissionRate(10000);
-
-	m_emitter->setStartSpin(10.0f);
-	m_emitter->setStartSpinVar(2.0f);
-	m_emitter->setEndSpin(30.0f);
-	m_emitter->setEndSpinVar(5.0f);
-
-	m_emitter->setDuration(0.5f);
-
-	m_emitter->setStartSize(4.0f);
-	m_emitter->setStartSizeVar(2.0f);
-	m_emitter->setEndSize(30.0f);
-	m_emitter->setEndSizeVar(5.0f);
-
-	// texture
-	m_emitter->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
-
-	// additive
-	m_emitter->setBlendAdditive(true);
-
-	m_emitter->setPosition(x, y);
-	m_emitter->setAutoRemoveOnFinish(true);
-
-	this->addChild(m_emitter, 20);
-
-	if (_cherry->getActionState() == kActionStateAttack)
+	if (_cherry->getManaPool() >= 3)
 	{
-		CCObject *pObject = NULL;
-		CCARRAY_FOREACH(_enemies, pObject)
+		_cherry->setManaPool(_cherry->getManaPool() - 3);
+		updateUI();
+		_cherry->attack();
+
+		int x = _cherry->getPosition().x;
+		int y = _cherry->getPosition().y;
+
+		m_emitter = CCParticleFlower::create();
+
+		m_emitter->setPosVar(CCPointZero);
+
+		m_emitter->initWithTotalParticles(300);
+
+		m_emitter->setLifeVar(0);
+		m_emitter->setLife(0.5f);
+		m_emitter->setSpeed(400);
+		m_emitter->setSpeedVar(20);
+		m_emitter->setEmissionRate(10000);
+
+		m_emitter->setStartSpin(10.0f);
+		m_emitter->setStartSpinVar(2.0f);
+		m_emitter->setEndSpin(30.0f);
+		m_emitter->setEndSpinVar(5.0f);
+
+		m_emitter->setDuration(0.5f);
+
+		m_emitter->setStartSize(4.0f);
+		m_emitter->setStartSizeVar(2.0f);
+		m_emitter->setEndSize(30.0f);
+		m_emitter->setEndSizeVar(5.0f);
+
+// texture
+		m_emitter->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
+
+// additive
+		m_emitter->setBlendAdditive(true);
+
+		m_emitter->setPosition(x, y);
+		m_emitter->setAutoRemoveOnFinish(true);
+
+		this->addChild(m_emitter, 20);
+
+		if (_cherry->getActionState() == kActionStateAttack)
 		{
-			EnemyFemale *enemy = (EnemyFemale*) pObject;
-			if (enemy->getActionState() != kActionStateKnockedOut)
+			CCObject *pObject = NULL;
+			CCARRAY_FOREACH(_enemies, pObject)
 			{
-				if (_cherry->getCircleAttackBox().actual.intersectsRect(enemy->getHitbox().actual))
+				EnemyFemale *enemy = (EnemyFemale*) pObject;
+				if (enemy->getActionState() != kActionStateKnockedOut)
 				{
-					enemy->hurtWithDamage(_cherry->getDamage());
+					if (_cherry->getCircleAttackBox().actual.intersectsRect(enemy->getHitbox().actual))
+					{
+						enemy->hurtWithDamage(_cherry->getDamage());
+					}
 				}
 			}
 		}
 	}
+
 }
 void GameLayer::draw()
 {
@@ -639,7 +735,8 @@ void GameLayer::projectileMoveFinished(CCNode* sender)
 	{
 		_projectiles->removeObject(sprite);
 
-		this->removeChild(m_emitter, true);
+		if (m_emitter->isActive())
+			this->removeChild(m_emitter, true);
 
 		m_emitter = new CCParticleSystemQuad();
 		std::string filename = "Particles/Phoenix.plist";
@@ -667,7 +764,7 @@ void GameLayer::endGame()
 {
 	CCMenuItemImage *goBack = CCMenuItemImage::create("retryOn.png", "retryOff.png", this, menu_selector(GameLayer::restartGame));
 
-	// Place the menu item bottom-right conner.
+// Place the menu item bottom-right conner.
 	goBack->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width/2, CCDirector::sharedDirector()->getWinSize().height/2));
 
 	CCMenu* pMenu = CCMenu::create(goBack, NULL);

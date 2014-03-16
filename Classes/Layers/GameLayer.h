@@ -32,8 +32,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void circleSkill();
 		void firstSkill();
 		void projectileSkill();
-
-
+//		void energyCharge();
 
 		void keyBackClicked();
 
@@ -49,12 +48,12 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 
 		void update(float dt);
 		void updatePositions();
+		void updateUI();
 		void updateProjectiles();
 		void updateEnemies(float dt);
 		void setViewpointCenter(cocos2d::CCPoint position);
 
 		void reorderActors();
-
 		void endGame();
 
 		void projectileMoveFinished(cocos2d::CCNode* sender);
@@ -70,10 +69,16 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		CC_SYNTHESIZE(cocos2d::CCArray*, _targets, Targets);
 		CC_SYNTHESIZE(cocos2d::CCArray*, _projectiles, Projectiles);
 
+		CC_SYNTHESIZE(cocos2d::CCArray*, _hpPool, HpPool);
+		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _manaPool, ManaPool);
+
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _hpBlip, HpBlip);
 
+		CC_SYNTHESIZE_RETAIN(cocos2d::CCTexture2D*, _manaEmptyBall, ManaEmptyBall);
+		CC_SYNTHESIZE_RETAIN(cocos2d::CCTexture2D*, _manaFullBall, ManaFullBall);
+
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
-		CC_SYNTHESIZE_RETAIN( cocos2d::CCParticleSystemQuad*, m_emitter, ParticleSystemQuad);
+		CC_SYNTHESIZE_RETAIN(cocos2d::CCParticleSystemQuad*, m_emitter, ParticleSystemQuad);
 
 	protected:
 		bool _bInit;
