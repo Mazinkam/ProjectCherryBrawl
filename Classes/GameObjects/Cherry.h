@@ -20,8 +20,6 @@ public:
 	bool init();
 	void knockout();
 
-	CC_SYNTHESIZE(bool* , _castProjectile, CastProjectile);
-
 };
 
 

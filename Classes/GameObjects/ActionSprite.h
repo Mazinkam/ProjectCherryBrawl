@@ -22,12 +22,13 @@ class ActionSprite: public cocos2d::CCSprite
 		void idle();
 		void hurtWithDamage(float damage);
 		virtual void knockout();
+		virtual void splitEnemy();
 		void walkWithDirection(cocos2d::CCPoint direction);
 
 		void attack();
 		void circleAttack();
 		void projectileAttack();
-
+		void splitAttack();
 
 		//scheduled methods
 		void update(float dt);
@@ -42,9 +43,13 @@ class ActionSprite: public cocos2d::CCSprite
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _hurtAction, HurtAction);
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _knockedOutAction, KnockedOutAction);
 
+
+
+
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _attackAction, AttackAction);
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _circleAttackAction, CircleAttackAction);
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _projectileAttackAction, ProjectileAttackAction);
+		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _splittingAction, SplittingAction);
 
 		//states
 		CC_SYNTHESIZE(ActionState, _actionState, ActionState);
@@ -53,10 +58,14 @@ class ActionSprite: public cocos2d::CCSprite
 		CC_SYNTHESIZE(float, _walkSpeed, WalkSpeed);
 		CC_SYNTHESIZE(float, _hitPoints, HitPoints);
 		CC_SYNTHESIZE(float, _life, Life);
-		CC_SYNTHESIZE(float, _damage, Damage); //needs different damages for differnet skills
-		CC_SYNTHESIZE(float, _projectileDamage, ProjectileDamage); //needs different damages for differnet skills
-		CC_SYNTHESIZE(float, _circleDamage, CircleDamage); //needs different damages for differnet skills
+		CC_SYNTHESIZE(float, _damage, Damage);
+		CC_SYNTHESIZE(float, _projectileDamage, ProjectileDamage);
+		CC_SYNTHESIZE(float, _circleDamage, CircleDamage);
+		CC_SYNTHESIZE(float, _splitDamage, SplitDamage);
 		CC_SYNTHESIZE(float, _manaPool, ManaPool);
+
+
+		CC_SYNTHESIZE(std::string, _SpriteType, SpriteType);
 
 		//movement
 		CC_SYNTHESIZE(cocos2d::CCPoint, _velocity, Velocity);
@@ -72,6 +81,7 @@ class ActionSprite: public cocos2d::CCSprite
 		CC_SYNTHESIZE(BoundingBox, _attackBox, AttackBox);
 		CC_SYNTHESIZE(BoundingBox, _circleAttackBox, CircleAttackBox);
 		CC_SYNTHESIZE(BoundingBox, _projectileAttackBox, ProjectileAttackBox);
+		CC_SYNTHESIZE(BoundingBox, _splitAttackBox, SplitAttackBox);
 
 
 };

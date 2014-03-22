@@ -67,23 +67,36 @@ bool EnemyFemale::init()
 		CCAnimation *hurtAnimation = CCAnimation::createWithSpriteFrames(hurtFrames, float(1.0 / 12.0));
 		this->setHurtAction(CCSequence::create(CCAnimate::create(hurtAnimation), CCCallFunc::create(this, callfunc_selector(EnemyFemale::idle)), NULL));
 
+		//splitting animation
+		CCArray *splittingFrames = CCArray::createWithCapacity(5);
+		for (i = 1; i < 6; i++)
+		{
+			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("fenemy_split%03d.png", i)->getCString());
+			splittingFrames->addObject(frame);
+
+		}
+		CCAnimation *splittingAnimation = CCAnimation::createWithSpriteFrames(splittingFrames, float(1.0 / 12.0));
+		this->setSplittingAction(CCSequence::create(CCAnimate::create(splittingAnimation), CCFadeOut::create(3), CCRemoveSelf::create(true), NULL));
+
 		//knocked out animation
 		CCArray *knockedOutFrames = CCArray::createWithCapacity(4);
 		for (i = 1; i < 5; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("Fenemy_hit%03d.png", i)->getCString());
-			if(i > 3)
+			if (i > 3)
 				frame->setOffset(ccp(0,-10));
 			knockedOutFrames->addObject(frame);
 		}
 		CCAnimation *knockedOutAnimation = CCAnimation::createWithSpriteFrames(knockedOutFrames, float(1.0 / 12.0));
-		this->setKnockedOutAction(CCSequence::create(CCAnimate::create(knockedOutAnimation), CCBlink::create(2.0, 10.0), CCRemoveSelf::create(), NULL));
+		this->setKnockedOutAction(CCSequence::create(CCAnimate::create(knockedOutAnimation), CCBlink::create(2.0, 10.0), CCRemoveSelf::create(true), NULL));
 
 		this->setWalkSpeed(80.0);
 		this->setCenterToBottom(39.0);
 		this->setCenterToSides(29.0);
 		this->setHitPoints(100.0);
-		this->setDamage(10.0);
+		this->setDamage(5.0);
+
+		this->setSpriteType("Common");
 
 		this->setHitbox(this->createBoundingBoxWithOrigin(ccp(-this->getCenterToSides(),
 				-this->getCenterToBottom()),

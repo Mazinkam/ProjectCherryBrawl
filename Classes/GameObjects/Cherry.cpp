@@ -61,6 +61,7 @@ bool Cherry::init()
 		CCAnimation *attackProjectileAnimation = CCAnimation::createWithSpriteFrames(attackProjectileFrames, float(1.0 / 24.0));
 		this->setProjectileAttackAction(CCSequence::create(CCAnimate::create(attackProjectileAnimation), CCCallFunc::create(this, callfunc_selector(Cherry::idle)), NULL));
 
+
 		//attack radius animation
 		CCArray *attackCircleFrames = CCArray::createWithCapacity(3);
 		for (i = 1; i < 4; i++)
@@ -114,12 +115,16 @@ bool Cherry::init()
 		this->setCircleDamage(80.0);
 		this->setWalkSpeed(160.0);
 
+		this->setSpriteType("Cherry");
+
 		this->setHitbox(this->createBoundingBoxWithOrigin(ccp(-this->getCenterToSides(),
 				-this->getCenterToBottom()), CCSizeMake(this->getCenterToSides() * 2, this->getCenterToBottom() * 2)));
 
 		this->setAttackBox(this->createBoundingBoxWithOrigin(ccp(this->getCenterToSides(), -this->getCenterToBottom()), CCSizeMake(40, this->getCenterToBottom()*2)));
 
 		this->setCircleAttackBox(this->createBoundingBoxWithOrigin(ccp(-this->getCenterToSides()*6, -this->getCenterToBottom()*6), CCSizeMake(this->getCenterToSides()*13, this->getCenterToBottom()*10)));
+
+		this->setSplitAttackBox(this->createBoundingBoxWithOrigin(ccp(-this->getCenterToSides()*12, -this->getCenterToBottom()*5), CCSizeMake(this->getCenterToSides()*30, this->getCenterToBottom()*10)));
 
 		bRet = true;
 	} while (0);

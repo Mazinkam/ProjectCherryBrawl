@@ -23,6 +23,7 @@ ActionSprite::ActionSprite(void)
 	_attackAction = NULL;
 	_circleAttackAction = NULL;
 	_projectileAttackAction = NULL;
+	_splittingAction = NULL;
 
 }
 
@@ -84,6 +85,7 @@ void ActionSprite::hurtWithDamage(float damage)
 
 		if (_hitPoints <= 0)
 		{
+			LOG("KNOCKED OUT");
 			this->knockout();
 		}
 	}
@@ -95,6 +97,20 @@ void ActionSprite::knockout()
 	this->runAction(_knockedOutAction);
 	_hitPoints = 0;
 	_actionState = kActionStateKnockedOut; // k prefix is konstant!, _ for memeber variables
+}
+
+void ActionSprite::splitEnemy()
+{
+	if (_SpriteType == "Common")
+	{
+		this->stopAllActions();
+		this->runAction(_splittingAction);
+		_hitPoints = 0;
+		_actionState = kActionStateKnockedOut; // k prefix is konstant!, _ for memeber variables
+	} else
+	{
+		this->hurtWithDamage(50);
+	}
 }
 
 void ActionSprite::walkWithDirection(CCPoint direction)
@@ -147,6 +163,9 @@ void ActionSprite::transformBoxes()
 
 	_circleAttackBox.actual.origin = ccpAdd(this->getPosition(), ccp(_circleAttackBox.original.origin.x ,
 					_circleAttackBox.original.origin.y));
+
+	_splitAttackBox.actual.origin = ccpAdd(this->getPosition(), ccp(_splitAttackBox.original.origin.x ,
+			_splitAttackBox.original.origin.y));
 
 }
 

@@ -1,7 +1,7 @@
 /*
  * GameResources.h
  *
- *  Created on: 15.3.2014
+ *  Created on: 22.3.2014
  *      Author: user
  */
 
@@ -23,7 +23,6 @@ static const char s_LifeCherry[] = "LIFE.png";
 
 static const char s_ManaEmpty[] = "MANA_empty.png";
 static const char s_ManaFull[] = "MANA_full.png";
-
 
 static const char s_PauseOn[] = "PAUSE_on.png";
 static const char s_PauseOff[] = "PAUSE_off.png";

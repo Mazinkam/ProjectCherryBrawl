@@ -28,11 +28,12 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void initCherry();
 		void initEnemies();
 		void initSkillBar();
+		void initStartCutscene();
 
 		void circleSkill();
 		void firstSkill();
 		void projectileSkill();
-//		void energyCharge();
+		void SplitSkill();
 
 		void keyBackClicked();
 
@@ -56,32 +57,28 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void reorderActors();
 		void endGame();
 
-		void projectileMoveFinished(cocos2d::CCNode* sender);
+		void objectRemoval(cocos2d::CCNode* sender);
 
 		void restartGame(cocos2d::CCObject* pSender);
 
 		cocos2d::CCTMXTiledMap *_tileMap;
-		cocos2d::CCSpriteBatchNode *_actorsTest;
+		cocos2d::CCSpriteBatchNode *_actorsAtlas;
 
 		CC_SYNTHESIZE(HudLayer*, _hud, Hud);
 		CC_SYNTHESIZE(Cherry*, _cherry, Cherry);
 
-		CC_SYNTHESIZE(cocos2d::CCArray*, _targets, Targets);
+		CC_SYNTHESIZE(cocos2d::CCArray*, _cherryText, CherryText);
+		CC_SYNTHESIZE(cocos2d::CCArray*, _enemyText, EnemyText);
+		CC_SYNTHESIZE(cocos2d::CCArray*, _BossText, BossText);
+
 		CC_SYNTHESIZE(cocos2d::CCArray*, _projectiles, Projectiles);
-
-		CC_SYNTHESIZE(cocos2d::CCArray*, _hpPool, HpPool);
-		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _manaPool, ManaPool);
-
-		CC_SYNTHESIZE(cocos2d::CCSprite*, _hpBlip, HpBlip);
-
-		CC_SYNTHESIZE_RETAIN(cocos2d::CCTexture2D*, _manaEmptyBall, ManaEmptyBall);
-		CC_SYNTHESIZE_RETAIN(cocos2d::CCTexture2D*, _manaFullBall, ManaFullBall);
 
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCParticleSystemQuad*, m_emitter, ParticleSystemQuad);
 
 	protected:
 		bool _bInit;
+		bool _dialougeState;
 
 
 };
