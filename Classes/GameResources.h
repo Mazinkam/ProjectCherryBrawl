@@ -27,8 +27,11 @@ static const char s_ManaFull[] = "MANA_full.png";
 static const char s_PauseOn[] = "PAUSE_on.png";
 static const char s_PauseOff[] = "PAUSE_off.png";
 
-static const char s_PlayOn[] = "playOn.png";
-static const char s_PlayOff[] = "playOff.png";
+static const char s_PlayOn[] = "play_on.png";
+static const char s_PlayOff[] = "play_off.png";
+
+static const char s_ControlsOn[] = "controls_on.png";
+static const char s_ControlsOff[] = "controls_off.png";
 
 static const char s_RetryOn[] = "retryOn.png";
 static const char s_RetryOff[] = "retryOff.png";
@@ -47,7 +50,8 @@ static const char s_Skill_4_Off[] = "SKILL4_off.png";
 
 static const char s_Stars[] = "stars.png";
 
-static const char s_CherryLogo[] = "PCBlogo2.png";
+static const char s_CherryLogo[] = "splash_logo.png";
+static const char s_CherryBG[] = "splash_background.png";
 
 // tilemaps resource
 static const char s_TilesPng[] = "background.png";

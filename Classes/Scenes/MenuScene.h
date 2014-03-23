@@ -22,7 +22,13 @@ public:
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
 
+    MenuScene(void);
+	virtual ~MenuScene(void);
+
     CREATE_FUNC(MenuScene);
+
+    CC_SYNTHESIZE(cocos2d::CCParticleSystemQuad*, _cherryParticles, CherryParticles);
+    CC_SYNTHESIZE(cocos2d::CCParticleSystemQuad*, _fenemyParticles, FenemyParticles);
 };
 
 

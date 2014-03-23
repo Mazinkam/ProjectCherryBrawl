@@ -7,10 +7,21 @@
 
 #include "MenuScene.h"
 #include "GameScene.h"
+#include "../Defines.h"
 #include "../Utils/TouchTrailLayer.h"
 
-
 using namespace cocos2d;
+
+MenuScene::MenuScene(void)
+{
+	_cherryParticles = NULL;
+}
+
+MenuScene::~MenuScene(void)
+{
+	RELEASE_OBJECT(_cherryParticles);
+	RELEASE_OBJECT(_fenemyParticles);
+}
 
 CCScene* MenuScene::scene()
 {
@@ -43,37 +54,62 @@ bool MenuScene::init()
 
 		CC_BREAK_IF(!CCScene::init());
 
-		CCMenuItemImage *pCloseItem = CCMenuItemImage::create("CloseNormal.png", "CloseSelected.png", this, menu_selector(MenuScene::menuCloseCallback));
-		CC_BREAK_IF(!pCloseItem);
+		CCMenuItemImage *_closeButton = CCMenuItemImage::create(s_PauseOn, s_PauseOff, this, menu_selector(MenuScene::menuCloseCallback));
+		CC_BREAK_IF(!_closeButton);
+		_closeButton->setPosition(ccp(SCREEN.width - 20, SCREEN.height-20));
 
-		// Place the menu item bottom-right conner.
-		pCloseItem->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20));
+		CCMenuItemImage *_playButton = CCMenuItemImage::create(s_PlayOff, s_PlayOn, this, menu_selector(GameScene::DisplayScene));
+		CC_BREAK_IF(!_playButton);
+		_playButton->setPosition(ccp(SCREEN.width/2, SCREEN.height/3.2));
+
+		CCMenuItemImage *_controlsButton = CCMenuItemImage::create(s_ControlsOff, s_ControlsOn, this, menu_selector(GameScene::DisplayScene));
+		CC_BREAK_IF(!_controlsButton);
+		_controlsButton->setPosition(ccp(SCREEN.width/2, SCREEN.height/7));
 
 		// Create a menu with the "close" menu item, it's an auto release object.
-		CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
-		pMenu->setPosition(CCPointZero);
-		CC_BREAK_IF(!pMenu);
+		CCMenu* _pMenu = CCMenu::create(_closeButton, _playButton, _controlsButton, NULL);
+		_pMenu->setPosition(CCPointZero);
+		CC_BREAK_IF(!_pMenu);
 
-		// Add the menu to MenuScene layer as a child layer.
-		this->addChild(pMenu, 1);
-		CCSize size2 = CCDirector::sharedDirector()->getWinSize();
-		CCMenuItemImage *pMenu1 = CCMenuItemImage::create("playOn.png", "playOff.png", this, menu_selector(GameScene::DisplayScene));
-		CC_BREAK_IF(!pMenu1);
-		CCMenu* pMenu11 = CCMenu::create(pMenu1, NULL);
-		pMenu11->setPosition(ccp(size2.width/2, size2.height/1.2));
-		CC_BREAK_IF(!pMenu11);
-		this->addChild(pMenu11, 1);
+		// Add the menu to MenuScene layer as a child layer.G
+		this->addChild(_pMenu, 1);
 
+		CCSprite* _menuBG = CCSprite::create(s_CherryBG);
+		CC_BREAK_IF(!_menuBG);
+		_menuBG->setPosition(CENTER);
 
-		CCSize size = CCDirector::sharedDirector()->getWinSize();
+		CCSprite* _menuLogo = CCSprite::create(s_CherryLogo);
+		CC_BREAK_IF(!_menuLogo);
+		_menuLogo->setPosition(ccp(SCREEN.width/2,SCREEN.height/1.45));
 
-		CCSprite* pSprite = CCSprite::create("PCBlogo2.png");
-		CC_BREAK_IF(!pSprite);
+		_cherryParticles = CCParticleFlower::create();
+		_cherryParticles->initWithTotalParticles(100);
+		_cherryParticles->retain();
+		_cherryParticles->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
+		_cherryParticles->setPosition(SCREEN.width/1.9, SCREEN.height/1.2);
 
-		// Place the sprite on the center of the screen
-		pSprite->setPosition(ccp(size.width/2, size.height/2));
+		_fenemyParticles = CCParticleFlower::create();
+		_fenemyParticles->initWithTotalParticles(100);
+		_fenemyParticles->setGravity(ccp(0,150));
 
-		this->addChild(pSprite);
+		_fenemyParticles->setLifeVar(0);
+		_fenemyParticles->setLife(0.7f);
+
+		_fenemyParticles->setGravity(ccp(0,150));
+
+		_fenemyParticles->setStartSize(0.5f);
+		_fenemyParticles->setStartSizeVar(0.5f);
+		_fenemyParticles->setEndSize(30.0f);
+		_fenemyParticles->setEndSizeVar(5.0f);
+		_fenemyParticles->retain();
+		_fenemyParticles->setTexture(CCTextureCache::sharedTextureCache()->addImage("fenemyBall.png"));
+		_fenemyParticles->setPosition(50, 100);
+
+		this->addChild(_menuBG, -1);
+		this->addChild(_cherryParticles, 10);
+		this->addChild(_fenemyParticles, 10);
+		this->addChild(_menuLogo, 12);
+
 		bRet = true;
 	} while (0);
 
