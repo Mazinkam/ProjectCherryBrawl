@@ -83,6 +83,10 @@ bool Cherry::init()
 		}
 		CCAnimation *walkAnimation = CCAnimation::createWithSpriteFrames(walkFrames, float(1.0 / 12.0));
 		this->setWalkAction(CCRepeatForever::create(CCAnimate::create(walkAnimation)));
+
+		CCAnimation *walkAnimationSingle = CCAnimation::createWithSpriteFrames(attackFrames, float(1.0 / 12.0));
+		this->setAttackAction(CCSequence::create(CCAnimate::create(attackAnimation), CCCallFunc::create(this, callfunc_selector(Cherry::idle)), NULL));
+
 		//hurt animation
 		CCArray *hurtFrames = CCArray::createWithCapacity(1);
 		for (i = 1; i < 2; i++)
@@ -104,6 +108,9 @@ bool Cherry::init()
 		}
 		CCAnimation *knockedOutAnimation = CCAnimation::createWithSpriteFrames(knockedOutFrames, float(1.0 / 12.0));
 		this->setKnockedOutAction(CCSequence::create(CCAnimate::create(knockedOutAnimation), CCBlink::create(2.0, 10.0), NULL));
+
+		//WalkIdle
+		this->setWalkIdle(CCSequence::create(CCAnimate::create(walkAnimation), CCCallFunc::create(this, callfunc_selector(Cherry::idle)), NULL));
 
 		this->setCenterToBottom(39.0);
 		this->setCenterToSides(29.0);

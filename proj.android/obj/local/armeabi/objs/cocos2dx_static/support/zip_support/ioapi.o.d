@@ -1,7 +1,7 @@
 obj/local/armeabi/objs/cocos2dx_static/support/zip_support/ioapi.o: \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/zip_support/ioapi.cpp \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/zip_support/ioapi.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/zip_support/ioapi.cpp \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/zip_support/ioapi.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdio.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -27,9 +27,9 @@ obj/local/armeabi/objs/cocos2dx_static/support/zip_support/ioapi.o: \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/zlib.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/zconf.h
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/zip_support/ioapi.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/zip_support/ioapi.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdio.h:
 

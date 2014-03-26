@@ -23,6 +23,7 @@ class HudLayer: public cocos2d::CCLayer
 		bool init();
 		void dialougeModeOn();
 		void dialougeModeOff();
+		void speechDialouge();
 
 		CREATE_FUNC (HudLayer);
 		CC_SYNTHESIZE(SimpleDPad*, _dPad, DPad);
@@ -30,6 +31,8 @@ class HudLayer: public cocos2d::CCLayer
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _dialougeBox , DialougeBox);
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _hpBackground, HpBackground);
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _hpBorder, HpBorder);
+
+		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameDialouge, GameDialouge);
 
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _goBack , GoBack);
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _skillOne , SkillOne);
@@ -39,8 +42,6 @@ class HudLayer: public cocos2d::CCLayer
 
 		CC_SYNTHESIZE(cocos2d::CCArray*, _hpPool, HpPool);
 		CC_SYNTHESIZE(cocos2d::CCArray*, _manaPool, ManaPool);
-
-
 
 };
 

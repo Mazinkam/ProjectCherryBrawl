@@ -14,13 +14,11 @@ using namespace cocos2d;
 
 MenuScene::MenuScene(void)
 {
-	_cherryParticles = NULL;
+
 }
 
 MenuScene::~MenuScene(void)
 {
-	RELEASE_OBJECT(_cherryParticles);
-	RELEASE_OBJECT(_fenemyParticles);
 }
 
 CCScene* MenuScene::scene()
@@ -72,8 +70,6 @@ bool MenuScene::init()
 		CC_BREAK_IF(!_pMenu);
 
 		// Add the menu to MenuScene layer as a child layer.G
-		this->addChild(_pMenu, 1);
-
 		CCSprite* _menuBG = CCSprite::create(s_CherryBG);
 		CC_BREAK_IF(!_menuBG);
 		_menuBG->setPosition(CENTER);
@@ -105,7 +101,9 @@ bool MenuScene::init()
 		_fenemyParticles->setTexture(CCTextureCache::sharedTextureCache()->addImage("fenemyBall.png"));
 		_fenemyParticles->setPosition(50, 100);
 
+
 		this->addChild(_menuBG, -1);
+		this->addChild(_pMenu, 1);
 		this->addChild(_cherryParticles, 10);
 		this->addChild(_fenemyParticles, 10);
 		this->addChild(_menuLogo, 12);

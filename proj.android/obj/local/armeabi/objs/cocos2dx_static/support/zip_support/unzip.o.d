@@ -1,5 +1,5 @@
 obj/local/armeabi/objs/cocos2dx_static/support/zip_support/unzip.o: \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/zip_support/unzip.cpp \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/zip_support/unzip.cpp \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdio.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -24,11 +24,11 @@ obj/local/armeabi/objs/cocos2dx_static/support/zip_support/unzip.o: \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/memory.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/zlib.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/zconf.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/zip_support/unzip.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/zip_support/unzip.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/android/log.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/zip_support/ioapi.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/zip_support/ioapi.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/errno.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/errno.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/errno.h \
@@ -83,15 +83,15 @@ obj/local/armeabi/objs/cocos2dx_static/support/zip_support/unzip.o: \
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/zconf.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/zip_support/unzip.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/zip_support/unzip.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h:
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/android/log.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/zip_support/ioapi.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/zip_support/ioapi.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/errno.h:
 

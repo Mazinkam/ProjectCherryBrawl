@@ -1,5 +1,5 @@
 obj/local/armeabi/objs/cocos2dx_static/kazmath/src/mat4.o: \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/src/mat4.c \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/src/mat4.c \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/memory.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/assert.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs.h \
@@ -23,12 +23,12 @@ obj/local/armeabi/objs/cocos2dx_static/kazmath/src/mat4.o: \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/linux/types.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/kernel.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/sysmacros.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformMacros.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/include/ccConfig.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformMacros.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/include/ccConfig.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/android/log.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/math.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/limits.h \
@@ -38,13 +38,13 @@ obj/local/armeabi/objs/cocos2dx_static/kazmath/src/mat4.o: \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/machine/limits.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/syslimits.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/page.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/vec3.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat4.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat3.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/quaternion.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/plane.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/neon_matrix_impl.h
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/vec3.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat4.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat3.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/quaternion.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/plane.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/neon_matrix_impl.h
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/memory.h:
 
@@ -92,17 +92,17 @@ obj/local/armeabi/objs/cocos2dx_static/kazmath/src/mat4.o: \
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/sysmacros.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformMacros.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformMacros.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/include/ccConfig.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/include/ccConfig.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/android/CCPlatformDefine.h:
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/android/log.h:
 
@@ -122,16 +122,16 @@ obj/local/armeabi/objs/cocos2dx_static/kazmath/src/mat4.o: \
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/asm/page.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/vec3.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/vec3.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat4.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat4.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/utility.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat3.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/mat3.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/quaternion.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/quaternion.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/plane.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/plane.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/kazmath/include/kazmath/neon_matrix_impl.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/kazmath/include/kazmath/neon_matrix_impl.h:

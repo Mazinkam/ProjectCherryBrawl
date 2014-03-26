@@ -30,6 +30,9 @@ class ActionSprite: public cocos2d::CCSprite
 		void projectileAttack();
 		void splitAttack();
 
+
+		void walkLeftThenIdle();
+
 		//scheduled methods
 		void update(float dt);
 
@@ -43,8 +46,7 @@ class ActionSprite: public cocos2d::CCSprite
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _hurtAction, HurtAction);
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _knockedOutAction, KnockedOutAction);
 
-
-
+		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _walkIdle, WalkIdle);
 
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _attackAction, AttackAction);
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCAction*, _circleAttackAction, CircleAttackAction);

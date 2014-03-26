@@ -1,5 +1,5 @@
 obj/local/armeabi/objs/cocos2dx_static/support/base64.o: \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/base64.cpp \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/base64.cpp \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdio.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -22,7 +22,7 @@ obj/local/armeabi/objs/cocos2dx_static/support/base64.o: \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/alloca.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/strings.h \
  /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/memory.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/base64.h
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/base64.h
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/stdio.h:
 
@@ -68,4 +68,4 @@ obj/local/armeabi/objs/cocos2dx_static/support/base64.o: \
 
 /c/development/android-ndk-r9c/platforms/android-16/arch-arm/usr/include/memory.h:
 
-/c/development/cocos2d-x-2.2.2/samples/Cpp/HelloCpp/proj.android/../../../../cocos2dx/support/base64.h:
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/base64.h:

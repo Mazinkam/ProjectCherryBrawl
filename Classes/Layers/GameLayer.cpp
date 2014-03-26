@@ -12,18 +12,16 @@ GameLayer::GameLayer(void) :
 {
 	_tileMap = NULL;
 	_cherry = NULL;
+	_fenemy1 = NULL;
 	_enemies = NULL;
 	_bInit = false;
+	_dialougeState = false;
+	_enemyBeaten = true;
 
 }
 
 GameLayer::~GameLayer(void)
 {
-
-	RELEASE_ARRAY(_projectiles);
-	RELEASE_ARRAY(_enemies);
-	RELEASE_OBJECT(_cherry);
-
 	// cpp don't need to call super dealloc
 	// virtual destructor will do this
 	this->unscheduleUpdate();
@@ -41,35 +39,39 @@ bool GameLayer::init()
 //		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("superd_theme.ogg", true);
 
 		_projectiles = new CCArray;
-
+		CC_BREAK_IF(!_projectiles);
+		_cherryText = new CCArray;
+		CC_BREAK_IF(!_cherryText);
+		_enemyText = new CCArray;
+		CC_BREAK_IF(!_enemyText);
 
 		this->setTouchEnabled(true);
 
-		_dialougeState = false;
-
-		//CCMessageBox("oi","cole");
-
 		CCSpriteFrameCache* cache = CCSpriteFrameCache::sharedSpriteFrameCache();
+		CC_BREAK_IF(!cache);
 		cache->addSpriteFramesWithFile(s_gameAtlasPlist, s_gameAtlasPNG);
 
 		_actorsAtlas = CCSpriteBatchNode::create(s_gameAtlasPNG);
-
+		CC_BREAK_IF(!_actorsAtlas);
 		_actorsAtlas->getTexture()->setAntiAliasTexParameters();
 		this->addChild(_actorsAtlas, -5);
 
 		this->initTileMap();
-		this->initEnemies();
+		LOG("initTileMap");
 		this->initCherry();
+		LOG("initCherry");
+		this->initEnemies();
+		LOG("initEnemies");
 
 		this->scheduleUpdate();
+		LOG("scheduleUpdate");
 		this->setKeypadEnabled(true);
 
 		m_emitter = new CCParticleSystemQuad();
+		CC_BREAK_IF(!m_emitter);
 
-//		this->initSkillBar();
 		bRet = true;
 	} while (0);
-//_hud->get
 	return bRet;
 }
 
@@ -87,21 +89,21 @@ void GameLayer::initTileMap()
 
 void GameLayer::initStartCutscene()
 {
-	CCLabelTTF* cherryText1 = CCLabelTTF::create("Hmm.. School seems very quiet, I wonder where everyone is?", "Arial", 24);
-	CCLabelTTF* enemyText1 = CCLabelTTF::create("SENSORS SHOW NON ALTERED BRAIN ACTIVITY!", "Arial", 24);
-	CCLabelTTF* cherryText2 = CCLabelTTF::create("Who are you? I have never seen you around.", "Arial", 24);
-	CCLabelTTF* enemyText2 = CCLabelTTF::create("IMMINENT THREAT TO THE PROJECT. MUST EXTERMINATE. EXTERMINATE!", "Arial", 24);
+	LOG("initStartCutscene");
+	_sceneOne = 0;
+	_sceneTwo = 0;
+	_checkPointOne = true;
+	_checkPointTwo = true;
+	_dialougeState = true;
+	_enemyBeaten = false;
 
-	CCLabelTTF* cherryText3 = CCLabelTTF::create("Even though she looked human, I couldn't sense any life essence.", "Arial", 24);
-	CCLabelTTF* cherryText4 = CCLabelTTF::create("I need to to investigate further...", "Arial", 24);
+	if (!_dialougeState)
+	_hud->dialougeModeOff();
+	if (_dialougeState)
+	_hud->dialougeModeOn();
 
-	_cherryText->addObject(cherryText1);
-	_cherryText->addObject(cherryText2);
-	_cherryText->addObject(cherryText3);
-	_cherryText->addObject(cherryText4);
-
-	_enemyText->addObject(enemyText1);
-	_enemyText->addObject(enemyText2);
+	_hud->getGameDialouge()->setVisible(false);
+	_hud->getGameDialouge()->setPosition(ccp(SCREEN.width/2, SCREEN.height/5));
 }
 
 void GameLayer::initCherry()
@@ -111,183 +113,29 @@ void GameLayer::initCherry()
 	_cherry->setPosition(ccp(_cherry->getCenterToSides(), 80));
 	_cherry->setDesiredPosition(_cherry->getPosition());
 	_cherry->idle();
+	LOG("Cherry done");
+
+	_fenemy1 = EnemyFemale::create();
+	_actorsAtlas->addChild(_fenemy1);
+	_fenemy1->setPosition(ccp(SCREEN.width, 80));
+	_fenemy1->setDesiredPosition(_fenemy1->getPosition());
+	_fenemy1->setScaleX(-1);
+	_fenemy1->idle();
+	LOG("EnemyFemale done");
 }
-
-void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
-{
-
-}
-
-//
-void GameLayer::didChangeDirectionTo(SimpleDPad *simpleDPad, CCPoint direction)
-{
-	_cherry->walkWithDirection(direction);
-}
-
-void GameLayer::isHoldingDirection(SimpleDPad *simpleDPad, CCPoint direction)
-{
-	_cherry->walkWithDirection(direction);
-
-}
-
-void GameLayer::simpleDPadTouchEnded(SimpleDPad *simpleDPad)
-{
-	if (_cherry->getActionState() == kActionStateWalk)
-	{
-		_cherry->idle();
-	}
-}
-
-void GameLayer::update(float dt)
-{
-	_cherry->update(dt);
-
-	this->updatePositions();
-	this->updateEnemies(dt);
-	this->setViewpointCenter(_cherry->getPosition());
-
-	this->updateProjectiles();
-	this->updateUI();
-
-}
-void GameLayer::updateProjectiles()
-{
-	CCArray *projectilesToDelete = new CCArray;
-	CCObject* it = NULL;
-
-	// for (it = _projectiles->begin(); it != _projectiles->end(); it++)
-	CCARRAY_FOREACH(_projectiles, it)
-	{
-		CCSprite *projectile = dynamic_cast<CCSprite*>(it);
-		CCRect projectileRect = CCRectMake(
-				projectile->getPosition().x - (projectile->getContentSize().width/2),
-				projectile->getPosition().y - (projectile->getContentSize().height/2),
-				projectile->getContentSize().width,
-				projectile->getContentSize().height);
-
-		CCObject *pObject = NULL;
-		CCARRAY_FOREACH(_enemies, pObject)
-		{
-			EnemyFemale *enemy = (EnemyFemale*) pObject;
-			if (enemy->getActionState() != kActionStateKnockedOut)
-			{
-				if (projectileRect.intersectsRect(enemy->getHitbox().actual))
-				{
-					enemy->hurtWithDamage(_cherry->getProjectileDamage());
-					projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
-					cocos2d::CCLog("enemy->hurtWithDamage(_cherry->getDamage());");
-				}
-			}
-
-		}
-
-	}
-
-	// for (it = projectilesToDelete->begin(); it != projectilesToDelete->end(); it++)
-	CCARRAY_FOREACH(projectilesToDelete, it)
-	{
-		CCSprite* projectile = dynamic_cast<CCSprite*>(it);
-		_projectiles->removeObject(projectile);
-		this->removeChild(projectile, true);
-	}
-	projectilesToDelete->release();
-}
-
-void GameLayer::updatePositions()
-{
-
-	float posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _cherry->getCenterToSides(),
-			MAX(_cherry->getCenterToSides()*4, _cherry->getDesiredPosition().x));
-	float posY = MIN(3 * _tileMap->getTileSize().height + _cherry->getCenterToBottom(),
-			MAX(_cherry->getCenterToBottom()+5, _cherry->getDesiredPosition().y));
-	_cherry->setPosition(ccp(posX, posY));
-
-	CCObject *pObject = NULL;
-	CCARRAY_FOREACH(_enemies, pObject)
-	{
-		EnemyFemale *enemy = (EnemyFemale*) pObject;
-		posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - enemy->getCenterToSides(),
-				MAX(enemy->getCenterToSides(), enemy->getDesiredPosition().x));
-		posY = MIN(3 * _tileMap->getTileSize().height + enemy->getCenterToBottom(),
-				MAX(enemy->getCenterToBottom(), enemy->getDesiredPosition().y));
-		enemy->setPosition(ccp(posX, posY));
-	}
-}
-
-void GameLayer::updateUI()
-{
-	CCObject *item;
-	int i = 0;
-	CCARRAY_FOREACH(_hud->getManaPool(), item)
-	{
-		i++;
-		CCSprite *s = ((cocos2d::CCSprite*) item);
-		if (s != NULL)
-		{
-			if (i <= _cherry->getManaPool())
-			{
-				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaFull));
-			} else
-			{
-				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaEmpty));
-			}
-		}
-		if (_dialougeState)
-			s->setVisible(false);
-		else
-			s->setVisible(true);
-	}
-
-	i = 0;
-	CCARRAY_FOREACH(_hud->getHpPool(), item)
-	{
-		i++;
-		CCSprite *s = ((cocos2d::CCSprite*) item);
-		if (s != NULL)
-		{
-			if (i * 10 <= _cherry->getHitPoints())
-			{
-				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_HpBlip));
-			} else
-			{
-				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_HpBlip));
-				s->setOpacity(10);
-			}
-		}
-		if (_dialougeState)
-			s->setVisible(false);
-		else
-			s->setVisible(true);
-	}
-}
-
-void GameLayer::setViewpointCenter(CCPoint position)
-{
-	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-
-	int x = MAX(position.x, winSize.width / 2);
-	int y = MAX(position.y, winSize.height / 2);
-	x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width) - winSize.width / 2);
-	y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - winSize.height / 2);
-	CCPoint actualPosition = ccp(x, y);
-
-	CCPoint centerOfView = ccp(winSize.width / 2, winSize.height / 2);
-	CCPoint viewPoint = ccpSub(centerOfView, actualPosition);
-	this->setPosition(viewPoint);
-}
-
 void GameLayer::initEnemies()
 {
 	int enemyCount = 25;
 	this->setEnemies(CCArray::createWithCapacity(enemyCount));
-
+	LOG("Started enemies init");
 	for (int i = 0; i < enemyCount; i++)
 	{
+		LOG("%i",i);
 		EnemyFemale *enemy = EnemyFemale::create();
 		_actorsAtlas->addChild(enemy);
 		_enemies->addObject(enemy);
 
-		int minX = SCREEN.width + enemy->getCenterToSides();
+		int minX = SCREEN.width + enemy->getCenterToSides()*3;
 		int maxX = _tileMap->getMapSize().width * _tileMap->getTileSize().width - enemy->getCenterToSides();
 		int minY = enemy->getCenterToBottom();
 		int maxY = 3 * _tileMap->getTileSize().height + enemy->getCenterToBottom();
@@ -295,117 +143,16 @@ void GameLayer::initEnemies()
 		enemy->setPosition(ccp(random_range(minX, maxX), random_range(minY, maxY)));
 		enemy->setDesiredPosition(enemy->getPosition());
 		enemy->idle();
+		LOG("%i",i);
 	}
+	LOG("done enemies init");
 
 }
-
-void GameLayer::reorderActors()
-{
-	CCObject *pObject = NULL;
-	CCARRAY_FOREACH(_actorsAtlas->getChildren(), pObject)
-	{
-		ActionSprite *sprite = (ActionSprite*) pObject;
-		_actorsAtlas->reorderChild(sprite, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - sprite->getPosition().y);
-	}
-}
-
-void GameLayer::updateEnemies(float dt)
-{
-	float distanceSQ;
-	int randomChoice = 0;
-	CCObject *pObject = NULL;
-
-	if (!_dialougeState)
-	{
-		CCARRAY_FOREACH(_enemies, pObject)
-		{
-			EnemyFemale *enemy = (EnemyFemale*) pObject;
-			enemy->update(dt);
-			if (enemy->getActionState() != kActionStateKnockedOut)
-			{
-
-				//2
-				if (CURTIME > enemy->getNextDecisionTime())
-				{
-					distanceSQ = ccpDistanceSQ(enemy->getPosition(), _cherry->getPosition());
-					//cocos2d::CCLog("distanceSQ: %lf", distanceSQ);
-
-					//3 distance for attacks, code needs to be rewritted for more enemies
-					if (distanceSQ <= 7000)
-					{
-						enemy->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5) * 1000);
-						randomChoice = random_range(0, 1);
-
-						if (randomChoice == 0)
-						{
-							if (_cherry->getPosition().x > enemy->getPosition().x)
-							{
-								enemy->setScaleX(1.0);
-							} else
-							{
-								enemy->setScaleX(-1.0);
-							}
-
-							//4
-							enemy->setNextDecisionTime(enemy->getNextDecisionTime() + frandom_range(0.1, 0.2) * 2000);
-							enemy->attack();
-							if (enemy->getActionState() == kActionStateAttack)
-							{
-								if (fabsf(_cherry->getPosition().y - enemy->getPosition().y) < 20)
-								{
-									if (_cherry->getHitbox().actual.intersectsRect(enemy->getAttackBox().actual) && _hud->getChildByTag(50) == NULL)
-									{
-										_cherry->hurtWithDamage(enemy->getDamage());
-
-										//end game
-										if (_cherry->getActionState() == kActionStateKnockedOut)
-										{
-											this->endGame();
-											LOG("END GAME CHECK 1");
-										}
-									}
-								}
-							}
-						} else
-						{
-							enemy->idle();
-						}
-					} else if (distanceSQ <= SCREEN.width * SCREEN.width)
-					{
-						//5
-						enemy->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5) * 1000);
-						randomChoice = random_range(0, 2);
-						if (randomChoice == 0)
-						{
-							CCPoint moveDirection = ccpNormalize(ccpSub(_cherry->getPosition(), enemy->getPosition()));
-							enemy->walkWithDirection(moveDirection);
-						}
-						else
-						{
-							enemy->idle();
-						}
-					}
-				}
-			}
-		}
-	}
-
-	//end game checker here
-	if (_cherry->getActionState() == kActionStateKnockedOut && _hud->getChildByTag(50) == NULL)
-	{
-		LOG("END GAME CHECK 2");
-		this->endGame();
-	}
-
-	this->initSkillBar();
-	_hud->dialougeModeOn();
-//	_hud->PassingObjects(_cherry, _enemies);
-}
-
 void GameLayer::initSkillBar()
 {
 	if (_hud != NULL && _hud->getChildByTag(10) == NULL && _bInit == false)
 	{
+		LOG("initSkillBar");
 		_hud->setGoBack(CCMenuItemImage::create(s_PauseOff, s_PauseOn, this, menu_selector(GameLayer::mainMenu)));
 
 		_hud->getGoBack()->setPosition(ccp(SCREEN.width - 20, SCREEN.height-20));
@@ -469,9 +216,441 @@ void GameLayer::initSkillBar()
 //		}
 
 		_bInit = true;
-
+		this->initStartCutscene();
 	}
 
+}
+
+void GameLayer::updateCutsceneOne()
+{
+
+	if (_checkPointOne && _sceneOne <= 10)
+	{
+		_sceneOne++;
+
+		if (_sceneOne == 1)
+		{
+			LOG("%i",_sceneOne);
+			_cherry->walkLeftThenIdle();
+
+		}
+		if (_sceneOne == 2)
+		{
+			LOG("%i",_sceneOne);
+			_hud->getGameDialouge()->setVisible(true);
+
+		}
+		if (_sceneOne == 3)
+		{
+			LOG("%i",_sceneOne);
+			_fenemy1->walkLeftThenIdle();
+
+		}
+		if (_sceneOne == 4)
+		{
+			LOG("%i",_sceneOne);
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox002.png"));
+
+		}
+		if (_sceneOne == 5)
+		{
+			LOG("%i",_sceneOne);
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox003.png"));
+
+		}
+		if (_sceneOne == 6)
+		{
+			LOG("%i",_sceneOne);
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox004.png"));
+
+		}
+		if (_sceneOne == 7)
+		{
+			LOG("%i",_sceneOne);
+			_dialougeState = false;
+			_hud->dialougeModeOff();
+
+		}
+		if (_sceneOne == 8)
+		{
+			LOG("%i",_sceneOne);
+			_hud->dialougeModeOn();
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox005.png"));
+		}
+		if (_sceneOne == 9)
+		{
+			LOG("%i",_sceneOne);
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox006.png"));
+		}
+		if (_sceneOne == 10)
+		{
+			LOG("%i",_sceneOne);
+			_checkPointOne = false;
+			_dialougeState = false;
+			_hud->getGameDialouge()->setVisible(false);
+			_hud->dialougeModeOff();
+		}
+		LOG("%i",_sceneOne);
+	}
+
+}
+
+void GameLayer::updateCutsceneTwo()
+{
+
+}
+
+void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
+{
+	if (_checkPointOne && _dialougeState)
+		updateCutsceneOne();
+	if (_checkPointTwo && !_checkPointOne && _dialougeState)
+		updateCutsceneTwo();
+}
+
+//
+void GameLayer::didChangeDirectionTo(SimpleDPad *simpleDPad, CCPoint direction)
+{
+	if (!_dialougeState)
+		_cherry->walkWithDirection(direction);
+}
+
+void GameLayer::isHoldingDirection(SimpleDPad *simpleDPad, CCPoint direction)
+{
+	if (!_dialougeState)
+		_cherry->walkWithDirection(direction);
+
+}
+
+void GameLayer::simpleDPadTouchEnded(SimpleDPad *simpleDPad)
+{
+	if (_cherry->getActionState() == kActionStateWalk)
+	{
+		_cherry->idle();
+	}
+}
+
+void GameLayer::update(float dt)
+{
+	_cherry->update(dt);
+
+	this->updatePositions();
+	this->updateEnemies(dt);
+	this->setViewpointCenter(_cherry->getPosition());
+
+	this->updateProjectiles();
+	this->updateUI();
+
+}
+void GameLayer::updateProjectiles()
+{
+	CCArray *projectilesToDelete = new CCArray;
+	CCObject* it = NULL;
+
+	// for (it = _projectiles->begin(); it != _projectiles->end(); it++)
+	CCARRAY_FOREACH(_projectiles, it)
+	{
+		CCSprite *projectile = dynamic_cast<CCSprite*>(it);
+		CCRect projectileRect = CCRectMake(
+				projectile->getPosition().x - (projectile->getContentSize().width/2),
+				projectile->getPosition().y - (projectile->getContentSize().height/2),
+				projectile->getContentSize().width,
+				projectile->getContentSize().height);
+
+		CCObject *pObject = NULL;
+		CCARRAY_FOREACH(_enemies, pObject)
+		{
+			EnemyFemale *enemy = (EnemyFemale*) pObject;
+			if (enemy->getActionState() != kActionStateKnockedOut)
+			{
+				if (projectileRect.intersectsRect(enemy->getHitbox().actual))
+				{
+					enemy->hurtWithDamage(_cherry->getProjectileDamage());
+					projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
+					cocos2d::CCLog("enemy->hurtWithDamage(_cherry->getDamage());");
+				}
+			}
+
+		}
+		if (_fenemy1->getActionState() != kActionStateKnockedOut)
+		{
+			if (projectileRect.intersectsRect(_fenemy1->getHitbox().actual))
+			{
+				_fenemy1->hurtWithDamage(_cherry->getProjectileDamage());
+				projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
+				cocos2d::CCLog("enemy->hurtWithDamage(_cherry->getDamage());");
+			}
+		}
+	}
+
+	// for (it = projectilesToDelete->begin(); it != projectilesToDelete->end(); it++)
+	CCARRAY_FOREACH(projectilesToDelete, it)
+	{
+		CCSprite* projectile = dynamic_cast<CCSprite*>(it);
+		_projectiles->removeObject(projectile);
+		this->removeChild(projectile, true);
+	}
+	projectilesToDelete->release();
+}
+
+void GameLayer::updatePositions()
+{
+	float posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _cherry->getCenterToSides(),
+			MAX(_cherry->getCenterToSides()*4, _cherry->getDesiredPosition().x));
+	float posY = MIN(3 * _tileMap->getTileSize().height + _cherry->getCenterToBottom(),
+			MAX(_cherry->getCenterToBottom()+5, _cherry->getDesiredPosition().y));
+	_cherry->setPosition(ccp(posX, posY));
+
+	posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _fenemy1->getCenterToSides(),
+			MAX(_fenemy1->getCenterToSides(), _fenemy1->getDesiredPosition().x));
+	posY = MIN(3 * _tileMap->getTileSize().height + _fenemy1->getCenterToBottom(),
+			MAX(_fenemy1->getCenterToBottom(), _fenemy1->getDesiredPosition().y));
+	_fenemy1->setPosition(ccp(posX, posY));
+
+	CCObject *pObject = NULL;
+	CCARRAY_FOREACH(_enemies, pObject)
+	{
+		EnemyFemale *enemy = (EnemyFemale*) pObject;
+		posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - enemy->getCenterToSides(),
+				MAX(enemy->getCenterToSides(), enemy->getDesiredPosition().x));
+		posY = MIN(3 * _tileMap->getTileSize().height + enemy->getCenterToBottom(),
+				MAX(enemy->getCenterToBottom(), enemy->getDesiredPosition().y));
+		enemy->setPosition(ccp(posX, posY));
+	}
+}
+
+void GameLayer::updateUI()
+{
+	CCObject *item;
+	int i = 0;
+	CCARRAY_FOREACH(_hud->getManaPool(), item)
+	{
+		i++;
+		CCSprite *s = ((cocos2d::CCSprite*) item);
+		if (s != NULL)
+		{
+			if (i <= _cherry->getManaPool())
+			{
+				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaFull));
+			} else
+			{
+				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaEmpty));
+			}
+		}
+		if (_dialougeState)
+			s->setVisible(false);
+		else
+			s->setVisible(true);
+	}
+
+	i = 0;
+	CCARRAY_FOREACH(_hud->getHpPool(), item)
+	{
+		i++;
+		CCSprite *s = ((cocos2d::CCSprite*) item);
+		if (s != NULL)
+		{
+			if (i * 10 <= _cherry->getHitPoints())
+			{
+				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_HpBlip));
+			} else
+			{
+				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_HpBlip));
+				s->setOpacity(10);
+			}
+		}
+		if (_dialougeState)
+			s->setVisible(false);
+		else
+			s->setVisible(true);
+	}
+
+}
+
+void GameLayer::setViewpointCenter(CCPoint position)
+{
+	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+
+	int x = MAX(position.x, winSize.width / 2);
+	int y = MAX(position.y, winSize.height / 2);
+	x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width) - winSize.width / 2);
+	y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - winSize.height / 2);
+	CCPoint actualPosition = ccp(x, y);
+
+	CCPoint centerOfView = ccp(winSize.width / 2, winSize.height / 2);
+	CCPoint viewPoint = ccpSub(centerOfView, actualPosition);
+	this->setPosition(viewPoint);
+}
+
+void GameLayer::reorderActors()
+{
+	CCObject *pObject = NULL;
+	CCARRAY_FOREACH(_actorsAtlas->getChildren(), pObject)
+	{
+		ActionSprite *sprite = (ActionSprite*) pObject;
+		_actorsAtlas->reorderChild(sprite, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - sprite->getPosition().y);
+	}
+}
+
+void GameLayer::updateEnemies(float dt)
+{
+	float distanceSQ;
+	int randomChoice = 0;
+	CCObject *pObject = NULL;
+//
+	if (_enemyBeaten)
+	{
+		_fenemy1->update(dt);
+		if (_fenemy1->getActionState() != kActionStateKnockedOut)
+		{
+			if (CURTIME > _fenemy1->getNextDecisionTime())
+			{
+				distanceSQ = ccpDistanceSQ(_fenemy1->getPosition(), _cherry->getPosition());
+				//cocos2d::CCLog("distanceSQ: %lf", distanceSQ);
+
+				//3 distance for attacks, code needs to be rewritted for more enemies
+				if (distanceSQ <= 700)
+				{
+					_fenemy1->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5) * 1000);
+					randomChoice = random_range(0, 1);
+
+					if (randomChoice == 0)
+					{
+						if (_cherry->getPosition().x > _fenemy1->getPosition().x)
+						{
+							_fenemy1->setScaleX(1.0);
+						} else
+						{
+							_fenemy1->setScaleX(-1.0);
+						}
+
+						//4
+						_fenemy1->setNextDecisionTime(_fenemy1->getNextDecisionTime() + frandom_range(0.1, 0.2) * 2000);
+						_fenemy1->attack();
+						if (_fenemy1->getActionState() == kActionStateAttack)
+						{
+							if (fabsf(_cherry->getPosition().y - _fenemy1->getPosition().y) < 20)
+							{
+								if (_cherry->getHitbox().actual.intersectsRect(_fenemy1->getAttackBox().actual) && _hud->getChildByTag(50) == NULL)
+								{
+									_cherry->hurtWithDamage(_fenemy1->getDamage());
+
+								}
+							}
+						}
+					} else
+					{
+						_fenemy1->idle();
+					}
+				} else if (distanceSQ <= SCREEN.width * SCREEN.width)
+				{
+					//5
+					_fenemy1->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5) * 1000);
+					randomChoice = random_range(0, 2);
+					if (randomChoice == 0)
+					{
+						CCPoint moveDirection = ccpNormalize(ccpSub(_cherry->getPosition(), _fenemy1->getPosition()));
+						_fenemy1->walkWithDirection(moveDirection);
+					}
+					else
+					{
+						_fenemy1->idle();
+					}
+				}
+			}
+		}
+		if (_fenemy1->getActionState() == kActionStateKnockedOut)
+		{
+			_enemyBeaten = true;
+		}
+	}
+
+//	LOG("single enemy update");
+	if (!_dialougeState)
+	{
+		CCARRAY_FOREACH(_enemies, pObject)
+		{
+			EnemyFemale *enemy = (EnemyFemale*) pObject;
+			enemy->update(dt);
+			if (enemy->getActionState() != kActionStateKnockedOut)
+			{
+
+				//2
+				if (CURTIME > enemy->getNextDecisionTime())
+				{
+					distanceSQ = ccpDistanceSQ(enemy->getPosition(), _cherry->getPosition());
+					//cocos2d::CCLog("distanceSQ: %lf", distanceSQ);
+
+					//3 distance for attacks, code needs to be rewritted for more enemies
+					if (distanceSQ <= 7000)
+					{
+						enemy->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5) * 1000);
+						randomChoice = random_range(0, 1);
+
+						if (randomChoice == 0)
+						{
+							if (_cherry->getPosition().x > enemy->getPosition().x)
+							{
+								enemy->setScaleX(1.0);
+							} else
+							{
+								enemy->setScaleX(-1.0);
+							}
+
+							//4
+							enemy->setNextDecisionTime(enemy->getNextDecisionTime() + frandom_range(0.1, 0.2) * 2000);
+							enemy->attack();
+							if (enemy->getActionState() == kActionStateAttack)
+							{
+								if (fabsf(_cherry->getPosition().y - enemy->getPosition().y) < 20)
+								{
+									if (_cherry->getHitbox().actual.intersectsRect(enemy->getAttackBox().actual) && _hud->getChildByTag(50) == NULL)
+									{
+										_cherry->hurtWithDamage(enemy->getDamage());
+
+										//end game
+										if (_cherry->getActionState() == kActionStateKnockedOut)
+										{
+											this->endGame();
+											LOG("END GAME CHECK 1");
+										}
+									}
+								}
+							}
+						} else
+						{
+							enemy->idle();
+						}
+					} else if (distanceSQ <= SCREEN.width * SCREEN.width)
+					{
+						//5
+						enemy->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5)* 1000);
+						randomChoice = random_range(0, 2)
+						;
+						if (randomChoice == 0)
+						{
+							CCPoint moveDirection = ccpNormalize(ccpSub(_cherry->getPosition(), enemy->getPosition()));
+							enemy->walkWithDirection(moveDirection);
+						}
+						else
+						{
+							enemy->idle();
+						}
+					}
+				}
+			}
+		}
+	}
+//	LOG("_enemies update");
+
+//end game checker here
+	if (_cherry->getActionState() == kActionStateKnockedOut && _hud->getChildByTag(50) == NULL)
+	{
+		LOG("END GAME CHECK 2");
+		this->endGame();
+	}
+
+	this->initSkillBar();
 }
 
 void GameLayer::firstSkill()
@@ -535,6 +714,13 @@ void GameLayer::firstSkill()
 				}
 			}
 		}
+		if (_fenemy1->getActionState() != kActionStateKnockedOut)
+		{
+			if (_cherry->getAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
+			{
+				_fenemy1->hurtWithDamage(_cherry->getDamage());
+			}
+		}
 	}
 
 }
@@ -558,7 +744,6 @@ void GameLayer::SplitSkill()
 		this->addChild(_tempBg, 20);
 		this->addChild(_slashCut, 21);
 
-		updateUI();
 		CCObject *pObject = NULL;
 		CCARRAY_FOREACH(_enemies, pObject)
 		{
@@ -569,6 +754,13 @@ void GameLayer::SplitSkill()
 				{
 					enemy->splitEnemy();
 				}
+			}
+		}
+		if (_fenemy1->getActionState() != kActionStateKnockedOut)
+		{
+			if (_cherry->getSplitAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
+			{
+				_fenemy1->splitEnemy();
 			}
 		}
 
@@ -583,7 +775,6 @@ void GameLayer::projectileSkill()
 		_cherry->setManaPool(_cherry->getManaPool() - 2);
 		_cherry->projectileAttack();
 
-		updateUI();
 		CCSprite *projectile = CCSprite::create("stars-grayscale.png");
 		projectile->setPosition(ccp(_cherry->getPositionX(), _cherry->getPositionY()));
 
@@ -602,7 +793,7 @@ void GameLayer::projectileSkill()
 
 		float length = sqrtf((offRealX * offRealX) + (offRealY * offRealY));
 
-		float velocity = 480 / 1; // 480pixels/1sec
+		float velocity = 480 / 1;	// 480pixels/1sec
 
 		float realMoveDuration = length / velocity;
 
@@ -639,7 +830,7 @@ void GameLayer::circleSkill()
 	if (_cherry->getManaPool() >= 3)
 	{
 		_cherry->setManaPool(_cherry->getManaPool() - 3);
-		updateUI();
+//		updateUI();
 		_cherry->circleAttack();
 
 		int x = _cherry->getPosition().x;
@@ -692,6 +883,13 @@ void GameLayer::circleSkill()
 					{
 						enemy->hurtWithDamage(_cherry->getCircleDamage());
 					}
+				}
+			}
+			if (_fenemy1->getActionState() != kActionStateKnockedOut)
+			{
+				if (_cherry->getCircleAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
+				{
+					_fenemy1->hurtWithDamage(_cherry->getCircleDamage());
 				}
 			}
 		}

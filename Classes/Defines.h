@@ -40,9 +40,7 @@ typedef enum _ActionState {
 	kActionStateWalk,
 	kActionStateHurt,
 	kActionStateKnockedOut,
-	kActionStateDialougeWalk,
-	kActionStateDialougeStand,
-	kActionStateDialougeHit
+	kActionStateDialougeWalk
 } ActionState;
 
 typedef enum _GameState {

@@ -41,6 +41,23 @@ void ActionSprite::idle()
 		_velocity = CCPointZero; // same as 0,0
 	}
 }
+
+void ActionSprite::walkLeftThenIdle()
+{
+	if (_actionState == kActionStateIdle)
+	{
+
+		this->stopAllActions();
+
+		CCMoveBy *moveBy = CCMoveBy::create(2.0f, (this->getScaleX() == -1 ? ccp(-200, 0): ccp(200, 0)));
+		CCSpawn *spawn = CCSpawn::create(moveBy, _walkIdle, NULL);
+		this->runAction(spawn);
+
+		_actionState = kActionStateDialougeWalk;
+
+	}
+
+}
 //add more states for different atks and sword movements
 void ActionSprite::attack()
 {
@@ -121,7 +138,7 @@ void ActionSprite::walkWithDirection(CCPoint direction)
 		this->runAction(_walkAction);
 		_actionState = kActionStateWalk;
 	}
-	if (_actionState == kActionStateWalk)
+	if (_actionState == kActionStateWalk || _actionState == kActionStateDialougeWalk)
 	{
 		_velocity = ccp(direction.x * _walkSpeed, direction.y * _walkSpeed);
 		if (_velocity.x >= 0)
@@ -137,7 +154,7 @@ void ActionSprite::walkWithDirection(CCPoint direction)
 
 void ActionSprite::update(float dt)
 {
-	if (_actionState == kActionStateWalk)
+	if (_actionState == kActionStateWalk || _actionState == kActionStateDialougeWalk)
 	{
 		_desiredPosition = ccpAdd(this->getPosition(), ccpMult(_velocity, dt));
 	}
@@ -165,7 +182,7 @@ void ActionSprite::transformBoxes()
 					_circleAttackBox.original.origin.y));
 
 	_splitAttackBox.actual.origin = ccpAdd(this->getPosition(), ccp(_splitAttackBox.original.origin.x ,
-			_splitAttackBox.original.origin.y));
+					_splitAttackBox.original.origin.y));
 
 }
 

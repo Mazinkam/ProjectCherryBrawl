@@ -90,6 +90,9 @@ bool EnemyFemale::init()
 		CCAnimation *knockedOutAnimation = CCAnimation::createWithSpriteFrames(knockedOutFrames, float(1.0 / 12.0));
 		this->setKnockedOutAction(CCSequence::create(CCAnimate::create(knockedOutAnimation), CCBlink::create(2.0, 10.0), CCRemoveSelf::create(true), NULL));
 
+		//WalkIdle
+		//this->setWalkIdle(CCSequence::create(CCAnimate::create(walkAnimation), CCCallFunc::create(this, callfunc_selector(EnemyFemale::idle)), NULL));
+
 		this->setWalkSpeed(80.0);
 		this->setCenterToBottom(39.0);
 		this->setCenterToSides(29.0);

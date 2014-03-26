@@ -50,6 +50,8 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void update(float dt);
 		void updatePositions();
 		void updateUI();
+		void updateCutsceneOne();
+		void updateCutsceneTwo();
 		void updateProjectiles();
 		void updateEnemies(float dt);
 		void setViewpointCenter(cocos2d::CCPoint position);
@@ -66,6 +68,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 
 		CC_SYNTHESIZE(HudLayer*, _hud, Hud);
 		CC_SYNTHESIZE(Cherry*, _cherry, Cherry);
+		CC_SYNTHESIZE(EnemyFemale*, _fenemy1, Fenemy);
 
 		CC_SYNTHESIZE(cocos2d::CCArray*, _cherryText, CherryText);
 		CC_SYNTHESIZE(cocos2d::CCArray*, _enemyText, EnemyText);
@@ -79,6 +82,8 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 	protected:
 		bool _bInit;
 		bool _dialougeState;
+		int _sceneOne, _sceneTwo;
+		bool _checkPointOne, _checkPointTwo, _enemyBeaten, _bFirstCheck;
 
 
 };
