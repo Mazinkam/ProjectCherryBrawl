@@ -63,3 +63,5 @@ void GameScene::DisplayScene(CCObject* pSender)
 	CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, GameScene::scene(), ccWHITE));
 }
 
+
+

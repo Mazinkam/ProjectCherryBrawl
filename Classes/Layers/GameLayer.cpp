@@ -17,6 +17,7 @@ GameLayer::GameLayer(void) :
 	_bInit = false;
 	_dialougeState = false;
 	_enemyBeaten = true;
+	_enemyCanMove = false;
 
 }
 
@@ -92,8 +93,12 @@ void GameLayer::initStartCutscene()
 	LOG("initStartCutscene");
 	_sceneOne = 0;
 	_sceneTwo = 0;
+	_cutsceneOneDone = false;
+	_cutsceneTwoDone = false;
+
 	_checkPointOne = true;
-	_checkPointTwo = true;
+	_checkPointTwo = false;
+
 	_dialougeState = true;
 	_enemyBeaten = false;
 
@@ -117,7 +122,7 @@ void GameLayer::initCherry()
 
 	_fenemy1 = EnemyFemale::create();
 	_actorsAtlas->addChild(_fenemy1);
-	_fenemy1->setPosition(ccp(SCREEN.width, 80));
+	_fenemy1->setPosition(ccp(SCREEN.width/1.5, 80));
 	_fenemy1->setDesiredPosition(_fenemy1->getPosition());
 	_fenemy1->setScaleX(-1);
 	_fenemy1->idle();
@@ -224,7 +229,7 @@ void GameLayer::initSkillBar()
 void GameLayer::updateCutsceneOne()
 {
 
-	if (_checkPointOne && _sceneOne <= 10)
+	if (_sceneOne <= 9)
 	{
 		_sceneOne++;
 
@@ -243,49 +248,50 @@ void GameLayer::updateCutsceneOne()
 		if (_sceneOne == 3)
 		{
 			LOG("%i",_sceneOne);
-			_fenemy1->walkLeftThenIdle();
+			//	_fenemy1->walkLeftThenIdle();
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox002.png"));
 
 		}
 		if (_sceneOne == 4)
 		{
 			LOG("%i",_sceneOne);
-			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox002.png"));
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox003.png"));
 
 		}
 		if (_sceneOne == 5)
 		{
 			LOG("%i",_sceneOne);
-			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox003.png"));
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox004.png"));
 
 		}
 		if (_sceneOne == 6)
 		{
 			LOG("%i",_sceneOne);
-			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox004.png"));
+			_dialougeState = false;
+			_enemyBeaten = false;
+			_checkPointOne = false;
+			_enemyCanMove = true;
+			_hud->dialougeModeOff();
 
 		}
 		if (_sceneOne == 7)
 		{
 			LOG("%i",_sceneOne);
-			_dialougeState = false;
-			_hud->dialougeModeOff();
+			_hud->dialougeModeOn();
+			_hud->getGameDialouge()->setVisible(true);
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox005.png"));
 
 		}
 		if (_sceneOne == 8)
 		{
 			LOG("%i",_sceneOne);
-			_hud->dialougeModeOn();
-			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox005.png"));
+
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox006.png"));
 		}
 		if (_sceneOne == 9)
 		{
 			LOG("%i",_sceneOne);
-			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox006.png"));
-		}
-		if (_sceneOne == 10)
-		{
-			LOG("%i",_sceneOne);
-			_checkPointOne = false;
+			_cutsceneOneDone = true;
 			_dialougeState = false;
 			_hud->getGameDialouge()->setVisible(false);
 			_hud->dialougeModeOff();
@@ -302,9 +308,9 @@ void GameLayer::updateCutsceneTwo()
 
 void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
-	if (_checkPointOne && _dialougeState)
+	if (!_cutsceneOneDone && _dialougeState)
 		updateCutsceneOne();
-	if (_checkPointTwo && !_checkPointOne && _dialougeState)
+	if (!_cutsceneTwoDone && _cutsceneOneDone && _dialougeState)
 		updateCutsceneTwo();
 }
 
@@ -341,6 +347,15 @@ void GameLayer::update(float dt)
 	this->updateProjectiles();
 	this->updateUI();
 
+	if (_enemyBeaten && !_cutsceneOneDone && !_checkPointOne)
+	{
+		_dialougeState = true;
+		_checkPointOne = true;
+		_hud->dialougeModeOn();
+		_hud->getGameDialouge()->setVisible(true);
+		_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox005.png"));
+		this->updateUI();
+	}
 }
 void GameLayer::updateProjectiles()
 {
@@ -498,7 +513,7 @@ void GameLayer::updateEnemies(float dt)
 	int randomChoice = 0;
 	CCObject *pObject = NULL;
 //
-	if (_enemyBeaten)
+	if (!_enemyBeaten && _enemyCanMove)
 	{
 		_fenemy1->update(dt);
 		if (_fenemy1->getActionState() != kActionStateKnockedOut)
@@ -511,7 +526,7 @@ void GameLayer::updateEnemies(float dt)
 				//3 distance for attacks, code needs to be rewritted for more enemies
 				if (distanceSQ <= 700)
 				{
-					_fenemy1->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5) * 1000);
+					_fenemy1->setNextDecisionTime(CURTIME + frandom_range(1.0, 2.0) * 1000);
 					randomChoice = random_range(0, 1);
 
 					if (randomChoice == 0)
@@ -525,7 +540,7 @@ void GameLayer::updateEnemies(float dt)
 						}
 
 						//4
-						_fenemy1->setNextDecisionTime(_fenemy1->getNextDecisionTime() + frandom_range(0.1, 0.2) * 2000);
+						_fenemy1->setNextDecisionTime(_fenemy1->getNextDecisionTime() + frandom_range(1.0,2.0) * 2000);
 						_fenemy1->attack();
 						if (_fenemy1->getActionState() == kActionStateAttack)
 						{

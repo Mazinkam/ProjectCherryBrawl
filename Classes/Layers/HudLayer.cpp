@@ -56,7 +56,7 @@ bool HudLayer::init()
 
 		_gameDialouge = CCSprite::create("dialougebox001.png");
 		CC_BREAK_IF(!_gameDialouge);
-		this->addChild(_gameDialouge, 30);
+		this->addChild(_gameDialouge, 60);
 
 		_gameDialouge->setVisible(false);
 

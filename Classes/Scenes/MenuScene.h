@@ -21,6 +21,7 @@ public:
 
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
+    void DisplayScene();
 
     MenuScene(void);
 	virtual ~MenuScene(void);

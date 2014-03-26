@@ -56,11 +56,11 @@ bool MenuScene::init()
 		CC_BREAK_IF(!_closeButton);
 		_closeButton->setPosition(ccp(SCREEN.width - 20, SCREEN.height-20));
 
-		CCMenuItemImage *_playButton = CCMenuItemImage::create(s_PlayOff, s_PlayOn, this, menu_selector(GameScene::DisplayScene));
+		CCMenuItemImage *_playButton = CCMenuItemImage::create(s_PlayOff, s_PlayOn, this, menu_selector(MenuScene::DisplayScene));
 		CC_BREAK_IF(!_playButton);
 		_playButton->setPosition(ccp(SCREEN.width/2, SCREEN.height/3.2));
 
-		CCMenuItemImage *_controlsButton = CCMenuItemImage::create(s_ControlsOff, s_ControlsOn, this, menu_selector(GameScene::DisplayScene));
+		CCMenuItemImage *_controlsButton = CCMenuItemImage::create(s_ControlsOff, s_ControlsOn, this, menu_selector(MenuScene::DisplayScene));
 		CC_BREAK_IF(!_controlsButton);
 		_controlsButton->setPosition(ccp(SCREEN.width/2, SCREEN.height/7));
 
@@ -112,6 +112,10 @@ bool MenuScene::init()
 	} while (0);
 
 	return bRet;
+}
+void MenuScene::DisplayScene()
+{
+	CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, GameScene::scene(), ccBLACK));
 }
 
 void MenuScene::menuCloseCallback(CCObject* pSender)

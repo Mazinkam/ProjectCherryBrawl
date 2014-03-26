@@ -83,7 +83,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		bool _bInit;
 		bool _dialougeState;
 		int _sceneOne, _sceneTwo;
-		bool _checkPointOne, _checkPointTwo, _enemyBeaten, _bFirstCheck;
+		bool _checkPointOne, _checkPointTwo,_cutsceneOneDone, _cutsceneTwoDone, _enemyBeaten,_enemyCanMove, _bFirstCheck;
 
 
 };
