@@ -478,6 +478,8 @@ void GameLayer::update(float dt)
 	this->updateBoss(dt);
 	this->setViewpointCenter(_cherry->getPosition());
 
+	this->reorderActors();
+
 	this->updateProjectiles();
 	this->updateUI();
 
