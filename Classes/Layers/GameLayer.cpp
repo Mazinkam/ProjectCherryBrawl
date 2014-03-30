@@ -76,6 +76,7 @@ bool GameLayer::init()
 		this->setKeypadEnabled(true);
 
 		m_emitter = new CCParticleSystemQuad();
+
 		CC_BREAK_IF(!m_emitter);
 
 		bRet = true;
@@ -161,7 +162,7 @@ void GameLayer::initCherry()
 
 	_eBossWings = EnemyBossWings::create();
 	_actorsAtlas->addChild(_eBossWings);
-	_eBossWings->setPosition(ccp(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBossWings->getCenterToSides()*3, 70));
+	_eBossWings->setPosition(ccp(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBossWings->getCenterToSides()*3, 80));
 	_eBossWings->setDesiredPosition(_eBossWings->getPosition());
 	_eBossWings->setScaleX(-1);
 	_eBossWings->idle();
@@ -178,12 +179,10 @@ void GameLayer::initCherry()
 }
 void GameLayer::initEnemies()
 {
-	int enemyCount = 0;
+	int enemyCount = 10;
 	this->setEnemies(CCArray::createWithCapacity(enemyCount));
 	LOG("Started enemies init");
-	for (int i = 0; i < enemyCount; i++)
 	{
-		LOG("%i",i);
 		EnemyFemale *enemy = EnemyFemale::create();
 		_actorsAtlas->addChild(enemy);
 		_enemies->addObject(enemy);
@@ -192,11 +191,11 @@ void GameLayer::initEnemies()
 		int maxX = (_tileMap->getMapSize().width/2) * _tileMap->getTileSize().width - enemy->getCenterToSides();
 		int minY = enemy->getCenterToBottom();
 		int maxY = 3 * _tileMap->getTileSize().height + enemy->getCenterToBottom();
+
 		enemy->setScaleX(-1);
 		enemy->setPosition(ccp(random_range(minX, maxX), random_range(minY, maxY)));
 		enemy->setDesiredPosition(enemy->getPosition());
 		enemy->idle();
-		LOG("%i",i);
 	}
 	LOG("done enemies init");
 
@@ -449,7 +448,6 @@ void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 		updateCutsceneTwo();
 }
 
-//
 void GameLayer::didChangeDirectionTo(SimpleDPad *simpleDPad, CCPoint direction)
 {
 	if (!_dialougeState)
@@ -484,6 +482,7 @@ void GameLayer::update(float dt)
 	this->updateUI();
 
 }
+
 void GameLayer::updateProjectiles()
 {
 	CCArray *projectilesToDelete = new CCArray;
@@ -558,12 +557,20 @@ void GameLayer::updatePositions()
 			MAX(_fenemy1->getCenterToBottom(), _fenemy1->getDesiredPosition().y));
 	_fenemy1->setPosition(ccp(posX, posY));
 
-	posX = _tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBoss->getCenterToSides() * 3;
+	posX = _tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBoss->getCenterToSides() * 5;
 
 	posY = MIN(3 * _tileMap->getTileSize().height + _eBoss->getCenterToBottom(),
 			MAX(_eBoss->getCenterToBottom(), _eBoss->getDesiredPosition().y));
 	_eBoss->setPosition(ccp(posX, posY));
-	_eBossWings->setPosition(ccp(posX, posY));
+
+	if (_eBoss->getActionState() == kActionStateAttack || _eBoss->getActionState() == kActionStateWalk)
+	{
+		_eBossWings->setPosition(ccp(posX-7, posY-7));
+	}
+	else
+	{
+		_eBossWings->setPosition(ccp(posX, posY-7));
+	}
 
 	CCObject *pObject = NULL;
 	CCARRAY_FOREACH(_enemies, pObject)
@@ -765,7 +772,6 @@ void GameLayer::updateBoss(float dt)
 //		LOG("Hurt");
 //	if (_eBoss->getActionState() == kActionStateKnockedOut)
 //		LOG("Dead");
-
 
 }
 void GameLayer::updateEnemies(float dt)

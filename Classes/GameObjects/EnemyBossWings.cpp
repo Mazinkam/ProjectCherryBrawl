@@ -37,16 +37,15 @@ bool EnemyBossWings::init()
 		CCAnimation *idleAnimation = CCAnimation::createWithSpriteFrames(idleFrames, float(1.0 / 12.0));
 		this->setIdleAction(CCRepeatForever::create(CCAnimate::create(idleAnimation)));
 
-
 		//knocked out animation
-		CCArray *knockedOutFrames = CCArray::createWithCapacity(5);
-		for (i = 1; i < 6; i++)
+		CCArray *knockedOutFrames = CCArray::createWithCapacity(6);
+		for (i = 1; i < 7; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("wingdead_%03d.png", i)->getCString());
 			knockedOutFrames->addObject(frame);
 		}
 		CCAnimation *knockedOutAnimation = CCAnimation::createWithSpriteFrames(knockedOutFrames, float(1.0 / 12.0));
-		this->setKnockedOutAction(CCSequence::create(CCAnimate::create(knockedOutAnimation), NULL));
+		this->setKnockedOutAction(CCSequence::create(CCAnimate::create(knockedOutAnimation), CCFadeOut::create(0.5f), NULL));
 
 		//WalkIdle
 		//	this->setWalkIdle(CCSequence::create(CCAnimate::create(walkAnimation), CCCallFunc::create(this, callfunc_selector(EnemyBossWings::idle)), NULL));
