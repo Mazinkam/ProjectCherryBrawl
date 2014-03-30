@@ -11,6 +11,8 @@
 #include "cocos2d.h"
 #include "../GameObjects/Cherry.h"
 #include "../GameObjects/EnemyFemale.h"
+#include "../GameObjects/EnemyBoss.h"
+#include "../GameObjects/EnemyBossWings.h"
 #include "../GameObjects/SimpleDPad.h"
 #include "../Layers/HudLayer.h"
 #include "../GameResources.h"
@@ -21,7 +23,8 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		GameLayer(void);
 		virtual ~GameLayer(void);
 
-		CREATE_FUNC(GameLayer);
+		CREATE_FUNC(GameLayer)
+		;
 
 		bool init();
 		void initTileMap();
@@ -29,6 +32,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void initEnemies();
 		void initSkillBar();
 		void initStartCutscene();
+		void initStartCutsceneTwo();
 
 		void circleSkill();
 		void firstSkill();
@@ -36,7 +40,6 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void SplitSkill();
 
 		void keyBackClicked();
-
 
 		virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 		virtual void didChangeDirectionTo(SimpleDPad *simpleDPad, cocos2d::CCPoint direction);
@@ -53,6 +56,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void updateCutsceneOne();
 		void updateCutsceneTwo();
 		void updateProjectiles();
+		void updateBoss(float dt);
 		void updateEnemies(float dt);
 		void setViewpointCenter(cocos2d::CCPoint position);
 
@@ -69,6 +73,8 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		CC_SYNTHESIZE(HudLayer*, _hud, Hud);
 		CC_SYNTHESIZE(Cherry*, _cherry, Cherry);
 		CC_SYNTHESIZE(EnemyFemale*, _fenemy1, Fenemy);
+		CC_SYNTHESIZE(EnemyBoss*, _eBoss, EnemyBoss);
+		CC_SYNTHESIZE(EnemyBossWings*, _eBossWings, EnemyBossWings);
 
 		CC_SYNTHESIZE(cocos2d::CCArray*, _cherryText, CherryText);
 		CC_SYNTHESIZE(cocos2d::CCArray*, _enemyText, EnemyText);
@@ -83,8 +89,8 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		bool _bInit;
 		bool _dialougeState;
 		int _sceneOne, _sceneTwo;
-		bool _checkPointOne, _checkPointTwo,_cutsceneOneDone, _cutsceneTwoDone, _enemyBeaten,_enemyCanMove, _bFirstCheck;
-
+		bool _checkPointOne, _checkPointTwo, _cutsceneOneDone, _cutsceneTwoDone, _enemyBeaten, _enemyCanMove, _bFirstCheck;
+		bool _checkPointOneSceneTwo, _checkPointTwoSceneTwo, _reachedBoss, _bossTalk, _bossCanMove, _bossDead;
 
 };
 

@@ -57,10 +57,10 @@ bool EnemyFemale::init()
 		this->setWalkAction(CCRepeatForever::create(CCAnimate::create(walkAnimation)));
 
 		//hurt animation
-		CCArray *hurtFrames = CCArray::createWithCapacity(2);
-		for (i = 1; i < 3; i++)
+		CCArray *hurtFrames = CCArray::createWithCapacity(10);
+		for (i = 1; i < 11; i++)
 		{
-			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("Fenemy_hit%03d.png", i)->getCString());
+			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("Fenemy_hit001.png");
 			hurtFrames->addObject(frame);
 
 		}

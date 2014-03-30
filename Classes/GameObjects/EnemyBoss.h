@@ -8,11 +8,20 @@
 #ifndef ENEMYBOSS_H_
 #define ENEMYBOSS_H_
 
-class EnemyBoss
+#include "ActionSprite.h"
+
+class EnemyBoss: public ActionSprite
 {
 	public:
-		EnemyBoss();
-		virtual ~EnemyBoss();
+	EnemyBoss(void);
+	virtual ~EnemyBoss(void);
+
+	CREATE_FUNC (EnemyBoss);
+
+	bool init();
+	void knockout();
+
+	CC_SYNTHESIZE(float, _nextDecisionTime, NextDecisionTime);
 };
 
 #endif /* ENEMYBOSS_H_ */

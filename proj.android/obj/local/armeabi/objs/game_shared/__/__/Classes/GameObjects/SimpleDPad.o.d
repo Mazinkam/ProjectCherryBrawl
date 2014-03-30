@@ -203,7 +203,8 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/GameObjects/SimpleDPad.o: \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/CCScheduler.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/data_support/uthash.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponent.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h \
+ jni/../../Classes/GameObjects/../GameResources.h
 
 jni/../../Classes/GameObjects/SimpleDPad.h:
 
@@ -612,3 +613,5 @@ jni/../../Classes/GameObjects/SimpleDPad.h:
 /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponent.h:
 
 /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h:
+
+jni/../../Classes/GameObjects/../GameResources.h:

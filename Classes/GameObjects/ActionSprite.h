@@ -25,6 +25,8 @@ class ActionSprite: public cocos2d::CCSprite
 		virtual void splitEnemy();
 		void walkWithDirection(cocos2d::CCPoint direction);
 
+		virtual  void  cleanup();
+
 		void attack();
 		void circleAttack();
 		void projectileAttack();
@@ -65,6 +67,9 @@ class ActionSprite: public cocos2d::CCSprite
 		CC_SYNTHESIZE(float, _circleDamage, CircleDamage);
 		CC_SYNTHESIZE(float, _splitDamage, SplitDamage);
 		CC_SYNTHESIZE(float, _manaPool, ManaPool);
+
+
+		CC_SYNTHESIZE(bool, _attackDone, AttackDone);
 
 
 		CC_SYNTHESIZE(std::string, _SpriteType, SpriteType);

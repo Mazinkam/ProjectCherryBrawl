@@ -19,6 +19,8 @@ ActionSprite::ActionSprite(void)
 	_hurtAction = NULL;
 	_knockedOutAction = NULL;
 
+	_attackDone = false;
+
 	//attacks
 	_attackAction = NULL;
 	_circleAttackAction = NULL;
@@ -46,7 +48,6 @@ void ActionSprite::walkLeftThenIdle()
 {
 	if (_actionState == kActionStateIdle)
 	{
-
 		this->stopAllActions();
 
 		CCMoveBy *moveBy = CCMoveBy::create(2.0f, (this->getScaleX() == -1 ? ccp(-200, 0): ccp(200, 0)));
@@ -61,11 +62,13 @@ void ActionSprite::walkLeftThenIdle()
 //add more states for different atks and sword movements
 void ActionSprite::attack()
 {
+	_attackDone = true;
 	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack || _actionState == kActionStateWalk)
 	{
 		this->stopAllActions();
 		this->runAction(_attackAction);
 		_actionState = kActionStateAttack;
+		_attackDone = false;
 	}
 }
 
@@ -135,7 +138,14 @@ void ActionSprite::walkWithDirection(CCPoint direction)
 	if (_actionState == kActionStateIdle)
 	{
 		this->stopAllActions();
-		this->runAction(_walkAction);
+		if (getSpriteType() != "Wings")
+		{
+			this->runAction(_walkAction);
+		}
+		else
+		{
+			this->runAction(_idleAction);
+		}
 		_actionState = kActionStateWalk;
 	}
 	if (_actionState == kActionStateWalk || _actionState == kActionStateDialougeWalk)
@@ -192,3 +202,13 @@ void ActionSprite::setPosition(CCPoint position)
 	this->transformBoxes();
 }
 
+void ActionSprite::cleanup()
+{
+//	CC_SAFE_RELEASE_NULL(_idleAction);
+//	CC_SAFE_RELEASE_NULL(_attackAction);
+//	CC_SAFE_RELEASE_NULL(_walkAction);
+//	CC_SAFE_RELEASE_NULL(_walkIdle);
+//	CC_SAFE_RELEASE_NULL(_hurtAction);
+//	CC_SAFE_RELEASE_NULL(_knockedOutAction);
+//	CCSprite::cleanup();
+}

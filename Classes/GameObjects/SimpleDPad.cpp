@@ -1,4 +1,5 @@
 #include "SimpleDPad.h"
+#include "../GameResources.h"
 #include <math.h>
 
 using namespace cocos2d;
@@ -38,7 +39,7 @@ bool SimpleDPad::initWithFile(CCString *filename, float radius)
 		_radius = radius;
 		_direction = CCPointZero;
 		_isHeld = false;
-		_touchStick = CCSprite::create("DPAD_button.png");
+		_touchStick = CCSprite::create(s_DpadBtn);
 		CC_BREAK_IF(!_touchStick);
 
 		_touchStick->setPosition(ccp(75.0,75.0));

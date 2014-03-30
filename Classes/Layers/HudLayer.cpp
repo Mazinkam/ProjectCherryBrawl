@@ -36,25 +36,29 @@ bool HudLayer::init()
 	{
 		CC_BREAK_IF(!CCLayer::init());
 
-		_manaPool = new CCArray;
-		_hpPool = new CCArray;
 
-		_dPad = SimpleDPad::dPadWithFile(CCString::create("DPAD_background.png"), 75);
+		_manaPool = new CCArray;
+		CC_BREAK_IF(!_manaPool);
+		_hpPool = new CCArray;
+		CC_BREAK_IF(!_hpPool);
+
+		_dPad = SimpleDPad::dPadWithFile(CCString::create(s_DpadBG), 75);
+		CC_BREAK_IF(!_dPad);
 		_dPad->setPosition(ccp(95.0, 95.0));
 
-		_dialougeBox = CCSprite::create("dialougebox.png");
+		_dialougeBox = CCSprite::create(s_DialougeBox);
 		CC_BREAK_IF(!_dialougeBox);
 		_dialougeBox->setPosition(ccp(SCREEN.width/2, SCREEN.height/5));
 
-		_hpBackground = CCSprite::create("HP_background.png");
+		_hpBackground = CCSprite::create(s_HpBG);
 		CC_BREAK_IF(!_hpBackground);
 		_hpBackground->setPosition(ccp(SCREEN.width/2 - s_horizPadding, SCREEN.height/4.8));
 
-		_hpBorder = CCSprite::create("HP_border.png");
+		_hpBorder = CCSprite::create(s_HpBorder);
 		CC_BREAK_IF(!_hpBorder);
 		_hpBorder->setPosition(ccp(SCREEN.width/2 - s_horizPadding, SCREEN.height/4.8));
 
-		_gameDialouge = CCSprite::create("dialougebox001.png");
+		_gameDialouge = CCSprite::create(s_dialouge1);
 		CC_BREAK_IF(!_gameDialouge);
 		this->addChild(_gameDialouge, 60);
 
@@ -105,7 +109,6 @@ void HudLayer::dialougeModeOff()
 		_hpBackground->setVisible(true);
 	if (_hpBorder != NULL)
 		_hpBorder->setVisible(true);
-
 	if (_gameDialouge != NULL)
 		_gameDialouge->setVisible(false);
 	if (_skillOne != NULL)
@@ -117,62 +120,3 @@ void HudLayer::dialougeModeOff()
 	if (_skillFour != NULL)
 		_skillFour->setVisible(true);
 }
-
-void HudLayer::speechDialouge()
-{
-
-//	if (sceneOne <= 7)
-//	{
-//		sceneOne++;
-//
-//		if (sceneOne == 1)
-//		{
-//
-//			_dialougeCherry1->setPosition(ccp(SCREEN.width/2, SCREEN.height/5));
-//			_dialougeCherry1->setVisible(true);
-//
-//		}
-//		if (sceneOne == 2)
-//		{
-//			_dialougeCherry1->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox002.png"));
-//
-//		}
-//		if (sceneOne == 3)
-//		{
-//			_dialougeCherry1->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox003.png"));
-//
-//		}
-//		if (sceneOne == 4)
-//		{
-//			_dialougeCherry1->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox004.png"));
-//
-//		}
-//		if (sceneOne == 5)
-//		{
-//			_dialougeCherry1->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox005.png"));
-//
-//		}
-//		if (sceneOne == 6)
-//		{
-//			_dialougeCherry1->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox006.png"));
-//
-//		}
-//		if (sceneOne == 7)
-//		{
-//			_dialougeCherry1->setVisible(false);
-//			checkPointOne = true;
-//		}
-//		LOG("%i",sceneOne);
-//
-//	}
-//	if (sceneOne > 10 && sceneTwo < 10 && checkPointOne)
-//	{
-//		sceneTwo++;
-//	}
-//	if (sceneOne > 6)
-//	{
-////		_cherryText1->updateLabel();
-////		_cherryText1->setString("frist labeawfawfawfawfawfawfawfl");
-//	}
-}
-

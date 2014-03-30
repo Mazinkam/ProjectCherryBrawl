@@ -14,6 +14,8 @@ LOCAL_SRC_FILES := game/main.cpp \
                    ../../Classes/Scenes/SplashScene.cpp \
                    ../../Classes/Scenes/MenuScene.cpp \
                    ../../Classes/GameObjects/EnemyFemale.cpp \
+                   ../../Classes/GameObjects/EnemyBoss.cpp \
+                   ../../Classes/GameObjects/EnemyBossWings.cpp \
                    ../../Classes/Layers/HudLayer.cpp \
                    ../../Classes/GameObjects/Cherry.cpp \
                    ../../Classes/Utils/TouchTrailLayer.cpp \

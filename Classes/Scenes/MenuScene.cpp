@@ -101,7 +101,6 @@ bool MenuScene::init()
 		_fenemyParticles->setTexture(CCTextureCache::sharedTextureCache()->addImage("fenemyBall.png"));
 		_fenemyParticles->setPosition(50, 100);
 
-
 		this->addChild(_menuBG, -1);
 		this->addChild(_pMenu, 1);
 		this->addChild(_cherryParticles, 10);

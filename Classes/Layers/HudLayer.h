@@ -23,7 +23,6 @@ class HudLayer: public cocos2d::CCLayer
 		bool init();
 		void dialougeModeOn();
 		void dialougeModeOff();
-		void speechDialouge();
 
 		CREATE_FUNC (HudLayer);
 		CC_SYNTHESIZE(SimpleDPad*, _dPad, DPad);

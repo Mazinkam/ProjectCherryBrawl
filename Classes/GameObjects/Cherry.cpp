@@ -120,7 +120,8 @@ bool Cherry::init()
 		this->setDamage(20.0);
 		this->setProjectileDamage(80.0);
 		this->setCircleDamage(80.0);
-		this->setWalkSpeed(160.0);
+		this->setSplitDamage(180.0);
+		this->setWalkSpeed(220.0);
 
 		this->setSpriteType("Cherry");
 

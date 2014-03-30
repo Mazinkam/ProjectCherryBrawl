@@ -57,4 +57,11 @@ static const char s_CherryBG[] = "splash_background.png";
 static const char s_TilesPng[] = "background.png";
 static const char s_TilesTMX[] = "firstFloor.tmx";
 
+static const char s_dialouge1[] = "dialougebox001.png";
+static const char s_dialouge2[] = "dialougebox002.png";
+static const char s_dialouge3[] = "dialougebox003.png";
+static const char s_dialouge4[] = "dialougebox004.png";
+static const char s_dialouge5[] = "dialougebox005.png";
+static const char s_dialouge6[] = "dialougebox006.png";
+
 #endif /* GAMERESOURCES_H_ */

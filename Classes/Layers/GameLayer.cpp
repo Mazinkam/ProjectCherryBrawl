@@ -13,11 +13,18 @@ GameLayer::GameLayer(void) :
 	_tileMap = NULL;
 	_cherry = NULL;
 	_fenemy1 = NULL;
+	_eBoss = NULL;
+	_eBossWings = NULL;
 	_enemies = NULL;
 	_bInit = false;
 	_dialougeState = false;
 	_enemyBeaten = true;
 	_enemyCanMove = false;
+	_bossCanMove = false;
+	_reachedBoss = false;
+	_bossDead = false;
+	_checkPointOneSceneTwo = false;
+	_checkPointOneSceneTwo = false;
 
 }
 
@@ -101,6 +108,30 @@ void GameLayer::initStartCutscene()
 
 	_dialougeState = true;
 	_enemyBeaten = false;
+	_bossTalk = false;
+	_bossDead = false;
+	_reachedBoss = false;
+
+	if (!_dialougeState)
+	_hud->dialougeModeOff();
+	if (_dialougeState)
+	_hud->dialougeModeOn();
+
+	_hud->getGameDialouge()->setVisible(false);
+	_hud->getGameDialouge()->setPosition(ccp(SCREEN.width/2, SCREEN.height/5));
+}
+
+void GameLayer::initStartCutsceneTwo()
+{
+	LOG("initStartCutsceneTwo");
+	_sceneOne = 0;
+	_sceneTwo = 0;
+
+	_dialougeState = true;
+	_enemyBeaten = false;
+	_bossTalk = true;
+	_bossDead = false;
+	_reachedBoss = true;
 
 	if (!_dialougeState)
 	_hud->dialougeModeOff();
@@ -127,10 +158,27 @@ void GameLayer::initCherry()
 	_fenemy1->setScaleX(-1);
 	_fenemy1->idle();
 	LOG("EnemyFemale done");
+
+	_eBossWings = EnemyBossWings::create();
+	_actorsAtlas->addChild(_eBossWings);
+	_eBossWings->setPosition(ccp(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBossWings->getCenterToSides()*3, 70));
+	_eBossWings->setDesiredPosition(_eBossWings->getPosition());
+	_eBossWings->setScaleX(-1);
+	_eBossWings->idle();
+	LOG("EnemyBossWings done");
+
+	_eBoss = EnemyBoss::create();
+	_actorsAtlas->addChild(_eBoss);
+	_eBoss->setPosition(ccp(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBoss->getCenterToSides()*3, 80));
+	_eBoss->setDesiredPosition(_eBoss->getPosition());
+	_eBoss->setScaleX(-1);
+	_eBoss->idle();
+	LOG("EnemyBoss done");
+
 }
 void GameLayer::initEnemies()
 {
-	int enemyCount = 25;
+	int enemyCount = 0;
 	this->setEnemies(CCArray::createWithCapacity(enemyCount));
 	LOG("Started enemies init");
 	for (int i = 0; i < enemyCount; i++)
@@ -141,7 +189,7 @@ void GameLayer::initEnemies()
 		_enemies->addObject(enemy);
 
 		int minX = SCREEN.width + enemy->getCenterToSides()*3;
-		int maxX = _tileMap->getMapSize().width * _tileMap->getTileSize().width - enemy->getCenterToSides();
+		int maxX = (_tileMap->getMapSize().width/2) * _tileMap->getTileSize().width - enemy->getCenterToSides();
 		int minY = enemy->getCenterToBottom();
 		int maxY = 3 * _tileMap->getTileSize().height + enemy->getCenterToBottom();
 		enemy->setScaleX(-1);
@@ -278,9 +326,8 @@ void GameLayer::updateCutsceneOne()
 		{
 			LOG("%i",_sceneOne);
 			_hud->dialougeModeOn();
-			_hud->getGameDialouge()->setVisible(true);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox005.png"));
-
+			_hud->getGameDialouge()->setVisible(true);
 		}
 		if (_sceneOne == 8)
 		{
@@ -303,6 +350,94 @@ void GameLayer::updateCutsceneOne()
 
 void GameLayer::updateCutsceneTwo()
 {
+
+	if (_sceneTwo <= 12)
+	{
+		_sceneTwo++;
+
+		if (_sceneTwo == 1)
+		{
+			LOG("%i",_sceneOne);
+			_cherry->walkLeftThenIdle();
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox007.png"));
+
+		}
+		if (_sceneTwo == 2)
+		{
+			LOG("%i",_sceneTwo);
+			_hud->getGameDialouge()->setVisible(true);
+
+		}
+		if (_sceneTwo == 3)
+		{
+			LOG("%i",_sceneTwo);
+			//	_fenemy1->walkLeftThenIdle();
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox008.png"));
+
+		}
+		if (_sceneTwo == 4)
+		{
+			LOG("%i",_sceneTwo);
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox009.png"));
+
+		}
+		if (_sceneTwo == 5)
+		{
+			LOG("%i",_sceneTwo);
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox010.png"));
+
+		}
+		if (_sceneTwo == 6)
+		{
+			LOG("%i",_sceneTwo);
+			_dialougeState = false;
+			_checkPointOneSceneTwo = false;
+			_bossCanMove = true;
+			_hud->dialougeModeOff();
+
+		}
+		if (_sceneTwo == 7)
+		{
+			LOG("%i",_sceneTwo);
+			_hud->dialougeModeOn();
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox011.png"));
+			_hud->getGameDialouge()->setVisible(true);
+
+		}
+		if (_sceneTwo == 8)
+		{
+			LOG("%i",_sceneTwo);
+
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox012.png"));
+		}
+		if (_sceneTwo == 9)
+		{
+			LOG("%i",_sceneTwo);
+
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox013.png"));
+		}
+		if (_sceneTwo == 10)
+		{
+			LOG("%i",_sceneTwo);
+
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox014.png"));
+		}
+		if (_sceneTwo == 11)
+		{
+			LOG("%i",_sceneTwo);
+
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox015.png"));
+		}
+		if (_sceneTwo == 12)
+		{
+			LOG("%i",_sceneTwo);
+			_cutsceneTwoDone = true;
+			_dialougeState = false;
+			_hud->getGameDialouge()->setVisible(false);
+			_hud->dialougeModeOff();
+		}
+		LOG("%i",_sceneTwo);
+	}
 
 }
 
@@ -342,20 +477,12 @@ void GameLayer::update(float dt)
 
 	this->updatePositions();
 	this->updateEnemies(dt);
+	this->updateBoss(dt);
 	this->setViewpointCenter(_cherry->getPosition());
 
 	this->updateProjectiles();
 	this->updateUI();
 
-	if (_enemyBeaten && !_cutsceneOneDone && !_checkPointOne)
-	{
-		_dialougeState = true;
-		_checkPointOne = true;
-		_hud->dialougeModeOn();
-		_hud->getGameDialouge()->setVisible(true);
-		_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage("dialougebox005.png"));
-		this->updateUI();
-	}
 }
 void GameLayer::updateProjectiles()
 {
@@ -382,7 +509,6 @@ void GameLayer::updateProjectiles()
 				{
 					enemy->hurtWithDamage(_cherry->getProjectileDamage());
 					projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
-					cocos2d::CCLog("enemy->hurtWithDamage(_cherry->getDamage());");
 				}
 			}
 
@@ -393,7 +519,14 @@ void GameLayer::updateProjectiles()
 			{
 				_fenemy1->hurtWithDamage(_cherry->getProjectileDamage());
 				projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
-				cocos2d::CCLog("enemy->hurtWithDamage(_cherry->getDamage());");
+			}
+		}
+		if (_eBoss->getActionState() != kActionStateKnockedOut)
+		{
+			if (projectileRect.intersectsRect(_eBoss->getHitbox().actual))
+			{
+				_eBoss->hurtWithDamage(_cherry->getProjectileDamage());
+				projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
 			}
 		}
 	}
@@ -410,6 +543,9 @@ void GameLayer::updateProjectiles()
 
 void GameLayer::updatePositions()
 {
+
+	//add movement restrictions for different scenes!
+
 	float posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _cherry->getCenterToSides(),
 			MAX(_cherry->getCenterToSides()*4, _cherry->getDesiredPosition().x));
 	float posY = MIN(3 * _tileMap->getTileSize().height + _cherry->getCenterToBottom(),
@@ -421,6 +557,13 @@ void GameLayer::updatePositions()
 	posY = MIN(3 * _tileMap->getTileSize().height + _fenemy1->getCenterToBottom(),
 			MAX(_fenemy1->getCenterToBottom(), _fenemy1->getDesiredPosition().y));
 	_fenemy1->setPosition(ccp(posX, posY));
+
+	posX = _tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBoss->getCenterToSides() * 3;
+
+	posY = MIN(3 * _tileMap->getTileSize().height + _eBoss->getCenterToBottom(),
+			MAX(_eBoss->getCenterToBottom(), _eBoss->getDesiredPosition().y));
+	_eBoss->setPosition(ccp(posX, posY));
+	_eBossWings->setPosition(ccp(posX, posY));
 
 	CCObject *pObject = NULL;
 	CCARRAY_FOREACH(_enemies, pObject)
@@ -484,17 +627,18 @@ void GameLayer::updateUI()
 
 void GameLayer::setViewpointCenter(CCPoint position)
 {
-	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+	if (!_reachedBoss)
+	{
+		int x = MAX(position.x, SCREEN.width / 2);
+		int y = MAX(position.y, SCREEN.height / 2);
+		x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width) - SCREEN.width / 2);
+		y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - SCREEN.height / 2);
+		CCPoint actualPosition = ccp(x, y);
 
-	int x = MAX(position.x, winSize.width / 2);
-	int y = MAX(position.y, winSize.height / 2);
-	x = MIN(x, (_tileMap->getMapSize().width * _tileMap->getTileSize().width) - winSize.width / 2);
-	y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - winSize.height / 2);
-	CCPoint actualPosition = ccp(x, y);
-
-	CCPoint centerOfView = ccp(winSize.width / 2, winSize.height / 2);
-	CCPoint viewPoint = ccpSub(centerOfView, actualPosition);
-	this->setPosition(viewPoint);
+		CCPoint centerOfView = ccp(SCREEN.width / 2, SCREEN.height / 2);
+		CCPoint viewPoint = ccpSub(centerOfView, actualPosition);
+		this->setPosition(viewPoint);
+	}
 }
 
 void GameLayer::reorderActors()
@@ -506,7 +650,124 @@ void GameLayer::reorderActors()
 		_actorsAtlas->reorderChild(sprite, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - sprite->getPosition().y);
 	}
 }
+void GameLayer::updateBoss(float dt)
+{
+	float distanceSQ;
+	int randomChoice = 0;
+	CCObject *pObject = NULL;
+	int bossAttackRange = (!_reachedBoss ? 129000 : 129000 * 4);
 
+	_eBoss->update(dt);
+	_eBossWings->update(dt);
+//	LOG("bossAttackRange: %i",bossAttackRange);
+	if (_eBoss->getActionState() != kActionStateKnockedOut && !_dialougeState)
+	{
+		if (CURTIME > _eBoss->getNextDecisionTime())
+		{
+
+			distanceSQ = ccpDistanceSQ(_eBoss->getPosition(), _cherry->getPosition());
+			//cocos2d::CCLog("distanceSQ: %lf", distanceSQ);
+			//LOG("distanceSQ %fl", distanceSQ);
+			//3 distance for attacks, code needs to be rewritted for more enemies
+			if (distanceSQ <= bossAttackRange)
+			{
+				_reachedBoss = true;
+				if (!_bossTalk)
+				{
+					initStartCutsceneTwo();
+				}
+				_eBoss->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.2) * 1000);
+				randomChoice = random_range(0, 1);
+
+				if (randomChoice == 0)
+				{
+					if (_cherry->getPosition().x > _eBoss->getPosition().x)
+					{
+						_eBoss->setScaleX(1.0);
+					} else
+					{
+						_eBoss->setScaleX(-1.0);
+					}
+
+					//4
+					_eBoss->setNextDecisionTime(_eBoss->getNextDecisionTime() + frandom_range(0.1,0.2) * 2000);
+
+					randomChoice = random_range(0, 6);
+
+					if (randomChoice == 1)
+					{
+						_eBoss->attack();
+
+						if (_eBoss->getActionState() == kActionStateAttack)
+						{
+							if (fabsf(_cherry->getPosition().y - _eBoss->getPosition().y) < 20)
+							{
+								if (_cherry->getHitbox().actual.intersectsRect(_eBoss->getAttackBox().actual) && _hud->getChildByTag(50) == NULL)
+								{
+									_cherry->hurtWithDamage(_eBoss->getDamage());
+
+								}
+							}
+						}
+					} else if (randomChoice == 2)
+					{
+						_eBoss->projectileAttack();
+
+						if (_eBoss->getActionState() == kActionStateAttack)
+						{
+							if (fabsf(_cherry->getPosition().y - _eBoss->getPosition().y) < 20)
+							{
+								if (_cherry->getHitbox().actual.intersectsRect(_eBoss->getAttackBox().actual) && _hud->getChildByTag(50) == NULL)
+								{
+									_cherry->hurtWithDamage(_eBoss->getDamage());
+
+								}
+							}
+						}
+					} else if (randomChoice == 3)
+					{
+
+					} else
+					{
+						CCPoint moveDirection = ccpNormalize(ccpSub(_cherry->getPosition(), _eBoss->getPosition()));
+						_eBoss->walkWithDirection(moveDirection);
+						//_eBossWings->walkWithDirection(moveDirection);
+					}
+				} else
+				{
+					_eBoss->idle();
+				}
+			} else if (distanceSQ <= SCREEN.width * SCREEN.width)
+			{
+				//5
+				_eBoss->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5) * 1000);
+				_eBoss->idle();
+			}
+		}
+	}
+	if (_eBoss->getActionState() == kActionStateKnockedOut)
+	{
+		_bossDead = true;
+
+	}
+	if (_bossDead && !_cutsceneTwoDone && !_checkPointOneSceneTwo)
+	{
+		_dialougeState = true;
+		_checkPointOne = true;
+		_hud->dialougeModeOn();
+		this->updateUI();
+		_eBoss->knockout();
+		_eBossWings->knockout();
+	}
+//	if (_eBoss->getActionState() == kActionStateAttack)
+//		LOG("Attack");
+//	if (_eBoss->getActionState() == kActionStateHurt)
+//		LOG("Hurt");
+//	if (_eBoss->getActionState() == kActionStateKnockedOut)
+//		LOG("Dead");
+
+
+}
 void GameLayer::updateEnemies(float dt)
 {
 	float distanceSQ;
@@ -526,7 +787,7 @@ void GameLayer::updateEnemies(float dt)
 				//3 distance for attacks, code needs to be rewritted for more enemies
 				if (distanceSQ <= 700)
 				{
-					_fenemy1->setNextDecisionTime(CURTIME + frandom_range(1.0, 2.0) * 1000);
+					_fenemy1->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5) * 1000);
 					randomChoice = random_range(0, 1);
 
 					if (randomChoice == 0)
@@ -540,7 +801,7 @@ void GameLayer::updateEnemies(float dt)
 						}
 
 						//4
-						_fenemy1->setNextDecisionTime(_fenemy1->getNextDecisionTime() + frandom_range(1.0,2.0) * 2000);
+						_fenemy1->setNextDecisionTime(_fenemy1->getNextDecisionTime() + frandom_range(0.1,0.5) * 2000);
 						_fenemy1->attack();
 						if (_fenemy1->getActionState() == kActionStateAttack)
 						{
@@ -578,6 +839,14 @@ void GameLayer::updateEnemies(float dt)
 		{
 			_enemyBeaten = true;
 		}
+	}
+
+	if (_enemyBeaten && !_cutsceneOneDone && !_checkPointOne)
+	{
+		_dialougeState = true;
+		_checkPointOne = true;
+		_hud->dialougeModeOn();
+		this->updateUI();
 	}
 
 //	LOG("single enemy update");
@@ -676,43 +945,46 @@ void GameLayer::firstSkill()
 	int x = (_cherry->getScaleX() == -1 ? (_cherry->getAttackBox().actual.origin.x - 20) : (_cherry->getAttackBox().actual.origin.x + 50));
 	int y = _cherry->getAttackBox().actual.origin.y;
 
-	m_emitter = CCParticleExplosion::create();
-
-	m_emitter->setPosVar(CCPointZero);
-
-	m_emitter->initWithTotalParticles(200);
-
-	m_emitter->setLifeVar(0);
-	m_emitter->setLife(0.7f);
-	m_emitter->setEmissionRate(10000);
-
-	m_emitter->setGravity(ccp(0,150));
-
-	m_emitter->setStartSpin(10.0f);
-	m_emitter->setStartSpinVar(2.0f);
-	m_emitter->setEndSpin(30.0f);
-	m_emitter->setEndSpinVar(5.0f);
-
-	m_emitter->setDuration(0.5f);
-
-	m_emitter->setStartSize(0.5f);
-	m_emitter->setStartSizeVar(0.5f);
-	m_emitter->setEndSize(30.0f);
-	m_emitter->setEndSizeVar(5.0f);
-
-	// texture
-	m_emitter->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
-
-	// additive
-	m_emitter->setBlendAdditive(true);
-
-	m_emitter->setPosition(x, y);
-	m_emitter->setAutoRemoveOnFinish(true);
-
-	this->addChild(m_emitter, 20);
-
 	if (_cherry->getActionState() == kActionStateAttack)
 	{
+		if (!_cherry->getAttackDone())
+		{
+			m_emitter = CCParticleExplosion::create();
+
+			m_emitter->setPosVar(CCPointZero);
+
+			m_emitter->initWithTotalParticles(200);
+
+			m_emitter->setLifeVar(0);
+			m_emitter->setLife(0.7f);
+			m_emitter->setEmissionRate(10000);
+
+			m_emitter->setGravity(ccp(0,150));
+
+			m_emitter->setStartSpin(10.0f);
+			m_emitter->setStartSpinVar(2.0f);
+			m_emitter->setEndSpin(30.0f);
+			m_emitter->setEndSpinVar(5.0f);
+
+			m_emitter->setDuration(0.5f);
+
+			m_emitter->setStartSize(0.5f);
+			m_emitter->setStartSizeVar(0.5f);
+			m_emitter->setEndSize(30.0f);
+			m_emitter->setEndSizeVar(5.0f);
+
+			// texture
+			m_emitter->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
+
+			// additive
+			m_emitter->setBlendAdditive(true);
+
+			m_emitter->setPosition(x, y);
+			m_emitter->setAutoRemoveOnFinish(true);
+
+			this->addChild(m_emitter, 20);
+		}
+
 		CCObject *pObject = NULL;
 		CCARRAY_FOREACH(_enemies, pObject)
 		{
@@ -734,6 +1006,13 @@ void GameLayer::firstSkill()
 			if (_cherry->getAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
 			{
 				_fenemy1->hurtWithDamage(_cherry->getDamage());
+			}
+		}
+		if (_eBoss->getActionState() != kActionStateKnockedOut)
+		{
+			if (_cherry->getAttackBox().actual.intersectsRect(_eBoss->getHitbox().actual))
+			{
+				_eBoss->hurtWithDamage(_cherry->getDamage());
 			}
 		}
 	}
@@ -776,6 +1055,13 @@ void GameLayer::SplitSkill()
 			if (_cherry->getSplitAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
 			{
 				_fenemy1->splitEnemy();
+			}
+		}
+		if (_eBoss->getActionState() != kActionStateKnockedOut)
+		{
+			if (_eBoss->getSplitAttackBox().actual.intersectsRect(_eBoss->getHitbox().actual))
+			{
+				_eBoss->hurtWithDamage(_cherry->getSplitDamage());
 			}
 		}
 
@@ -905,6 +1191,13 @@ void GameLayer::circleSkill()
 				if (_cherry->getCircleAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
 				{
 					_fenemy1->hurtWithDamage(_cherry->getCircleDamage());
+				}
+			}
+			if (_eBoss->getActionState() != kActionStateKnockedOut)
+			{
+				if (_eBoss->getCircleAttackBox().actual.intersectsRect(_eBoss->getHitbox().actual))
+				{
+					_eBoss->hurtWithDamage(_cherry->getCircleDamage());
 				}
 			}
 		}
