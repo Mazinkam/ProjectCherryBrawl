@@ -875,7 +875,7 @@
                 <key>sourceSize</key>
                 <string>{76,89}</string>
             </dict>
-            <key>bossdead_8.png</key>
+            <key>bossdead_008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{607,380},{58,81}}</string>
@@ -2094,7 +2094,7 @@
             <key>size</key>
             <string>{1024,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:c37b8c1ec9fc622ab00072521e0da87a:9eb27db0cf5d27696fe6a461236380a2:d808c8d622f147cb36714684944aa739$</string>
+            <string>$TexturePacker:SmartUpdate:8d0cced61e25294a19ff7af6f73ef69b:9eb27db0cf5d27696fe6a461236380a2:d808c8d622f147cb36714684944aa739$</string>
             <key>textureFileName</key>
             <string>game_atlas.png</string>
         </dict>
