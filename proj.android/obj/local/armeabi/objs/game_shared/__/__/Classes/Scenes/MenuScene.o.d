@@ -221,8 +221,7 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Scenes/MenuScene.o: \
  jni/../../Classes/Scenes/../Layers/../Layers/../Scenes/MenuScene.h \
  jni/../../Classes/Scenes/../Layers/../GameResources.h \
  jni/../../Classes/Scenes/../Layers/HudLayer.h \
- jni/../../Classes/Scenes/../Defines.h \
- jni/../../Classes/Scenes/../Utils/TouchTrailLayer.h
+ jni/../../Classes/Scenes/../Defines.h
 
 jni/../../Classes/Scenes/MenuScene.h:
 
@@ -667,5 +666,3 @@ jni/../../Classes/Scenes/../Layers/../GameResources.h:
 jni/../../Classes/Scenes/../Layers/HudLayer.h:
 
 jni/../../Classes/Scenes/../Defines.h:
-
-jni/../../Classes/Scenes/../Utils/TouchTrailLayer.h:

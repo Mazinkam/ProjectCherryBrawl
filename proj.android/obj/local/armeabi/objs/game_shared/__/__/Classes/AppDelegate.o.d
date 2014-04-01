@@ -205,9 +205,7 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/AppDelegate.o: \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/android/CCEGLView.h \
  jni/../../Classes/AppDelegate.h jni/../../Classes/Scenes/SplashScene.h \
- jni/../../Classes/Scenes/MenuScene.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../CocosDenshion/android/../include/SimpleAudioEngine.h \
- /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../CocosDenshion/android/../include/Export.h
+ jni/../../Classes/Scenes/MenuScene.h
 
 /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/include/cocos2d.h:
 
@@ -622,7 +620,3 @@ jni/../../Classes/AppDelegate.h:
 jni/../../Classes/Scenes/SplashScene.h:
 
 jni/../../Classes/Scenes/MenuScene.h:
-
-/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../CocosDenshion/android/../include/SimpleAudioEngine.h:
-
-/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../CocosDenshion/android/../include/Export.h:

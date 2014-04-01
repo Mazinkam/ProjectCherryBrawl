@@ -32,6 +32,11 @@ class HudLayer: public cocos2d::CCLayer
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _hpBorder, HpBorder);
 
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameDialouge, GameDialouge);
+		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameDisplayCherry, GameDisplayCherry);
+		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameDisplayOther, GameDisplayOther);
+
+		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameCherryNameTag, DisplayCherryNameTag);
+		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameOtherNameTag, DisplayOtherNameTag);
 
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _goBack , GoBack);
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _skillOne , SkillOne);

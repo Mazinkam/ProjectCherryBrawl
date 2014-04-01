@@ -6,7 +6,7 @@
  */
 
 #include "Cherry.h"
-#include "SimpleAudioEngine.h"
+//#include "SimpleAudioEngine.h"
 #include "../GameResources.h"
 using namespace cocos2d;
 

@@ -6,7 +6,7 @@
  */
 
 #include "EnemyFemale.h"
-#include "SimpleAudioEngine.h"
+//#include "SimpleAudioEngine.h"
 using namespace cocos2d;
 
 EnemyFemale::EnemyFemale(void)

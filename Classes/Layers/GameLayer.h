@@ -34,10 +34,14 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void initStartCutscene();
 		void initStartCutsceneTwo();
 
-		void circleSkill();
-		void firstSkill();
-		void projectileSkill();
-		void SplitSkill();
+		void circleSkill(CCObject* pObject);
+		void firstSkill(CCObject* pObject);
+		void projectileSkill(CCObject* pObject);
+		void SplitSkill(CCObject* pObject);
+
+
+		void bossFirstSkill();
+		void bossSecondSkill(CCObject* pObject);
 
 		void keyBackClicked();
 
@@ -46,7 +50,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		virtual void isHoldingDirection(SimpleDPad *simpleDPad, cocos2d::CCPoint direction);
 		virtual void simpleDPadTouchEnded(SimpleDPad *simpleDPad);
 
-		void mainMenu();
+		void mainMenu(CCObject* pObject);
 
 		void draw();
 
@@ -56,6 +60,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void updateCutsceneOne();
 		void updateCutsceneTwo();
 		void updateProjectiles();
+		void updateBossProjectiles();
 		void updateBoss(float dt);
 		void updateEnemies(float dt);
 		void setViewpointCenter(cocos2d::CCPoint position);
@@ -81,6 +86,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		CC_SYNTHESIZE(cocos2d::CCArray*, _BossText, BossText);
 
 		CC_SYNTHESIZE(cocos2d::CCArray*, _projectiles, Projectiles);
+		CC_SYNTHESIZE(cocos2d::CCArray*, _bossProjectiles, BossProjectiles);
 
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
 		CC_SYNTHESIZE_RETAIN(cocos2d::CCParticleSystemQuad*, m_emitter, ParticleSystemQuad);

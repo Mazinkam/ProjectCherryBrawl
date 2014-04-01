@@ -16,6 +16,8 @@ HudLayer::HudLayer(void)
 	_manaPool = NULL;
 	_hpPool = NULL;
 	_gameDialouge = NULL;
+	_gameDisplayCherry = NULL;
+	_gameDisplayOther = NULL;
 	_hpBackground = NULL;
 	_hpBorder = NULL;
 	_skillOne = NULL;
@@ -35,7 +37,6 @@ bool HudLayer::init()
 	do
 	{
 		CC_BREAK_IF(!CCLayer::init());
-
 
 		_manaPool = new CCArray;
 		CC_BREAK_IF(!_manaPool);
@@ -58,11 +59,32 @@ bool HudLayer::init()
 		CC_BREAK_IF(!_hpBorder);
 		_hpBorder->setPosition(ccp(SCREEN.width/2 - s_horizPadding, SCREEN.height/4.8));
 
-		_gameDialouge = CCSprite::create(s_dialouge1);
+		_gameDialouge = CCSprite::create(s_Dialouge1);
 		CC_BREAK_IF(!_gameDialouge);
 		this->addChild(_gameDialouge, 60);
 
+		_gameDisplayCherry = CCSprite::create(s_CherryNormal1);
+		CC_BREAK_IF(!_gameDisplayCherry);
+		this->addChild(_gameDisplayCherry, 61);
+
+		_gameDisplayOther = CCSprite::create(s_FenemyNormal);
+		CC_BREAK_IF(!_gameDisplayOther);
+		this->addChild(_gameDisplayOther, 61);
+
+
+		_gameCherryNameTag = CCSprite::create(s_CherryNameTag);
+		CC_BREAK_IF(!_gameCherryNameTag);
+		this->addChild(_gameCherryNameTag, 62);
+
+		_gameOtherNameTag = CCSprite::create(s_UnknownNameTag);
+		CC_BREAK_IF(!_gameOtherNameTag);
+		this->addChild(_gameOtherNameTag, 62);
+
 		_gameDialouge->setVisible(false);
+		_gameDisplayCherry->setVisible(false);
+		_gameDisplayOther->setVisible(false);
+		_gameCherryNameTag->setVisible(false);
+		_gameOtherNameTag->setVisible(false);
 
 		this->addChild(_dialougeBox, 6);
 
@@ -90,12 +112,25 @@ void HudLayer::dialougeModeOn()
 
 	if (_gameDialouge != NULL)
 		_gameDialouge->setVisible(true);
+	if (_gameDisplayOther != NULL)
+		_gameDisplayOther->setVisible(true);
+	if (_gameDisplayCherry != NULL)
+		_gameDisplayCherry->setVisible(true);
+	if (_gameCherryNameTag != NULL)
+		_gameCherryNameTag->setVisible(true);
+	if (_gameOtherNameTag != NULL)
+		_gameOtherNameTag->setVisible(true);
+
 	if (_skillOne != NULL)
 		_skillOne->setVisible(false);
 	if (_skillTwo != NULL)
 		_skillTwo->setVisible(false);
 	if (_skillThree != NULL)
 		_skillThree->setVisible(false);
+	if (_skillFour != NULL)
+		_skillFour->setVisible(false);
+	if (_skillFour != NULL)
+		_skillFour->setVisible(false);
 	if (_skillFour != NULL)
 		_skillFour->setVisible(false);
 
@@ -109,8 +144,18 @@ void HudLayer::dialougeModeOff()
 		_hpBackground->setVisible(true);
 	if (_hpBorder != NULL)
 		_hpBorder->setVisible(true);
+
 	if (_gameDialouge != NULL)
 		_gameDialouge->setVisible(false);
+	if (_gameDisplayCherry != NULL)
+		_gameDisplayCherry->setVisible(false);
+	if (_gameDisplayOther != NULL)
+		_gameDisplayOther->setVisible(false);
+	if (_gameCherryNameTag != NULL)
+		_gameCherryNameTag->setVisible(false);
+	if (_gameOtherNameTag != NULL)
+		_gameOtherNameTag->setVisible(false);
+
 	if (_skillOne != NULL)
 		_skillOne->setVisible(true);
 	if (_skillTwo != NULL)

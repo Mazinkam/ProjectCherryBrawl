@@ -22,6 +22,7 @@ class EnemyBoss: public ActionSprite
 	void knockout();
 
 	CC_SYNTHESIZE(float, _nextDecisionTime, NextDecisionTime);
+	CC_SYNTHESIZE(bool, _animDone, AnimDone);
 };
 
 #endif /* ENEMYBOSS_H_ */

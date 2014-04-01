@@ -6,7 +6,7 @@
  */
 
 #include "EnemyBossWings.h"
-#include "SimpleAudioEngine.h"
+//#include "SimpleAudioEngine.h"
 using namespace cocos2d;
 
 EnemyBossWings::EnemyBossWings()

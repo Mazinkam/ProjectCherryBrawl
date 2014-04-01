@@ -18,8 +18,6 @@ LOCAL_SRC_FILES := game/main.cpp \
                    ../../Classes/GameObjects/EnemyBossWings.cpp \
                    ../../Classes/Layers/HudLayer.cpp \
                    ../../Classes/GameObjects/Cherry.cpp \
-                   ../../Classes/Utils/TouchTrailLayer.cpp \
-                   ../../Classes/Utils/CCBlade.cpp \
                    ../../Classes/GameObjects/SimpleDPad.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

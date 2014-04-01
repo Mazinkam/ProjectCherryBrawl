@@ -6,7 +6,7 @@
  */
 
 #include "ActionSprite.h"
-#include "SimpleAudioEngine.h"
+//#include "SimpleAudioEngine.h"
 
 using namespace cocos2d;
 
@@ -16,6 +16,7 @@ ActionSprite::ActionSprite(void)
 	//behaviour
 	_idleAction = NULL;
 	_walkAction = NULL;
+	_walkIdle = NULL;
 	_hurtAction = NULL;
 	_knockedOutAction = NULL;
 

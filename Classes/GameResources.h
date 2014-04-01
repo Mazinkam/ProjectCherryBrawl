@@ -49,6 +49,7 @@ static const char s_Skill_4_On[] = "SKILL4_on.png";
 static const char s_Skill_4_Off[] = "SKILL4_off.png";
 
 static const char s_Stars[] = "stars.png";
+static const char s_GrayscaleStars[] = "stars-grayscale.png";
 
 static const char s_CherryLogo[] = "splash_logo.png";
 static const char s_CherryBG[] = "splash_background.png";
@@ -57,11 +58,34 @@ static const char s_CherryBG[] = "splash_background.png";
 static const char s_TilesPng[] = "background.png";
 static const char s_TilesTMX[] = "firstFloor.tmx";
 
-static const char s_dialouge1[] = "dialougebox001.png";
-static const char s_dialouge2[] = "dialougebox002.png";
-static const char s_dialouge3[] = "dialougebox003.png";
-static const char s_dialouge4[] = "dialougebox004.png";
-static const char s_dialouge5[] = "dialougebox005.png";
-static const char s_dialouge6[] = "dialougebox006.png";
+
+//dialouge box text
+static const char s_Dialouge1[] = "dialougebox001.png";
+static const char s_Dialouge2[] = "dialougebox002.png";
+static const char s_Dialouge3[] = "dialougebox003.png";
+static const char s_Dialouge4[] = "dialougebox004.png";
+static const char s_Dialouge5[] = "dialougebox005.png";
+static const char s_Dialouge6[] = "dialougebox006.png";
+static const char s_Dialouge7[] = "dialougebox007.png";
+static const char s_Dialouge8[] = "dialougebox008.png";
+static const char s_Dialouge9[] = "dialougebox009.png";
+static const char s_Dialouge10[] = "dialougebox010.png";
+static const char s_Dialouge11[] = "dialougebox011.png";
+static const char s_Dialouge12[] = "dialougebox012.png";
+static const char s_Dialouge13[] = "dialougebox013.png";
+static const char s_Dialouge14[] = "dialougebox014.png";
+static const char s_Dialouge15[] = "dialougebox015.png";
+
+static const char s_CherryNormal1[] = "cherry_normal001.png";
+static const char s_CherryNormal2[] = "cherry_normal002.png";
+
+static const char s_CherryUpset1[] = "cherry_upset001.png";
+static const char s_CherryUpset2[] = "cherry_upset002.png";
+
+static const char s_FenemyNormal[] = "fenemy_normal001.png";
+
+static const char s_CherryNameTag[] = "name_cherrylyn.png";
+static const char s_UnknownNameTag[] = "name_unknown.png";
+static const char s_MauveNameTag[] = "name_mauve.png";
 
 #endif /* GAMERESOURCES_H_ */

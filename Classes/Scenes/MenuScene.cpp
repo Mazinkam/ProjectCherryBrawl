@@ -1,14 +1,13 @@
 /*
- * MenuScene.cpp
- *
- *  Created on: 1.3.2014
- *      Author: user
- */
+* MenuScene.cpp
+*
+*  Created on: 1.3.2014
+*      Author: user
+*/
 
 #include "MenuScene.h"
 #include "GameScene.h"
 #include "../Defines.h"
-#include "../Utils/TouchTrailLayer.h"
 
 using namespace cocos2d;
 
@@ -79,13 +78,13 @@ bool MenuScene::init()
 		_menuLogo->setPosition(ccp(SCREEN.width/2,SCREEN.height/1.45));
 
 		_cherryParticles = CCParticleFlower::create();
-		_cherryParticles->initWithTotalParticles(100);
+	//	_cherryParticles->initWithTotalParticles(100);
 		_cherryParticles->retain();
 		_cherryParticles->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
 		_cherryParticles->setPosition(SCREEN.width/1.9, SCREEN.height/1.2);
 
 		_fenemyParticles = CCParticleFlower::create();
-		_fenemyParticles->initWithTotalParticles(100);
+	//	_fenemyParticles->initWithTotalParticles(100);
 		_fenemyParticles->setGravity(ccp(0,150));
 
 		_fenemyParticles->setLifeVar(0);

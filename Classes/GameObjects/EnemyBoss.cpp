@@ -6,13 +6,13 @@
  */
 
 #include "EnemyBoss.h"
-#include "SimpleAudioEngine.h"
+//#include "SimpleAudioEngine.h"
 using namespace cocos2d;
 
 EnemyBoss::EnemyBoss()
 {
 	// TODO Auto-generated constructor stub
-
+	_animDone = false;
 }
 
 EnemyBoss::~EnemyBoss()
@@ -101,6 +101,7 @@ bool EnemyBoss::init()
 		this->setCenterToSides(29.0);
 		this->setHitPoints(500.0);
 		this->setDamage(10.0);
+		this->setProjectileDamage(10.0);
 
 		this->setSpriteType("Boss");
 
@@ -122,5 +123,6 @@ void EnemyBoss::knockout()
 {
 	ActionSprite::knockout();
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("death.wav");
+	_animDone = true;
 }
 

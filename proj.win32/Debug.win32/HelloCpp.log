@@ -1,0 +1,28 @@
+﻿Build started 1.4.2014 21:23:55.
+     1>Project "C:\development\cocos2d-x-2.2.2\samples\Cpp\ProjectCherry\proj.win32\HelloCpp.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\development\cocos2d-x-2.2.2\samples\Cpp\ProjectCherry\proj.win32\..\..\..\..\cocos2dx" /I"C:\development\cocos2d-x-2.2.2\samples\Cpp\ProjectCherry\proj.win32\..\..\..\..\cocos2dx\include" /I"C:\development\cocos2d-x-2.2.2\samples\Cpp\ProjectCherry\proj.win32\..\..\..\..\cocos2dx\kazmath\include" /I"C:\development\cocos2d-x-2.2.2\samples\Cpp\ProjectCherry\proj.win32\..\..\..\..\cocos2dx\platform\win32" /I"C:\development\cocos2d-x-2.2.2\samples\Cpp\ProjectCherry\proj.win32\..\..\..\..\cocos2dx\platform\third_party\win32\OGLES" /I..\Classes /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _USING_V110_SDK71_ /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc110.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt main.cpp
+         main.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\development\cocos2d-x-2.2.2\Debug.win32\ProjectCHerry.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\development\cocos2d-x-2.2.2\Debug.win32\\" opengl32.lib glew32.lib libcocos2d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\development\cocos2d-x-2.2.2\Debug.win32\ProjectCHerry.pdb" /SUBSYSTEM:WINDOWS,"5.01" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\development\cocos2d-x-2.2.2\Debug.win32\ProjectCHerry.lib" /MACHINE:X86 /SAFESEH Debug.win32\ProjectCherry.res
+         Debug.win32\AppDelegate.obj
+         Debug.win32\ActionSprite.obj
+         Debug.win32\Cherry.obj
+         Debug.win32\EnemyBoss.obj
+         Debug.win32\EnemyBossWings.obj
+         Debug.win32\EnemyFemale.obj
+         Debug.win32\SimpleDPad.obj
+         Debug.win32\GameLayer.obj
+         Debug.win32\HudLayer.obj
+         Debug.win32\GameScene.obj
+         Debug.win32\MenuScene.obj
+         Debug.win32\SplashScene.obj
+         Debug.win32\main.obj
+         "C:\development\cocos2d-x-2.2.2\Debug.win32\libcocos2d.lib"
+         "C:\development\cocos2d-x-2.2.2\Debug.win32\libCocosDenshion.lib"
+         HelloCpp.vcxproj -> C:\development\cocos2d-x-2.2.2\Debug.win32\ProjectCHerry.exe
+     1>Done Building Project "C:\development\cocos2d-x-2.2.2\samples\Cpp\ProjectCherry\proj.win32\HelloCpp.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.64

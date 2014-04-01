@@ -41,11 +41,11 @@ bool GameScene::init()
 	{
 		CC_BREAK_IF(!CCScene::init());
 
-		_gameLayer = GameLayer::create();
-		this->addChild(_gameLayer, 0);
-
 		_hudLayer = HudLayer::create();
 		this->addChild(_hudLayer, 1);
+
+		_gameLayer = GameLayer::create();
+		this->addChild(_gameLayer, 0);
 
 		_hudLayer->getDPad()->setDelegate(_gameLayer);
 
