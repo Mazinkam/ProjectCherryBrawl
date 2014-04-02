@@ -39,6 +39,7 @@ class HudLayer: public cocos2d::CCLayer
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameOtherNameTag, DisplayOtherNameTag);
 
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _goBack , GoBack);
+		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _tapToContinue , TapToContinue);
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _skillOne , SkillOne);
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _skillTwo , SkillTwo);
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _skillThree , SkillThree);

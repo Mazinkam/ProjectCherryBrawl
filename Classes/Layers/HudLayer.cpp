@@ -24,6 +24,7 @@ HudLayer::HudLayer(void)
 	_skillTwo = NULL;
 	_skillThree = NULL;
 	_skillFour = NULL;
+	_tapToContinue = NULL;
 }
 
 HudLayer::~HudLayer(void)
@@ -65,11 +66,11 @@ bool HudLayer::init()
 
 		_gameDisplayCherry = CCSprite::create(s_CherryNormal1);
 		CC_BREAK_IF(!_gameDisplayCherry);
-		this->addChild(_gameDisplayCherry, 61);
+		this->addChild(_gameDisplayCherry, 59);
 
 		_gameDisplayOther = CCSprite::create(s_FenemyNormal);
 		CC_BREAK_IF(!_gameDisplayOther);
-		this->addChild(_gameDisplayOther, 61);
+		this->addChild(_gameDisplayOther, 59);
 
 
 		_gameCherryNameTag = CCSprite::create(s_CherryNameTag);
@@ -112,14 +113,8 @@ void HudLayer::dialougeModeOn()
 
 	if (_gameDialouge != NULL)
 		_gameDialouge->setVisible(true);
-	if (_gameDisplayOther != NULL)
-		_gameDisplayOther->setVisible(true);
-	if (_gameDisplayCherry != NULL)
-		_gameDisplayCherry->setVisible(true);
-	if (_gameCherryNameTag != NULL)
-		_gameCherryNameTag->setVisible(true);
-	if (_gameOtherNameTag != NULL)
-		_gameOtherNameTag->setVisible(true);
+	if (_tapToContinue != NULL)
+		_tapToContinue->setVisible(true);
 
 	if (_skillOne != NULL)
 		_skillOne->setVisible(false);
@@ -155,6 +150,9 @@ void HudLayer::dialougeModeOff()
 		_gameCherryNameTag->setVisible(false);
 	if (_gameOtherNameTag != NULL)
 		_gameOtherNameTag->setVisible(false);
+	if (_tapToContinue != NULL)
+		_tapToContinue->setVisible(false);
+
 
 	if (_skillOne != NULL)
 		_skillOne->setVisible(true);

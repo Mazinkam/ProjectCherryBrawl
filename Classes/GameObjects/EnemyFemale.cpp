@@ -91,7 +91,7 @@ bool EnemyFemale::init()
 		this->setKnockedOutAction(CCSequence::create(CCAnimate::create(knockedOutAnimation), CCBlink::create(2.0, 10.0), CCRemoveSelf::create(true), NULL));
 
 		//WalkIdle
-	//	this->setWalkIdle(CCSequence::create(CCAnimate::create(walkAnimation), CCCallFunc::create(this, callfunc_selector(EnemyFemale::idle)), NULL));
+		this->setWalkIdle(CCSequence::create(CCAnimate::create(walkAnimation), CCCallFunc::create(this, callfunc_selector(EnemyFemale::idle)), NULL));
 
 
 		this->setWalkSpeed(80.0);

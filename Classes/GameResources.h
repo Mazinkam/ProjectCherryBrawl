@@ -24,8 +24,8 @@ static const char s_LifeCherry[] = "LIFE.png";
 static const char s_ManaEmpty[] = "MANA_empty.png";
 static const char s_ManaFull[] = "MANA_full.png";
 
-static const char s_PauseOn[] = "PAUSE_on.png";
-static const char s_PauseOff[] = "PAUSE_off.png";
+static const char s_PauseOn[] = "onoff_on.png";
+static const char s_PauseOff[] = "onoff_off.png";
 
 static const char s_PlayOn[] = "play_on.png";
 static const char s_PlayOff[] = "play_off.png";
@@ -33,8 +33,11 @@ static const char s_PlayOff[] = "play_off.png";
 static const char s_ControlsOn[] = "controls_on.png";
 static const char s_ControlsOff[] = "controls_off.png";
 
-static const char s_RetryOn[] = "retryOn.png";
-static const char s_RetryOff[] = "retryOff.png";
+static const char s_RetryOn[] = "retry_on.png";
+static const char s_RetryOff[] = "retry_off.png";
+
+static const char s_TapOn[] = "tap_on.png";
+static const char s_TapOff[] = "tap_off.png";
 
 static const char s_Skill_1_On[] = "SKILL1_on.png";
 static const char s_Skill_1_Off[] = "SKILL1_off.png";
@@ -87,5 +90,8 @@ static const char s_FenemyNormal[] = "fenemy_normal001.png";
 static const char s_CherryNameTag[] = "name_cherrylyn.png";
 static const char s_UnknownNameTag[] = "name_unknown.png";
 static const char s_MauveNameTag[] = "name_mauve.png";
+
+static const char s_CherryLogoEnd[] = "end_logo.png";
+static const char s_EndCredits[] = "end_credits.png";
 
 #endif /* GAMERESOURCES_H_ */

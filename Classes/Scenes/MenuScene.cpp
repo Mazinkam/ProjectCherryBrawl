@@ -1,9 +1,9 @@
 /*
-* MenuScene.cpp
-*
-*  Created on: 1.3.2014
-*      Author: user
-*/
+ * MenuScene.cpp
+ *
+ *  Created on: 1.3.2014
+ *      Author: user
+ */
 
 #include "MenuScene.h"
 #include "GameScene.h"
@@ -51,9 +51,9 @@ bool MenuScene::init()
 
 		CC_BREAK_IF(!CCScene::init());
 
-		CCMenuItemImage *_closeButton = CCMenuItemImage::create(s_PauseOn, s_PauseOff, this, menu_selector(MenuScene::menuCloseCallback));
+		CCMenuItemImage *_closeButton = CCMenuItemImage::create(s_PauseOff, s_PauseOn, this, menu_selector(MenuScene::menuCloseCallback));
 		CC_BREAK_IF(!_closeButton);
-		_closeButton->setPosition(ccp(SCREEN.width - 20, SCREEN.height-20));
+		_closeButton->setPosition(ccp(SCREEN.width - 25, SCREEN.height-25));
 
 		CCMenuItemImage *_playButton = CCMenuItemImage::create(s_PlayOff, s_PlayOn, this, menu_selector(MenuScene::DisplayScene));
 		CC_BREAK_IF(!_playButton);
@@ -78,13 +78,13 @@ bool MenuScene::init()
 		_menuLogo->setPosition(ccp(SCREEN.width/2,SCREEN.height/1.45));
 
 		_cherryParticles = CCParticleFlower::create();
-	//	_cherryParticles->initWithTotalParticles(100);
+		//	_cherryParticles->initWithTotalParticles(100);
 		_cherryParticles->retain();
 		_cherryParticles->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Stars));
 		_cherryParticles->setPosition(SCREEN.width/1.9, SCREEN.height/1.2);
 
 		_fenemyParticles = CCParticleFlower::create();
-	//	_fenemyParticles->initWithTotalParticles(100);
+		//	_fenemyParticles->initWithTotalParticles(100);
 		_fenemyParticles->setGravity(ccp(0,150));
 
 		_fenemyParticles->setLifeVar(0);

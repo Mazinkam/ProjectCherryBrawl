@@ -8,7 +8,7 @@ using namespace cocos2d;
 bool showHitBox = true;
 
 GameLayer::GameLayer(void) :
-	_projectiles(NULL), _bossProjectiles(NULL)
+		_projectiles(NULL), _bossProjectiles(NULL)
 {
 	_tileMap = NULL;
 	_cherry = NULL;
@@ -68,8 +68,8 @@ bool GameLayer::init()
 
 		this->initTileMap();
 		LOG("initTileMap");
-		this->initCherry();
-		LOG("initCherry");
+		this->initSingleObjects();
+		LOG("initSingleObjects");
 		this->initEnemies();
 		LOG("initEnemies");
 
@@ -115,46 +115,37 @@ void GameLayer::initStartCutscene()
 	_bossDead = false;
 	_reachedBoss = false;
 
-	if (!_dialougeState)
-		_hud->dialougeModeOff();
-	if (_dialougeState)
-		_hud->dialougeModeOn();
-
-	_hud->getGameDialouge()->setVisible(false);
 	_hud->getGameDialouge()->setPosition(ccp(SCREEN.width/2, SCREEN.height/5));
 
-	_hud->getGameDisplayCherry()->setPosition(ccp(SCREEN.width/4, SCREEN.height/1.28));
-
-	_hud->getGameDisplayOther()->setPosition(ccp(SCREEN.width/1.3, SCREEN.height/1.3));
+	_hud->getGameDisplayCherry()->setPosition(ccp(SCREEN.width/4, SCREEN.height/1.29));
+	_hud->getGameDisplayOther()->setPosition(ccp(SCREEN.width/1.3, SCREEN.height/1.309));
 
 	_hud->getDisplayCherryNameTag()->setPosition(ccp(SCREEN.width/3.5, SCREEN.height/2.25));
+	_hud->getDisplayOtherNameTag()->setPosition(ccp(SCREEN.width/1.4, SCREEN.height/2.255));
 
-	_hud->getDisplayOtherNameTag()->setPosition(ccp(SCREEN.width/1.4, SCREEN.height/2.25));
+	_hud->setTapToContinue(CCMenuItemImage::create(s_TapOff, s_TapOn, this, menu_selector(GameLayer::updateCutscenes)));
+	_hud->getTapToContinue()->setPosition(ccp(SCREEN.width/2, SCREEN.height/12));
+
+	CCMenu* pMenu = CCMenu::create(_hud->getTapToContinue(), NULL);
+	pMenu->setPosition(CCPointZero);
+
+	pMenu->setTag(61);
+	_hud->addChild(pMenu, 61);
 
 }
 
 void GameLayer::initStartCutsceneTwo()
 {
 	LOG("initStartCutsceneTwo");
-	_sceneOne = 0;
 	_sceneTwo = 0;
 
 	_dialougeState = true;
-	_enemyBeaten = false;
 	_bossTalk = true;
 	_bossDead = false;
 	_reachedBoss = true;
-
-	if (!_dialougeState)
-		_hud->dialougeModeOff();
-	if (_dialougeState)
-		_hud->dialougeModeOn();
-
-	_hud->getGameDialouge()->setVisible(false);
-	_hud->getGameDialouge()->setPosition(ccp(SCREEN.width/2, SCREEN.height/5));
 }
 
-void GameLayer::initCherry()
+void GameLayer::initSingleObjects()
 {
 	_cherry = Cherry::create();
 	_actorsAtlas->addChild(_cherry);
@@ -191,8 +182,10 @@ void GameLayer::initCherry()
 void GameLayer::initEnemies()
 {
 	int enemyCount = 10;
+
 	this->setEnemies(CCArray::createWithCapacity(enemyCount));
 	LOG("Started enemies init");
+	for (int i = 0; i < enemyCount; i++)
 	{
 		EnemyFemale *enemy = EnemyFemale::create();
 		_actorsAtlas->addChild(enemy);
@@ -207,6 +200,7 @@ void GameLayer::initEnemies()
 		enemy->setPosition(ccp(random_range(minX, maxX), random_range(minY, maxY)));
 		enemy->setDesiredPosition(enemy->getPosition());
 		enemy->idle();
+		LOG("%i", i);
 	}
 	LOG("done enemies init");
 
@@ -217,8 +211,7 @@ void GameLayer::initSkillBar()
 	{
 		LOG("initSkillBar");
 		_hud->setGoBack(CCMenuItemImage::create(s_PauseOff, s_PauseOn, this, menu_selector(GameLayer::mainMenu)));
-
-		_hud->getGoBack()->setPosition(ccp(SCREEN.width - 20, SCREEN.height-20));
+		_hud->getGoBack()->setPosition(ccp(SCREEN.width - 25, SCREEN.height-25));
 
 		_hud->setSkillOne(CCMenuItemImage::create(s_Skill_1_Off, s_Skill_1_On, this, menu_selector(GameLayer::firstSkill)));
 		_hud->getSkillOne()->setPosition(ccp(SCREEN.width - (s_betweenButtons ),s_sizeFromSide));
@@ -284,7 +277,7 @@ void GameLayer::initSkillBar()
 
 }
 
-void GameLayer::updateCutsceneOne()
+void GameLayer::updateCutscenes(CCObject* pObject)
 {
 
 	if (_sceneOne <= 9)
@@ -301,28 +294,45 @@ void GameLayer::updateCutsceneOne()
 		{
 			LOG("%i",_sceneOne);
 			_hud->getGameDialouge()->setVisible(true);
+
 			_hud->getGameDisplayCherry()->setVisible(true);
-			_hud->getGameDisplayOther()->setVisible(true);
 			_hud->getDisplayCherryNameTag()->setVisible(true);
-			_hud->getDisplayOtherNameTag()->setVisible(true);
+
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 
 		}
 		if (_sceneOne == 3)
 		{
 			LOG("%i",_sceneOne);
-			//	_fenemy1->walkLeftThenIdle();
+			//_fenemy1->walkLeftThenIdle();
+			_hud->getGameDisplayCherry()->setVisible(false);
+			_hud->getDisplayCherryNameTag()->setVisible(false);
+
+			_hud->getGameDisplayOther()->setVisible(true);
+			_hud->getDisplayOtherNameTag()->setVisible(true);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge2));
 
 		}
 		if (_sceneOne == 4)
 		{
 			LOG("%i",_sceneOne);
+			_hud->getGameDisplayCherry()->setVisible(true);
+			_hud->getDisplayCherryNameTag()->setVisible(true);
+
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge3));
 
 		}
 		if (_sceneOne == 5)
 		{
 			LOG("%i",_sceneOne);
+			_hud->getGameDisplayCherry()->setVisible(false);
+			_hud->getDisplayCherryNameTag()->setVisible(false);
+
+			_hud->getGameDisplayOther()->setVisible(true);
+			_hud->getDisplayOtherNameTag()->setVisible(true);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge4));
 
 		}
@@ -334,19 +344,27 @@ void GameLayer::updateCutsceneOne()
 			_checkPointOne = false;
 			_enemyCanMove = true;
 			_hud->dialougeModeOff();
+			_hud->getGameDisplayCherry()->setVisible(false);
+			_hud->getDisplayCherryNameTag()->setVisible(false);
+
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
+			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge5));
 
 		}
 		if (_sceneOne == 7)
 		{
 			LOG("%i",_sceneOne);
-			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge5));
 			_hud->dialougeModeOn();
-			_hud->getGameDialouge()->setVisible(true);
 		}
 		if (_sceneOne == 8)
 		{
 			LOG("%i",_sceneOne);
+			_hud->getGameDisplayCherry()->setVisible(true);
+			_hud->getDisplayCherryNameTag()->setVisible(true);
 
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge6));
 		}
 		if (_sceneOne == 9)
@@ -359,26 +377,30 @@ void GameLayer::updateCutsceneOne()
 		}
 		LOG("%i",_sceneOne);
 	}
-
-}
-
-void GameLayer::updateCutsceneTwo()
-{
-
-	if (_sceneTwo <= 12)
+	if (_sceneTwo <= 12 && _cutsceneOneDone)
 	{
 		_sceneTwo++;
 
 		if (_sceneTwo == 1)
 		{
-			LOG("%i",_sceneOne);
+			LOG("%i",_sceneTwo);
 			_cherry->walkLeftThenIdle();
+			_hud->getGameDisplayCherry()->setVisible(false);
+			_hud->getDisplayCherryNameTag()->setVisible(false);
+
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge7));
 
 		}
 		if (_sceneTwo == 2)
 		{
 			LOG("%i",_sceneTwo);
+			_hud->getGameDisplayCherry()->setVisible(true);
+			_hud->getDisplayCherryNameTag()->setVisible(true);
+
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setVisible(true);
 
 		}
@@ -392,12 +414,22 @@ void GameLayer::updateCutsceneTwo()
 		if (_sceneTwo == 4)
 		{
 			LOG("%i",_sceneTwo);
+			_hud->getGameDisplayCherry()->setVisible(false);
+			_hud->getDisplayCherryNameTag()->setVisible(false);
+
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge9));
 
 		}
 		if (_sceneTwo == 5)
 		{
 			LOG("%i",_sceneTwo);
+			_hud->getGameDisplayCherry()->setVisible(true);
+			_hud->getDisplayCherryNameTag()->setVisible(true);
+
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge10));
 
 		}
@@ -408,11 +440,21 @@ void GameLayer::updateCutsceneTwo()
 			_checkPointOneSceneTwo = false;
 			_bossCanMove = true;
 			_hud->dialougeModeOff();
+			_hud->getGameDisplayCherry()->setVisible(false);
+			_hud->getDisplayCherryNameTag()->setVisible(false);
+
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 
 		}
 		if (_sceneTwo == 7)
 		{
 			LOG("%i",_sceneTwo);
+			_hud->getGameDisplayCherry()->setVisible(false);
+			_hud->getDisplayCherryNameTag()->setVisible(false);
+
+			_hud->getGameDisplayOther()->setVisible(true);
+			_hud->getDisplayOtherNameTag()->setVisible(true);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge11));
 			_hud->dialougeModeOn();
 			_hud->getGameDialouge()->setVisible(true);
@@ -421,25 +463,41 @@ void GameLayer::updateCutsceneTwo()
 		if (_sceneTwo == 8)
 		{
 			LOG("%i",_sceneTwo);
+			_hud->getGameDisplayCherry()->setVisible(true);
+			_hud->getDisplayCherryNameTag()->setVisible(true);
 
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge12));
 		}
 		if (_sceneTwo == 9)
 		{
 			LOG("%i",_sceneTwo);
+			_hud->getGameDisplayCherry()->setVisible(false);
+			_hud->getDisplayCherryNameTag()->setVisible(false);
 
+			_hud->getGameDisplayOther()->setVisible(true);
+			_hud->getDisplayOtherNameTag()->setVisible(true);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge13));
 		}
 		if (_sceneTwo == 10)
 		{
 			LOG("%i",_sceneTwo);
+			_hud->getGameDisplayCherry()->setVisible(true);
+			_hud->getDisplayCherryNameTag()->setVisible(true);
 
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge14));
 		}
 		if (_sceneTwo == 11)
 		{
 			LOG("%i",_sceneTwo);
+			_hud->getGameDisplayCherry()->setVisible(true);
+			_hud->getDisplayCherryNameTag()->setVisible(true);
 
+			_hud->getGameDisplayOther()->setVisible(false);
+			_hud->getDisplayOtherNameTag()->setVisible(false);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge15));
 		}
 		if (_sceneTwo == 12)
@@ -454,13 +512,13 @@ void GameLayer::updateCutsceneTwo()
 	}
 
 }
+void GameLayer::demoDone()
+{
+}
+
 
 void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
-	if (!_cutsceneOneDone && _dialougeState)
-		updateCutsceneOne();
-	if (!_cutsceneTwoDone && _cutsceneOneDone && _dialougeState)
-		updateCutsceneTwo();
 }
 
 void GameLayer::didChangeDirectionTo(SimpleDPad *simpleDPad, CCPoint direction)
@@ -510,10 +568,10 @@ void GameLayer::updateProjectiles()
 	{
 		CCSprite *projectile = dynamic_cast<CCSprite*>(it);
 		CCRect projectileRect = CCRectMake(
-			projectile->getPosition().x - (projectile->getContentSize().width/2),
-			projectile->getPosition().y - (projectile->getContentSize().height/2),
-			projectile->getContentSize().width,
-			projectile->getContentSize().height);
+				projectile->getPosition().x - (projectile->getContentSize().width/2),
+				projectile->getPosition().y - (projectile->getContentSize().height/2),
+				projectile->getContentSize().width,
+				projectile->getContentSize().height);
 
 		CCObject *pObject = NULL;
 		CCARRAY_FOREACH(_enemies, pObject)
@@ -566,10 +624,10 @@ void GameLayer::updateBossProjectiles()
 	{
 		CCSprite *projectile = dynamic_cast<CCSprite*>(it);
 		CCRect projectileRect = CCRectMake(
-			projectile->getPosition().x - (projectile->getContentSize().width/2),
-			projectile->getPosition().y - (projectile->getContentSize().height/2),
-			projectile->getContentSize().width,
-			projectile->getContentSize().height);
+				projectile->getPosition().x - (projectile->getContentSize().width/2),
+				projectile->getPosition().y - (projectile->getContentSize().height/2),
+				projectile->getContentSize().width,
+				projectile->getContentSize().height);
 
 		if (_cherry->getActionState() != kActionStateKnockedOut)
 		{
@@ -597,21 +655,21 @@ void GameLayer::updatePositions()
 	//add movement restrictions for different scenes!
 
 	float posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _cherry->getCenterToSides(),
-		MAX(_cherry->getCenterToSides()*4, _cherry->getDesiredPosition().x));
+			MAX(_cherry->getCenterToSides()*4, _cherry->getDesiredPosition().x));
 	float posY = MIN(3 * _tileMap->getTileSize().height + _cherry->getCenterToBottom(),
-		MAX(_cherry->getCenterToBottom()+5, _cherry->getDesiredPosition().y));
+			MAX(_cherry->getCenterToBottom()+5, _cherry->getDesiredPosition().y));
 	_cherry->setPosition(ccp(posX, posY));
 
 	posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _fenemy1->getCenterToSides(),
-		MAX(_fenemy1->getCenterToSides(), _fenemy1->getDesiredPosition().x));
+			MAX(_fenemy1->getCenterToSides(), _fenemy1->getDesiredPosition().x));
 	posY = MIN(3 * _tileMap->getTileSize().height + _fenemy1->getCenterToBottom(),
-		MAX(_fenemy1->getCenterToBottom(), _fenemy1->getDesiredPosition().y));
+			MAX(_fenemy1->getCenterToBottom(), _fenemy1->getDesiredPosition().y));
 	_fenemy1->setPosition(ccp(posX, posY));
 
 	posX = _tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBoss->getCenterToSides() * 5;
 
 	posY = MIN(3 * _tileMap->getTileSize().height + _eBoss->getCenterToBottom(),
-		MAX(_eBoss->getCenterToBottom(), _eBoss->getDesiredPosition().y));
+			MAX(_eBoss->getCenterToBottom(), _eBoss->getDesiredPosition().y));
 	_eBoss->setPosition(ccp(posX, posY));
 
 	if (_eBoss->getActionState() == kActionStateAttack || _eBoss->getActionState() == kActionStateWalk)
@@ -628,9 +686,9 @@ void GameLayer::updatePositions()
 	{
 		EnemyFemale *enemy = (EnemyFemale*) pObject;
 		posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - enemy->getCenterToSides(),
-			MAX(enemy->getCenterToSides(), enemy->getDesiredPosition().x));
+				MAX(enemy->getCenterToSides(), enemy->getDesiredPosition().x));
 		posY = MIN(3 * _tileMap->getTileSize().height + enemy->getCenterToBottom(),
-			MAX(enemy->getCenterToBottom(), enemy->getDesiredPosition().y));
+				MAX(enemy->getCenterToBottom(), enemy->getDesiredPosition().y));
 		enemy->setPosition(ccp(posX, posY));
 	}
 }
@@ -680,6 +738,11 @@ void GameLayer::updateUI()
 		else
 			s->setVisible(true);
 	}
+
+	if (!_dialougeState)
+		_hud->dialougeModeOff();
+	if (_dialougeState)
+		_hud->dialougeModeOn();
 
 }
 
@@ -1015,7 +1078,7 @@ void GameLayer::updateEnemies(float dt)
 						//5
 						enemy->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.5)* 1000);
 						randomChoice = random_range(0, 2)
-							;
+						;
 						if (randomChoice == 0)
 						{
 							CCPoint moveDirection = ccpNormalize(ccpSub(_cherry->getPosition(), enemy->getPosition()));
@@ -1392,7 +1455,7 @@ void GameLayer::endGame()
 	CCMenuItemImage *goBack = CCMenuItemImage::create("retryOn.png", "retryOff.png", this, menu_selector(GameLayer::restartGame));
 
 	// Place the menu item bottom-right conner.
-	goBack->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width/2, CCDirector::sharedDirector()->getWinSize().height/2));
+	goBack->setPosition(ccp(SCREEN.width/2, SCREEN.height/2));
 
 	CCMenu* pMenu = CCMenu::create(goBack, NULL);
 	pMenu->setPosition(CCPointZero);

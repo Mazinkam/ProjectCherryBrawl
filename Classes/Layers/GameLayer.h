@@ -28,7 +28,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 
 		bool init();
 		void initTileMap();
-		void initCherry();
+		void initSingleObjects();
 		void initEnemies();
 		void initSkillBar();
 		void initStartCutscene();
@@ -39,11 +39,11 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void projectileSkill(CCObject* pObject);
 		void SplitSkill(CCObject* pObject);
 
-
 		void bossFirstSkill();
-		void bossSecondSkill(CCObject* pObject);
+		void bossSecondSkill();
 
 		void keyBackClicked();
+		void demoDone();
 
 		virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
 		virtual void didChangeDirectionTo(SimpleDPad *simpleDPad, cocos2d::CCPoint direction);
@@ -57,8 +57,8 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void update(float dt);
 		void updatePositions();
 		void updateUI();
-		void updateCutsceneOne();
-		void updateCutsceneTwo();
+		void updateCutscenes(CCObject* pObject);
+
 		void updateProjectiles();
 		void updateBossProjectiles();
 		void updateBoss(float dt);
