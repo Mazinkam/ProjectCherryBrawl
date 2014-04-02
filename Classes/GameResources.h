@@ -93,5 +93,12 @@ static const char s_MauveNameTag[] = "name_mauve.png";
 
 static const char s_CherryLogoEnd[] = "end_logo.png";
 static const char s_EndCredits[] = "end_credits.png";
+static const char s_EndOverlay[] = "black002.png";
+
+static const char s_BossBigCoin[] = "koin.png";
+static const char s_BossSmallCoin[] = "koin_small001.png";
+
+static const char s_SpookyCoins[] = "SpookyPeas.plist";
+static const char s_Phoenix[] = "Phoenix.plist";
 
 #endif /* GAMERESOURCES_H_ */

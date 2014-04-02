@@ -56,15 +56,15 @@ typedef struct _BoundingBox {
 } BoundingBox;
 
 inline float GetCurTime(){
-	//timeval time;
-	//gettimeofday(&time, NULL);
-	//unsigned long millisecs = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	timeval time;
+	gettimeofday(&time, NULL);
+	unsigned long millisecs = (time.tv_sec * 1000) + (time.tv_usec / 1000);
 
-	time_t now;
-	tm* local;
-	time(&now); 
-	local=localtime(&now);
-	unsigned long millisecs = (local->tm_sec * 1000) + (local->tm_sec / 1000);
+//	time_t now;
+//	tm* local;
+//	time(&now);
+//	local=localtime(&now);
+//	unsigned long millisecs = (local->tm_sec * 1000) + (local->tm_sec / 1000); // for visual studio
 	return (float)millisecs;
 };
 

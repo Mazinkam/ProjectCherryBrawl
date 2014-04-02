@@ -23,8 +23,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		GameLayer(void);
 		virtual ~GameLayer(void);
 
-		CREATE_FUNC(GameLayer)
-		;
+		CREATE_FUNC(GameLayer);
 
 		bool init();
 		void initTileMap();
@@ -51,6 +50,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		virtual void simpleDPadTouchEnded(SimpleDPad *simpleDPad);
 
 		void mainMenu(CCObject* pObject);
+		void nothing(CCObject* pObject);
 
 		void draw();
 
@@ -75,28 +75,32 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		cocos2d::CCTMXTiledMap *_tileMap;
 		cocos2d::CCSpriteBatchNode *_actorsAtlas;
 
-		CC_SYNTHESIZE(HudLayer*, _hud, Hud);
-		CC_SYNTHESIZE(Cherry*, _cherry, Cherry);
-		CC_SYNTHESIZE(EnemyFemale*, _fenemy1, Fenemy);
-		CC_SYNTHESIZE(EnemyBoss*, _eBoss, EnemyBoss);
-		CC_SYNTHESIZE(EnemyBossWings*, _eBossWings, EnemyBossWings);
+	CC_SYNTHESIZE(HudLayer*, _hud, Hud)
+		;CC_SYNTHESIZE(Cherry*, _cherry, Cherry)
+		;CC_SYNTHESIZE(EnemyFemale*, _fenemy1, Fenemy)
+		;CC_SYNTHESIZE(EnemyBoss*, _eBoss, EnemyBoss)
+		;CC_SYNTHESIZE(EnemyBossWings*, _eBossWings, EnemyBossWings)
+		;
 
-		CC_SYNTHESIZE(cocos2d::CCArray*, _cherryText, CherryText);
-		CC_SYNTHESIZE(cocos2d::CCArray*, _enemyText, EnemyText);
-		CC_SYNTHESIZE(cocos2d::CCArray*, _BossText, BossText);
+	CC_SYNTHESIZE(cocos2d::CCArray*, _cherryText, CherryText)
+		;CC_SYNTHESIZE(cocos2d::CCArray*, _enemyText, EnemyText)
+		;CC_SYNTHESIZE(cocos2d::CCArray*, _BossText, BossText)
+		;
 
-		CC_SYNTHESIZE(cocos2d::CCArray*, _projectiles, Projectiles);
-		CC_SYNTHESIZE(cocos2d::CCArray*, _bossProjectiles, BossProjectiles);
+	CC_SYNTHESIZE(cocos2d::CCArray*, _projectiles, Projectiles)
+		;CC_SYNTHESIZE(cocos2d::CCArray*, _bossProjectiles, BossProjectiles)
+		;
 
-		CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
-		CC_SYNTHESIZE_RETAIN(cocos2d::CCParticleSystemQuad*, m_emitter, ParticleSystemQuad);
+	CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
+	CC_SYNTHESIZE_RETAIN(cocos2d::CCParticleSystemQuad*, _cherryEmitter, CherryParticleEmitter);
+	CC_SYNTHESIZE_RETAIN(cocos2d::CCParticleSystemQuad*, _bossEmitter, BossParticleEmitter);
 
 	protected:
 		bool _bInit;
 		bool _dialougeState;
 		int _sceneOne, _sceneTwo;
 		bool _checkPointOne, _checkPointTwo, _cutsceneOneDone, _cutsceneTwoDone, _enemyBeaten, _enemyCanMove, _bFirstCheck;
-		bool _checkPointOneSceneTwo, _checkPointTwoSceneTwo, _reachedBoss, _bossTalk, _bossCanMove, _bossDead;
+		bool _checkPointOneSceneTwo, _checkPointTwoSceneTwo, _reachedBoss, _bossTalk, _bossCanMove, _bossDead,_stopCamUpdate;
 
 };
 

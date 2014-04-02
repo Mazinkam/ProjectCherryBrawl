@@ -118,9 +118,9 @@ bool Cherry::init()
 		this->setManaPool(6);
 		this->setLife(3);
 		this->setDamage(20.0);
-		this->setProjectileDamage(80.0);
-		this->setCircleDamage(80.0);
-		this->setSplitDamage(180.0);
+		this->setProjectileDamage(100.0);
+		this->setCircleDamage(100.0);
+		this->setSplitDamage(120.0);
 		this->setWalkSpeed(190.0);
 
 		this->setSpriteType("Cherry");

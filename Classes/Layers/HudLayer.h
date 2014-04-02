@@ -24,6 +24,10 @@ class HudLayer: public cocos2d::CCLayer
 		void dialougeModeOn();
 		void dialougeModeOff();
 
+		void cherryTalks(bool isTalking, int chosenFrame);
+		void fenemyTalks(bool isTalking);
+		void eBossTalks(bool isTalking);
+
 		CREATE_FUNC (HudLayer);
 		CC_SYNTHESIZE(SimpleDPad*, _dPad, DPad);
 
