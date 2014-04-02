@@ -211,6 +211,7 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Layers/GameLayer.o: \
  jni/../../Classes/Layers/../Layers/../GameObjects/EnemyFemale.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/EnemyBoss.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/EnemyBossWings.h \
+ jni/../../Classes/Layers/../Layers/../GameObjects/ObjectShadow.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/SimpleDPad.h \
  jni/../../Classes/Layers/../Layers/../Layers/HudLayer.h \
  jni/../../Classes/Layers/../Layers/../Layers/../GameObjects/SimpleDPad.h \
@@ -645,6 +646,8 @@ jni/../../Classes/Layers/../Layers/../GameObjects/EnemyFemale.h:
 jni/../../Classes/Layers/../Layers/../GameObjects/EnemyBoss.h:
 
 jni/../../Classes/Layers/../Layers/../GameObjects/EnemyBossWings.h:
+
+jni/../../Classes/Layers/../Layers/../GameObjects/ObjectShadow.h:
 
 jni/../../Classes/Layers/../Layers/../GameObjects/SimpleDPad.h:
 

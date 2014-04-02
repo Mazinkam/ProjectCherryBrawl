@@ -32,6 +32,7 @@ bool EnemyBoss::init()
 		for (i = 1; i < 7; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("boss_idle%03d.png", i)->getCString());
+			frame->setOffset(ccp(0,20));
 			idleFrames->addObject(frame);
 		}
 		CCAnimation *idleAnimation = CCAnimation::createWithSpriteFrames(idleFrames, float(1.0 / 12.0));
@@ -42,7 +43,7 @@ bool EnemyBoss::init()
 		for (i = 1; i < 17; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("boss_attack%03d.png", i)->getCString());
-			frame->setOffset(ccp(18,0));
+			frame->setOffset(ccp(18,20));
 			attackFrames->addObject(frame);
 		}
 		CCAnimation *attackAnimation = CCAnimation::createWithSpriteFrames(attackFrames, float(1.0 / 24.0));
@@ -53,7 +54,7 @@ bool EnemyBoss::init()
 		for (i = 1; i < 17; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("boss_attack%03d.png", i)->getCString());
-			//frame->setOffset(ccp(45,24));
+			frame->setOffset(ccp(0,20));
 			attackProjectileFrames->addObject(frame);
 
 		}
@@ -66,6 +67,7 @@ bool EnemyBoss::init()
 		for (i = 1; i < 3; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("boss_attack%03d.png", i)->getCString());
+			frame->setOffset(ccp(0,20));
 			walkFrames->addObject(frame);
 		}
 		CCAnimation *walkAnimation = CCAnimation::createWithSpriteFrames(walkFrames, float(1.0 / 12.0));
@@ -76,6 +78,7 @@ bool EnemyBoss::init()
 		for (i = 1; i < 2; i++)
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("boss_hit%03d.png", i)->getCString());
+			frame->setOffset(ccp(0,20));
 			hurtFrames->addObject(frame);
 
 		}
@@ -101,7 +104,7 @@ bool EnemyBoss::init()
 		this->setCenterToSides(29.0);
 		this->setHitPoints(500.0);
 		this->setDamage(10.0);
-		this->setProjectileDamage(10.0);
+		this->setProjectileDamage(5.0);
 
 		this->setSpriteType("Boss");
 

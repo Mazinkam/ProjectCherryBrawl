@@ -8,7 +8,7 @@ using namespace cocos2d;
 bool showHitBox = true;
 
 GameLayer::GameLayer(void) :
-		_projectiles(NULL), _bossProjectiles(NULL)
+		_projectiles(NULL), _bossProjectiles(NULL), _enemiesShadow(NULL)
 {
 	_tileMap = NULL;
 	_cherry = NULL;
@@ -16,6 +16,11 @@ GameLayer::GameLayer(void) :
 	_eBoss = NULL;
 	_eBossWings = NULL;
 	_enemies = NULL;
+
+	_cherryShadow = NULL;
+	_fenemyShadow = NULL;
+	_eBossShadow = NULL;
+
 	_bInit = false;
 	_dialougeState = false;
 	_enemyBeaten = true;
@@ -65,7 +70,7 @@ bool GameLayer::init()
 		_actorsAtlas = CCSpriteBatchNode::create(s_gameAtlasPNG);
 		CC_BREAK_IF(!_actorsAtlas);
 		_actorsAtlas->getTexture()->setAntiAliasTexParameters();
-		this->addChild(_actorsAtlas, -5);
+		this->addChild(_actorsAtlas, -4);
 
 		this->initTileMap();
 		LOG("initTileMap");
@@ -165,6 +170,13 @@ void GameLayer::initSingleObjects()
 	_cherry->idle();
 	LOG("Cherry done");
 
+	_cherryShadow = ObjectShadow::create();
+	this->addChild(_cherryShadow, -5);
+	_cherryShadow->setPosition(ccp(_cherry->getPositionX(), _cherry->getPositionY()-50));
+	_cherryShadow->setDesiredPosition(_cherryShadow->getPosition());
+	_cherryShadow->idle();
+	LOG("Cherry Shadow done");
+
 	_fenemy1 = EnemyFemale::create();
 	_actorsAtlas->addChild(_fenemy1);
 	_fenemy1->setPosition(ccp(SCREEN.width/1.5, 80));
@@ -173,8 +185,15 @@ void GameLayer::initSingleObjects()
 	_fenemy1->idle();
 	LOG("EnemyFemale done");
 
+	_fenemyShadow = ObjectShadow::create();
+	this->addChild(_fenemyShadow, -5);
+	_fenemyShadow->setPosition(ccp(_fenemy1->getPositionX(), _fenemy1->getPositionY()-50));
+	_fenemyShadow->setDesiredPosition(_fenemyShadow->getPosition());
+	_fenemyShadow->idle();
+	LOG("EnemyFemale Shadow done");
+
 	_eBossWings = EnemyBossWings::create();
-	_actorsAtlas->addChild(_eBossWings);
+	this->addChild(_eBossWings, -5);
 	_eBossWings->setPosition(ccp(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBossWings->getCenterToSides()*2, 80));
 	_eBossWings->setDesiredPosition(_eBossWings->getPosition());
 	_eBossWings->setScaleX(-1);
@@ -189,18 +208,30 @@ void GameLayer::initSingleObjects()
 	_eBoss->idle();
 	LOG("EnemyBoss done");
 
+	_eBossShadow = ObjectShadow::create();
+	this->addChild(_eBossShadow, -5);
+	_eBossShadow->setPosition(ccp(_eBoss->getPositionX(), _eBoss->getPositionY()-50));
+	_eBossShadow->setDesiredPosition(_eBossShadow->getPosition());
+	_eBossShadow->idle();
+	LOG("EnemyBoss Shadow done");
+
 }
 void GameLayer::initEnemies()
 {
-	int enemyCount = 1;
+	int enemyCount = 10;
 
 	this->setEnemies(CCArray::createWithCapacity(enemyCount));
+	this->setEnemiesShadow(CCArray::createWithCapacity(enemyCount));
 	LOG("Started enemies init");
 	for (int i = 0; i < enemyCount; i++)
 	{
 		EnemyFemale *enemy = EnemyFemale::create();
+		ObjectShadow *shadow = ObjectShadow::create();
 		_actorsAtlas->addChild(enemy);
 		_enemies->addObject(enemy);
+
+		this->addChild(shadow, -5);
+		_enemiesShadow->addObject(shadow);
 
 		int minX = SCREEN.width + enemy->getCenterToSides()*3;
 		int maxX = ((_tileMap->getMapSize().width * _tileMap->getTileSize().width) * 0.8) - enemy->getCenterToSides();
@@ -211,6 +242,11 @@ void GameLayer::initEnemies()
 		enemy->setPosition(ccp(random_range(minX, maxX), random_range(minY, maxY)));
 		enemy->setDesiredPosition(enemy->getPosition());
 		enemy->idle();
+
+		shadow->setPosition(ccp(enemy->getPositionX(), enemy->getPositionY()-50));
+		shadow->setDesiredPosition(shadow->getPosition());
+		shadow->idle();
+
 		LOG("%i", i);
 	}
 	LOG("done enemies init");
@@ -306,7 +342,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 			LOG("%i",_sceneOne);
 			_hud->getGameDialouge()->setVisible(true);
 			_hud->cherryTalks(true,1);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,1);
 
 		}
 		if (_sceneOne == 3)
@@ -315,7 +351,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 			//_fenemy1->walkLeftThenIdle();
 
 			_hud->cherryTalks(false,1);
-			_hud->fenemyTalks(true);
+			_hud->fenemyTalks(true,1);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge2));
 
 		}
@@ -323,7 +359,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		{
 			LOG("%i",_sceneOne);
 			_hud->cherryTalks(true,4);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,1);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge3));
 
 		}
@@ -331,7 +367,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		{
 			LOG("%i",_sceneOne);
 			_hud->cherryTalks(false,1);
-			_hud->fenemyTalks(true);
+			_hud->fenemyTalks(true,1);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge4));
 
 		}
@@ -344,7 +380,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 			_enemyCanMove = true;
 			_hud->dialougeModeOff();
 			_hud->cherryTalks(false,1);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,1);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge5));
 
 		}
@@ -354,13 +390,13 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 			_hud->dialougeModeOn();
 			_hud->getGameDialouge()->setVisible(true);
 			_hud->cherryTalks(true,2);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,1);
 		}
 		if (_sceneOne == 8)
 		{
 			LOG("%i",_sceneOne);
 			_hud->cherryTalks(true,3);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,1);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge6));
 			_hud->getGameDialouge()->setVisible(true);
 		}
@@ -383,7 +419,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 			LOG("%i",_sceneTwo);
 			_cherry->walkLeftThenIdle();
 			_hud->cherryTalks(false,1);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,2);
 			_stopCamUpdate=true;
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge7));
 
@@ -392,7 +428,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(true,2);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,2);
 			_hud->getGameDialouge()->setVisible(true);
 
 		}
@@ -400,7 +436,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(true,3);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,2);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge8));
 
 		}
@@ -408,7 +444,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(false,1);
-			_hud->fenemyTalks(true);
+			_hud->fenemyTalks(true,2);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge9));
 
 		}
@@ -416,7 +452,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(true,3);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,2);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge10));
 
 		}
@@ -428,14 +464,14 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 			_bossCanMove = true;
 			_hud->dialougeModeOff();
 			_hud->cherryTalks(false,1);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,2);
 
 		}
 		if (_sceneTwo == 7)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(false,1);
-			_hud->fenemyTalks(true);
+			_hud->fenemyTalks(true,3);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge11));
 			_hud->dialougeModeOn();
 			_hud->getGameDialouge()->setVisible(true);
@@ -445,28 +481,28 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(true,3);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,3);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge12));
 		}
 		if (_sceneTwo == 9)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(false,2);
-			_hud->fenemyTalks(true);
+			_hud->fenemyTalks(true,3);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge13));
 		}
 		if (_sceneTwo == 10)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(true,2);
-			_hud->fenemyTalks(false);
+			_hud->fenemyTalks(false,3);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge14));
 		}
 		if (_sceneTwo == 11)
 		{
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(false,1);
-			_hud->fenemyTalks(true);
+			_hud->fenemyTalks(true,3);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge15));
 		}
 		if (_sceneTwo == 12)
@@ -476,6 +512,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 			_dialougeState = false;
 			_hud->getGameDialouge()->setVisible(false);
 			_hud->dialougeModeOff();
+			this->endGame();
 		}
 
 		if (_sceneTwo == 13)
@@ -643,38 +680,55 @@ void GameLayer::updatePositions()
 	float posY = MIN(3 * _tileMap->getTileSize().height + _cherry->getCenterToBottom(),
 			MAX(_cherry->getCenterToBottom()+5, _cherry->getDesiredPosition().y));
 	_cherry->setPosition(ccp(posX, posY));
+	_cherryShadow->setPosition(ccp(posX+2,posY-50));
 
 	posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - _fenemy1->getCenterToSides(),
 			MAX(_fenemy1->getCenterToSides(), _fenemy1->getDesiredPosition().x));
 	posY = MIN(3 * _tileMap->getTileSize().height + _fenemy1->getCenterToBottom(),
 			MAX(_fenemy1->getCenterToBottom(), _fenemy1->getDesiredPosition().y));
 	_fenemy1->setPosition(ccp(posX, posY));
+	_fenemyShadow->setPosition(ccp(posX+2,posY-50));
 
 	posX = _tileMap->getMapSize().width * _tileMap->getTileSize().width - _eBoss->getCenterToSides() * 5;
 
 	posY = MIN(3 * _tileMap->getTileSize().height + _eBoss->getCenterToBottom(),
 			MAX(_eBoss->getCenterToBottom(), _eBoss->getDesiredPosition().y));
 	_eBoss->setPosition(ccp(posX, posY));
+	_eBossShadow->setPosition(ccp(posX+2,posY-50));
 
 	if (_eBoss->getActionState() == kActionStateAttack || _eBoss->getActionState() == kActionStateWalk)
 	{
-		_eBossWings->setPosition(ccp(posX-9, posY));
+		_eBossWings->setPosition(ccp(posX+3, posY+10));
 	}
 	else
 	{
-		_eBossWings->setPosition(ccp(posX, posY));
+		_eBossWings->setPosition(ccp(posX, posY+10));
 	}
 
 	CCObject *pObject = NULL;
+
 	CCARRAY_FOREACH(_enemies, pObject)
 	{
+
 		EnemyFemale *enemy = (EnemyFemale*) pObject;
+		ObjectShadow *shadow = (ObjectShadow*)_enemiesShadow->objectAtIndex(_enemies->indexOfObject(enemy));
+
 		posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - enemy->getCenterToSides(),
 				MAX(enemy->getCenterToSides(), enemy->getDesiredPosition().x));
 		posY = MIN(3 * _tileMap->getTileSize().height + enemy->getCenterToBottom(),
 				MAX(enemy->getCenterToBottom(), enemy->getDesiredPosition().y));
 		enemy->setPosition(ccp(posX, posY));
+		shadow->setPosition(ccp(posX+2,posY-50));
+
 	}
+
+
+//	CCObject *pShadow = NULL;
+//	CCARRAY_FOREACH(_enemiesShadow, pShadow)
+//	{
+//		ObjectShadow *shadow = (ObjectShadow*) pShadow;
+//		shadow->setPosition(ccp(posX+2,posY-50));
+//	}
 }
 
 void GameLayer::updateUI()
@@ -851,6 +905,7 @@ void GameLayer::updateBoss(float dt)
 		this->updateUI();
 		_eBoss->knockout();
 		_eBossWings->knockout();
+		_eBossShadow->knockout();
 	}
 
 }
@@ -1032,6 +1087,7 @@ void GameLayer::updateEnemies(float dt)
 		if (_fenemy1->getActionState() == kActionStateKnockedOut)
 		{
 			_enemyBeaten = true;
+			_fenemyShadow->knockout();
 		}
 	}
 
@@ -1049,6 +1105,8 @@ void GameLayer::updateEnemies(float dt)
 		CCARRAY_FOREACH(_enemies, pObject)
 		{
 			EnemyFemale *enemy = (EnemyFemale*) pObject;
+			ObjectShadow *shadow = (ObjectShadow*)_enemiesShadow->objectAtIndex(_enemies->indexOfObject(enemy));
+
 			enemy->update(dt);
 			if (enemy->getActionState() != kActionStateKnockedOut)
 			{
@@ -1115,6 +1173,9 @@ void GameLayer::updateEnemies(float dt)
 							enemy->idle();
 						}
 					}
+				}
+				if(enemy->getActionState() == kActionStateKnockedOut){
+					shadow->knockout();
 				}
 			}
 		}
@@ -1504,6 +1565,7 @@ void GameLayer::objectRemoval(CCNode* sender)
 
 void GameLayer::endGame()
 {
+	_cherryShadow->knockout();
 	CCMenuItemImage *goBack = CCMenuItemImage::create(s_RetryOff, s_RetryOn, this, menu_selector(GameLayer::restartGame));
 
 	CCSprite *overLayer = CCSprite::create(s_EndOverlay);

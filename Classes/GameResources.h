@@ -87,6 +87,9 @@ static const char s_CherryUpset2[] = "cherry_upset002.png";
 
 static const char s_FenemyNormal[] = "fenemy_normal001.png";
 
+static const char s_BossNormal[] = "boss_normal001.png";
+static const char s_BossHurt[] = "boss_hurt001.png";
+
 static const char s_CherryNameTag[] = "name_cherrylyn.png";
 static const char s_UnknownNameTag[] = "name_unknown.png";
 static const char s_MauveNameTag[] = "name_mauve.png";
@@ -100,5 +103,6 @@ static const char s_BossSmallCoin[] = "koin_small001.png";
 
 static const char s_SpookyCoins[] = "SpookyPeas.plist";
 static const char s_Phoenix[] = "Phoenix.plist";
+static const char s_GameShadow[] = "shadow.png";
 
 #endif /* GAMERESOURCES_H_ */

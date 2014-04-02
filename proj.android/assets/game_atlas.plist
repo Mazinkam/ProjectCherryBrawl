@@ -1499,10 +1499,23 @@
                 <key>sourceSize</key>
                 <string>{143,38}</string>
             </dict>
+            <key>shadow.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{147,761},{58,24}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{58,24}}</string>
+                <key>sourceSize</key>
+                <string>{58,24}</string>
+            </dict>
             <key>skill1_001.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{147,761},{157,146}}</string>
+                <string>{{207,761},{157,146}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1515,7 +1528,7 @@
             <key>skill1_002.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{306,761},{157,146}}</string>
+                <string>{{366,761},{157,146}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1528,7 +1541,7 @@
             <key>skill1_003.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{465,761},{157,146}}</string>
+                <string>{{525,761},{157,146}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1541,7 +1554,7 @@
             <key>skill1_004.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{624,761},{157,146}}</string>
+                <string>{{684,761},{157,146}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -1554,7 +1567,7 @@
             <key>skill1_005.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{783,761},{157,146}}</string>
+                <string>{{843,761},{157,146}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -2094,7 +2107,7 @@
             <key>size</key>
             <string>{1024,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:8d0cced61e25294a19ff7af6f73ef69b:9eb27db0cf5d27696fe6a461236380a2:d808c8d622f147cb36714684944aa739$</string>
+            <string>$TexturePacker:SmartUpdate:44a961686295a2046de8eb280dc147c6:bbd721d2c98c02765d6d6ec1d7d32b5c:d808c8d622f147cb36714684944aa739$</string>
             <key>textureFileName</key>
             <string>game_atlas.png</string>
         </dict>

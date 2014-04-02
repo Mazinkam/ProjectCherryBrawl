@@ -13,6 +13,7 @@
 #include "../GameObjects/EnemyFemale.h"
 #include "../GameObjects/EnemyBoss.h"
 #include "../GameObjects/EnemyBossWings.h"
+#include "../GameObjects/ObjectShadow.h"
 #include "../GameObjects/SimpleDPad.h"
 #include "../Layers/HudLayer.h"
 #include "../GameResources.h"
@@ -75,12 +76,15 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		cocos2d::CCTMXTiledMap *_tileMap;
 		cocos2d::CCSpriteBatchNode *_actorsAtlas;
 
-	CC_SYNTHESIZE(HudLayer*, _hud, Hud)
-		;CC_SYNTHESIZE(Cherry*, _cherry, Cherry)
-		;CC_SYNTHESIZE(EnemyFemale*, _fenemy1, Fenemy)
-		;CC_SYNTHESIZE(EnemyBoss*, _eBoss, EnemyBoss)
-		;CC_SYNTHESIZE(EnemyBossWings*, _eBossWings, EnemyBossWings)
-		;
+	CC_SYNTHESIZE(HudLayer*, _hud, Hud);
+	CC_SYNTHESIZE(Cherry*, _cherry, Cherry);
+	CC_SYNTHESIZE(EnemyFemale*, _fenemy1, Fenemy);
+	CC_SYNTHESIZE(EnemyBoss*, _eBoss, EnemyBoss);
+	CC_SYNTHESIZE(EnemyBossWings*, _eBossWings, EnemyBossWings);
+	//extras
+	CC_SYNTHESIZE(ObjectShadow*, _cherryShadow, CherryShadow);
+	CC_SYNTHESIZE(ObjectShadow*, _eBossShadow, BossShadow);
+	CC_SYNTHESIZE(ObjectShadow*, _fenemyShadow, FenemyShadow);
 
 	CC_SYNTHESIZE(cocos2d::CCArray*, _cherryText, CherryText)
 		;CC_SYNTHESIZE(cocos2d::CCArray*, _enemyText, EnemyText)
@@ -92,6 +96,7 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		;
 
 	CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemies, Enemies);
+	CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, _enemiesShadow, EnemiesShadow);
 	CC_SYNTHESIZE_RETAIN(cocos2d::CCParticleSystemQuad*, _cherryEmitter, CherryParticleEmitter);
 	CC_SYNTHESIZE_RETAIN(cocos2d::CCParticleSystemQuad*, _bossEmitter, BossParticleEmitter);
 

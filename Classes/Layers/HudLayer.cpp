@@ -188,8 +188,25 @@ void HudLayer::cherryTalks(bool isTalking, int chosenFrame)
 	}
 }
 
-void HudLayer::fenemyTalks(bool isTalking)
+void HudLayer::fenemyTalks(bool isTalking, int chosenFrame)
 {
+	if (chosenFrame == 1)
+	{
+		_gameDisplayOther->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_FenemyNormal));
+		_gameOtherNameTag->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_UnknownNameTag));
+	}
+
+	if (chosenFrame == 2)
+	{
+		_gameDisplayOther->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_BossNormal));
+		_gameOtherNameTag->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_MauveNameTag));
+	}
+	if (chosenFrame == 3)
+	{
+		_gameDisplayOther->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_BossHurt));
+		_gameOtherNameTag->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_MauveNameTag));
+	}
+
 	if (isTalking)
 	{
 		if (_gameDisplayOther != NULL)
