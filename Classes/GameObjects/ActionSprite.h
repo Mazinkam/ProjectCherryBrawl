@@ -90,6 +90,8 @@ class ActionSprite: public cocos2d::CCSprite
 		CC_SYNTHESIZE(BoundingBox, _projectileAttackBox, ProjectileAttackBox);
 		CC_SYNTHESIZE(BoundingBox, _splitAttackBox, SplitAttackBox);
 
+		CC_SYNTHESIZE(bool, _splitAttackDone, SplitAttackDone);
+
 
 };
 

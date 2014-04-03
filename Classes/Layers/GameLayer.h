@@ -34,6 +34,8 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void initStartCutscene();
 		void initStartCutsceneTwo();
 
+		void displayDamage();
+
 		void circleSkill(CCObject* pObject);
 		void firstSkill(CCObject* pObject);
 		void projectileSkill(CCObject* pObject);

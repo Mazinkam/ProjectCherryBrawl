@@ -3,6 +3,8 @@
 #include "../Scenes/GameScene.h"
 //#include "SimpleAudioEngine.h"
 #include "../Defines.h"
+#include <string>
+#include <sstream>
 
 using namespace cocos2d;
 bool showHitBox = true;
@@ -603,6 +605,17 @@ void GameLayer::updateProjectiles()
 				{
 					enemy->hurtWithDamage(_cherry->getProjectileDamage());
 					projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
+
+					int printNum = _cherry->getProjectileDamage();
+					CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+					addChild(_dmgLabel);
+					_dmgLabel->setColor(ccRED);
+					_dmgLabel->setPosition(ccp(enemy->getPositionX(), enemy->getPositionY()+60));
+
+					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					_dmgLabel->runAction(seq);
 				}
 			}
 
@@ -613,6 +626,17 @@ void GameLayer::updateProjectiles()
 			{
 				_fenemy1->hurtWithDamage(_cherry->getProjectileDamage());
 				projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
+
+				int printNum = _cherry->getProjectileDamage();
+				CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+				addChild(_dmgLabel);
+				_dmgLabel->setColor(ccRED);
+				_dmgLabel->setPosition(ccp(_fenemy1->getPositionX(), _fenemy1->getPositionY()+60));
+
+				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+				_dmgLabel->runAction(seq);
 			}
 		}
 		if (_eBoss->getActionState() != kActionStateKnockedOut)
@@ -621,6 +645,17 @@ void GameLayer::updateProjectiles()
 			{
 				_eBoss->hurtWithDamage(_cherry->getProjectileDamage());
 				projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
+
+				int printNum = _cherry->getProjectileDamage();
+				CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+				addChild(_dmgLabel);
+				_dmgLabel->setColor(ccRED);
+				_dmgLabel->setPosition(ccp(_eBoss->getPositionX(), _eBoss->getPositionY()+60));
+
+				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+				_dmgLabel->runAction(seq);
 			}
 		}
 	}
@@ -656,6 +691,17 @@ void GameLayer::updateBossProjectiles()
 				LOG("damage cherry");
 				_cherry->hurtWithDamage(_eBoss->getProjectileDamage());
 				projectile->runAction(CCSequence::create(CCCallFuncN::create(this, callfuncN_selector(GameLayer::objectRemoval)), NULL));
+
+				int printNum = _eBoss->getProjectileDamage();
+				CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+				addChild(_dmgLabel);
+				_dmgLabel->setColor(ccRED);
+				_dmgLabel->setPosition(ccp(_cherry->getPositionX(), _cherry->getPositionY()+60));
+
+				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+				_dmgLabel->runAction(seq);
 			}
 		}
 	}
@@ -711,7 +757,7 @@ void GameLayer::updatePositions()
 	{
 
 		EnemyFemale *enemy = (EnemyFemale*) pObject;
-		ObjectShadow *shadow = (ObjectShadow*)_enemiesShadow->objectAtIndex(_enemies->indexOfObject(enemy));
+		ObjectShadow *shadow = (ObjectShadow*) _enemiesShadow->objectAtIndex(_enemies->indexOfObject(enemy));
 
 		posX = MIN(_tileMap->getMapSize().width * _tileMap->getTileSize().width - enemy->getCenterToSides(),
 				MAX(enemy->getCenterToSides(), enemy->getDesiredPosition().x));
@@ -722,14 +768,13 @@ void GameLayer::updatePositions()
 
 	}
 
-
 //	CCObject *pShadow = NULL;
 //	CCARRAY_FOREACH(_enemiesShadow, pShadow)
 //	{
 //		ObjectShadow *shadow = (ObjectShadow*) pShadow;
 //		shadow->setPosition(ccp(posX+2,posY-50));
 //	}
-}
+			}
 
 void GameLayer::updateUI()
 {
@@ -864,6 +909,16 @@ void GameLayer::updateBoss(float dt)
 								if (_cherry->getHitbox().actual.intersectsRect(_eBoss->getAttackBox().actual) && _hud->getChildByTag(100) == NULL)
 								{
 									_cherry->hurtWithDamage(_eBoss->getDamage());
+									int printNum = _eBoss->getDamage();
+									CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+									addChild(_dmgLabel);
+									_dmgLabel->setColor(ccRED);
+									_dmgLabel->setPosition(ccp(_cherry->getPositionX(), _cherry->getPositionY()+60));
+
+									CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+									CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+									CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+									_dmgLabel->runAction(seq);
 
 								}
 							}
@@ -892,9 +947,10 @@ void GameLayer::updateBoss(float dt)
 			}
 		}
 	}
-	if (_eBoss->getActionState() == kActionStateKnockedOut)
+	if (_eBoss->getHitPoints() <= 0)
 	{
 		_bossDead = true;
+		_eBoss->setActionState(kActionStateKnockedOut);
 
 	}
 	if (_bossDead && !_checkPointOneSceneTwo)
@@ -1028,7 +1084,7 @@ void GameLayer::updateEnemies(float dt)
 		_fenemy1->update(dt);
 		if (_fenemy1->getActionState() != kActionStateKnockedOut)
 		{
-			if (CURTIME > _fenemy1->getNextDecisionTime())
+			if (CURTIME > _fenemy1->getNextDecisionTime() && !_fenemy1->getSplitAttackDone())
 			{
 				distanceSQ = ccpDistanceSQ(_fenemy1->getPosition(), _cherry->getPosition());
 				//cocos2d::CCLog("distanceSQ: %lf", distanceSQ);
@@ -1059,6 +1115,16 @@ void GameLayer::updateEnemies(float dt)
 								if (_cherry->getHitbox().actual.intersectsRect(_fenemy1->getAttackBox().actual) && _hud->getChildByTag(50) == NULL)
 								{
 									_cherry->hurtWithDamage(_fenemy1->getDamage());
+									int printNum = _fenemy1->getDamage();
+									CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+									addChild(_dmgLabel);
+									_dmgLabel->setColor(ccRED);
+									_dmgLabel->setPosition(ccp(_cherry->getPositionX(), _cherry->getPositionY()+60));
+
+									CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+									CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+									CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+									_dmgLabel->runAction(seq);
 
 								}
 							}
@@ -1083,12 +1149,19 @@ void GameLayer::updateEnemies(float dt)
 					}
 				}
 			}
+			if (_fenemy1->getHitPoints() <= 0)
+			{
+				_enemyBeaten = true;
+				_fenemy1->setActionState(kActionStateKnockedOut);
+				_fenemyShadow->knockout();
+				if(!_fenemy1->getSplitAttackDone())
+				{
+					_fenemy1->knockout();
+				}
+
+			}
 		}
-		if (_fenemy1->getActionState() == kActionStateKnockedOut)
-		{
-			_enemyBeaten = true;
-			_fenemyShadow->knockout();
-		}
+
 	}
 
 	if (_enemyBeaten && !_cutsceneOneDone && !_checkPointOne)
@@ -1105,14 +1178,14 @@ void GameLayer::updateEnemies(float dt)
 		CCARRAY_FOREACH(_enemies, pObject)
 		{
 			EnemyFemale *enemy = (EnemyFemale*) pObject;
-			ObjectShadow *shadow = (ObjectShadow*)_enemiesShadow->objectAtIndex(_enemies->indexOfObject(enemy));
+			ObjectShadow *shadow = (ObjectShadow*) _enemiesShadow->objectAtIndex(_enemies->indexOfObject(enemy));
 
 			enemy->update(dt);
 			if (enemy->getActionState() != kActionStateKnockedOut)
 			{
 
 				//2
-				if (CURTIME > enemy->getNextDecisionTime())
+				if (CURTIME > enemy->getNextDecisionTime() && !enemy->getSplitAttackDone())
 				{
 					distanceSQ = ccpDistanceSQ(enemy->getPosition(), _cherry->getPosition());
 					//cocos2d::CCLog("distanceSQ: %lf", distanceSQ);
@@ -1140,9 +1213,20 @@ void GameLayer::updateEnemies(float dt)
 							{
 								if (fabsf(_cherry->getPosition().y - enemy->getPosition().y) < 20)
 								{
-									if (_cherry->getHitbox().actual.intersectsRect(enemy->getAttackBox().actual) && _hud->getChildByTag(50) == NULL)
+									if (_cherry->getHitbox().actual.intersectsRect(enemy->getAttackBox().actual) && _hud->getChildByTag(100) == NULL)
 									{
 										_cherry->hurtWithDamage(enemy->getDamage());
+
+										int printNum = enemy->getDamage();
+										CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+										addChild(_dmgLabel);
+										_dmgLabel->setColor(ccRED);
+										_dmgLabel->setPosition(ccp(_cherry->getPositionX(), _cherry->getPositionY()+60));
+
+										CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+										CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+										CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+										_dmgLabel->runAction(seq);
 
 										//end game
 										if (_cherry->getActionState() == kActionStateKnockedOut && _hud->getChildByTag(100) == NULL)
@@ -1173,11 +1257,22 @@ void GameLayer::updateEnemies(float dt)
 							enemy->idle();
 						}
 					}
+
 				}
-				if(enemy->getActionState() == kActionStateKnockedOut){
+				if (enemy->getHitPoints() <= 0) // make shadow also lose hp
+				{
+					LOG("KNOCKED OUT");
+					enemy->setActionState(kActionStateKnockedOut);
+					if(!enemy->getSplitAttackDone())
+					{
+						enemy->knockout();
+					}
+
 					shadow->knockout();
 				}
+
 			}
+
 		}
 	}
 //	LOG("_enemies update");
@@ -1254,6 +1349,20 @@ void GameLayer::firstSkill(CCObject* pObject)
 							_cherry->setManaPool(_cherry->getManaPool() + 0.5f);
 							if (_cherry->getManaPool() >= 6)
 								_cherry->setManaPool(6);
+
+							int printNum = _cherry->getDamage();
+							CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+							addChild(_dmgLabel);
+							_dmgLabel->setColor(ccRED);
+							_dmgLabel->setPosition(ccp(enemy->getPositionX(), enemy->getPositionY()+60));
+
+							CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+							CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+							CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+
+
+							_dmgLabel->runAction(seq);
+
 						}
 					}
 				}
@@ -1263,6 +1372,17 @@ void GameLayer::firstSkill(CCObject* pObject)
 				if (_cherry->getAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
 				{
 					_fenemy1->hurtWithDamage(_cherry->getDamage());
+					int printNum = _cherry->getDamage();
+					CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+					addChild(_dmgLabel);
+					_dmgLabel->setColor(ccRED);
+					_dmgLabel->setPosition(ccp(_fenemy1->getPositionX(), _fenemy1->getPositionY()+60));
+
+					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+
+					_dmgLabel->runAction(seq);
 				}
 			}
 			if (_eBoss->getActionState() != kActionStateKnockedOut)
@@ -1270,6 +1390,21 @@ void GameLayer::firstSkill(CCObject* pObject)
 				if (_cherry->getAttackBox().actual.intersectsRect(_eBoss->getHitbox().actual))
 				{
 					_eBoss->hurtWithDamage(_cherry->getDamage());
+					_cherry->setManaPool(_cherry->getManaPool() + 0.5f);
+					if (_cherry->getManaPool() >= 6)
+						_cherry->setManaPool(6);
+
+					int printNum = _cherry->getDamage();
+					CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+					addChild(_dmgLabel);
+					_dmgLabel->setColor(ccRED);
+					_dmgLabel->setPosition(ccp(_eBoss->getPositionX(), _eBoss->getPositionY()+60));
+
+					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+
+					_dmgLabel->runAction(seq);
 				}
 			}
 		}
@@ -1304,6 +1439,17 @@ void GameLayer::SplitSkill(CCObject* pObject)
 				if (_cherry->getSplitAttackBox().actual.intersectsRect(enemy->getHitbox().actual))
 				{
 					enemy->splitEnemy();
+
+					CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("SLICE!!!!")->getCString(), "Marker Felt", 24);
+					addChild(_dmgLabel);
+					_dmgLabel->setColor(ccRED);
+					_dmgLabel->setPosition(ccp(enemy->getPositionX(), enemy->getPositionY()+60));
+
+					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+
+					_dmgLabel->runAction(seq);
 				}
 			}
 		}
@@ -1312,6 +1458,17 @@ void GameLayer::SplitSkill(CCObject* pObject)
 			if (_cherry->getSplitAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
 			{
 				_fenemy1->splitEnemy();
+
+				CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("SLICE!!!!")->getCString(), "Marker Felt", 24);
+				addChild(_dmgLabel);
+				_dmgLabel->setColor(ccRED);
+				_dmgLabel->setPosition(ccp(_fenemy1->getPositionX(), _fenemy1->getPositionY()+60));
+
+				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+
+				_dmgLabel->runAction(seq);
 			}
 		}
 		if (_eBoss->getActionState() != kActionStateKnockedOut)
@@ -1319,6 +1476,17 @@ void GameLayer::SplitSkill(CCObject* pObject)
 			if (_eBoss->getSplitAttackBox().actual.intersectsRect(_eBoss->getHitbox().actual))
 			{
 				_eBoss->hurtWithDamage(_cherry->getSplitDamage());
+
+				CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("SLASH!")->getCString(), "Marker Felt", 24);
+				addChild(_dmgLabel);
+				_dmgLabel->setColor(ccRED);
+				_dmgLabel->setPosition(ccp(_fenemy1->getPositionX(), _fenemy1->getPositionY()+60));
+
+				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+
+				_dmgLabel->runAction(seq);
 			}
 		}
 
@@ -1440,6 +1608,16 @@ void GameLayer::circleSkill(CCObject* pObject)
 					if (_cherry->getCircleAttackBox().actual.intersectsRect(enemy->getHitbox().actual))
 					{
 						enemy->hurtWithDamage(_cherry->getCircleDamage());
+						int printNum = _cherry->getCircleDamage();
+						CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+						addChild(_dmgLabel);
+						_dmgLabel->setColor(ccRED);
+						_dmgLabel->setPosition(ccp(enemy->getPositionX(), enemy->getPositionY()+60));
+
+						CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+						CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+						CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+						_dmgLabel->runAction(seq);
 					}
 				}
 			}
@@ -1448,6 +1626,16 @@ void GameLayer::circleSkill(CCObject* pObject)
 				if (_cherry->getCircleAttackBox().actual.intersectsRect(_fenemy1->getHitbox().actual))
 				{
 					_fenemy1->hurtWithDamage(_cherry->getCircleDamage());
+					int printNum = _cherry->getCircleDamage();
+					CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+					addChild(_dmgLabel);
+					_dmgLabel->setColor(ccRED);
+					_dmgLabel->setPosition(ccp(_fenemy1->getPositionX(), _fenemy1->getPositionY()+60));
+
+					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					_dmgLabel->runAction(seq);
 				}
 			}
 			if (_eBoss->getActionState() != kActionStateKnockedOut)
@@ -1455,6 +1643,16 @@ void GameLayer::circleSkill(CCObject* pObject)
 				if (_eBoss->getCircleAttackBox().actual.intersectsRect(_eBoss->getHitbox().actual))
 				{
 					_eBoss->hurtWithDamage(_cherry->getCircleDamage());
+					int printNum = _cherry->getCircleDamage();
+					CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
+					addChild(_dmgLabel);
+					_dmgLabel->setColor(ccRED);
+					_dmgLabel->setPosition(ccp(_eBoss->getPositionX(), _eBoss->getPositionY()+60));
+
+					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
+					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					_dmgLabel->runAction(seq);
 				}
 			}
 		}
@@ -1468,8 +1666,8 @@ void GameLayer::draw()
 		//normal attack
 //				CCPoint p1 = ccp(_cherry->getAttackBox().actual.origin.x,_cherry->getAttackBox().actual.origin.y);
 //				CCPoint p2 = ccp(_cherry->getAttackBox().actual.origin.x + _cherry->getAttackBox().actual.size.width,_cherry->getAttackBox().actual.origin.y + _cherry->getAttackBox().actual.size.height);
-		CCPoint p1 = ccp(_cherry->getHitbox().actual.origin.x,_cherry->getHitbox().actual.origin.y);
-		CCPoint p2 = ccp(_cherry->getHitbox().actual.origin.x + _cherry->getHitbox().actual.size.width,_cherry->getHitbox().actual.origin.y + _cherry->getHitbox().actual.size.height);
+//		CCPoint p1 = ccp(_cherry->getHitbox().actual.origin.x,_cherry->getHitbox().actual.origin.y);
+//		CCPoint p2 = ccp(_cherry->getHitbox().actual.origin.x + _cherry->getHitbox().actual.size.width,_cherry->getHitbox().actual.origin.y + _cherry->getHitbox().actual.size.height);
 		//circle
 		//		CCPoint p1 = ccp(_cherry->getCircleAttackBox().actual.origin.x,_cherry->getCircleAttackBox().actual.origin.y);
 		//		CCPoint p2 = ccp(_cherry->getCircleAttackBox().actual.origin.x + _cherry->getCircleAttackBox().actual.size.width,_cherry->getCircleAttackBox().actual.origin.y + _cherry->getCircleAttackBox().actual.size.height);
@@ -1477,8 +1675,8 @@ void GameLayer::draw()
 		//		CCPoint p1 = ccp(_cherry->getSplitAttackBox().actual.origin.x,_cherry->getSplitAttackBox().actual.origin.y);
 		//		CCPoint p2 = ccp(_cherry->getSplitAttackBox().actual.origin.x + _cherry->getSplitAttackBox().actual.size.width,_cherry->getSplitAttackBox().actual.origin.y + _cherry->getSplitAttackBox().actual.size.height);
 		//
-				ccDrawColor4B(0, 0, 0, 255);
-				ccDrawRect(p1, p2);
+//				ccDrawColor4B(0, 0, 0, 255);
+//				ccDrawRect(p1, p2);
 
 		//
 		//		CCObject *pObject = NULL;
@@ -1498,8 +1696,8 @@ void GameLayer::draw()
 		//		ccDrawColor4B(255, 255, 255, 255);
 		//		ccDrawLine(p1, p2);
 
-			}
-		}
+	}
+}
 
 void GameLayer::objectRemoval(CCNode* sender)
 {

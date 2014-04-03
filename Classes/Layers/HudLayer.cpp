@@ -18,6 +18,7 @@ HudLayer::HudLayer(void)
 	_gameDialouge = NULL;
 	_gameDisplayCherry = NULL;
 	_gameDisplayOther = NULL;
+	_gameDisplayMauve = NULL;
 	_hpBackground = NULL;
 	_hpBorder = NULL;
 	_skillOne = NULL;
@@ -72,6 +73,10 @@ bool HudLayer::init()
 		CC_BREAK_IF(!_gameDisplayOther);
 		this->addChild(_gameDisplayOther, 59);
 
+		_gameDisplayMauve = CCSprite::create(s_BossNormal);
+		CC_BREAK_IF(!_gameDisplayMauve);
+		this->addChild(_gameDisplayMauve, 59);
+
 		_gameCherryNameTag = CCSprite::create(s_CherryNameTag);
 		CC_BREAK_IF(!_gameCherryNameTag);
 		this->addChild(_gameCherryNameTag, 62);
@@ -84,6 +89,7 @@ bool HudLayer::init()
 		_gameDisplayCherry->setVisible(false);
 		_gameDisplayOther->setVisible(false);
 		_gameCherryNameTag->setVisible(false);
+		_gameDisplayMauve->setVisible(false);
 		_gameOtherNameTag->setVisible(false);
 
 		this->addChild(_dialougeBox, 6);
@@ -198,25 +204,42 @@ void HudLayer::fenemyTalks(bool isTalking, int chosenFrame)
 
 	if (chosenFrame == 2)
 	{
-		_gameDisplayOther->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_BossNormal));
+		_gameDisplayOther->setVisible(false);
+		_gameDisplayMauve->setPosition(_gameDisplayOther->getPosition());
+		_gameDisplayMauve->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_BossNormal));
 		_gameOtherNameTag->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_MauveNameTag));
 	}
 	if (chosenFrame == 3)
 	{
-		_gameDisplayOther->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_BossHurt));
+		_gameDisplayOther->setVisible(false);
+		_gameDisplayMauve->setPosition(_gameDisplayOther->getPosition());
+		_gameDisplayMauve->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_BossHurt));
 		_gameOtherNameTag->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_MauveNameTag));
 	}
 
 	if (isTalking)
 	{
-		if (_gameDisplayOther != NULL)
-			_gameDisplayOther->setVisible(true);
+		if (chosenFrame == 1)
+		{
+			if (_gameDisplayOther != NULL)
+				_gameDisplayOther->setVisible(true);
+		} else
+		{
+			_gameDisplayMauve->setVisible(true);
+		}
 		if (_gameOtherNameTag != NULL)
 			_gameOtherNameTag->setVisible(true);
 	} else
 	{
-		if (_gameDisplayOther != NULL)
-			_gameDisplayOther->setVisible(false);
+		if (chosenFrame == 1)
+		{
+			if (_gameDisplayOther != NULL)
+				_gameDisplayOther->setVisible(false);
+		} else
+		{
+			_gameDisplayMauve->setVisible(false);
+		}
+
 		if (_gameOtherNameTag != NULL)
 			_gameOtherNameTag->setVisible(false);
 	}

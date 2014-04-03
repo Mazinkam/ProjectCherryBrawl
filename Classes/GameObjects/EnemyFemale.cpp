@@ -84,7 +84,7 @@ bool EnemyFemale::init()
 		{
 			CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(CCString::createWithFormat("Fenemy_hit%03d.png", i)->getCString());
 			if (i > 3)
-				frame->setOffset(ccp(0,-10));
+				frame->setOffset(ccp(0,-20));
 			knockedOutFrames->addObject(frame);
 		}
 		CCAnimation *knockedOutAnimation = CCAnimation::createWithSpriteFrames(knockedOutFrames, float(1.0 / 12.0));

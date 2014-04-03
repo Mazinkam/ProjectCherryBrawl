@@ -19,6 +19,7 @@ ActionSprite::ActionSprite(void)
 	_walkIdle = NULL;
 	_hurtAction = NULL;
 	_knockedOutAction = NULL;
+	_splitAttackDone = false;
 
 	_attackDone = false;
 
@@ -104,11 +105,6 @@ void ActionSprite::hurtWithDamage(float damage)
 		_actionState = kActionStateHurt;
 		_hitPoints -= damage;
 
-		if (_hitPoints <= 0)
-		{
-			LOG("KNOCKED OUT");
-			this->knockout();
-		}
 	}
 }
 
@@ -127,7 +123,8 @@ void ActionSprite::splitEnemy()
 		this->stopAllActions();
 		this->runAction(_splittingAction);
 		_hitPoints = 0;
-		_actionState = kActionStateKnockedOut; // k prefix is konstant!, _ for memeber variables
+		_splitAttackDone = true;
+		//_actionState = kActionStateKnockedOut; // k prefix is konstant!, _ for memeber variables
 	} else
 	{
 		this->hurtWithDamage(50);
@@ -142,8 +139,7 @@ void ActionSprite::walkWithDirection(CCPoint direction)
 		if (getSpriteType() != "Wings")
 		{
 			this->runAction(_walkAction);
-		}
-		else
+		} else
 		{
 			this->runAction(_idleAction);
 		}
