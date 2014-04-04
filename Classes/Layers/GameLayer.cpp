@@ -381,7 +381,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 			_checkPointOne = false;
 			_enemyCanMove = true;
 			_hud->dialougeModeOff();
-			_hud->cherryTalks(false,1);
+			_hud->cherryTalks(false,3);
 			_hud->fenemyTalks(false,1);
 			_hud->getGameDialouge()->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_Dialouge5));
 
@@ -614,7 +614,8 @@ void GameLayer::updateProjectiles()
 
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					CCHide *hideMe = CCHide::create();
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 					_dmgLabel->runAction(seq);
 				}
 			}
@@ -635,7 +636,8 @@ void GameLayer::updateProjectiles()
 
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+				CCHide *hideMe = CCHide::create();
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 				_dmgLabel->runAction(seq);
 			}
 		}
@@ -654,7 +656,8 @@ void GameLayer::updateProjectiles()
 
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+				CCHide *hideMe = CCHide::create();
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 				_dmgLabel->runAction(seq);
 			}
 		}
@@ -700,7 +703,8 @@ void GameLayer::updateBossProjectiles()
 
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+				CCHide *hideMe = CCHide::create();
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 				_dmgLabel->runAction(seq);
 			}
 		}
@@ -917,7 +921,8 @@ void GameLayer::updateBoss(float dt)
 
 									CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 									CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-									CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+									CCHide *hideMe = CCHide::create();
+									CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 									_dmgLabel->runAction(seq);
 
 								}
@@ -1123,7 +1128,8 @@ void GameLayer::updateEnemies(float dt)
 
 									CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 									CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-									CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+									CCHide *hideMe = CCHide::create();
+									CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 									_dmgLabel->runAction(seq);
 
 								}
@@ -1225,7 +1231,8 @@ void GameLayer::updateEnemies(float dt)
 
 										CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 										CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-										CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+										CCHide *hideMe = CCHide::create();
+										CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 										_dmgLabel->runAction(seq);
 
 										//end game
@@ -1358,7 +1365,8 @@ void GameLayer::firstSkill(CCObject* pObject)
 
 							CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 							CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-							CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+							CCHide *hideMe = CCHide::create();
+							CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 
 
 							_dmgLabel->runAction(seq);
@@ -1380,7 +1388,8 @@ void GameLayer::firstSkill(CCObject* pObject)
 
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					CCHide *hideMe = CCHide::create();
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 
 					_dmgLabel->runAction(seq);
 				}
@@ -1402,7 +1411,8 @@ void GameLayer::firstSkill(CCObject* pObject)
 
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					CCHide *hideMe = CCHide::create();
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 
 					_dmgLabel->runAction(seq);
 				}
@@ -1447,7 +1457,8 @@ void GameLayer::SplitSkill(CCObject* pObject)
 
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					CCHide *hideMe = CCHide::create();
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 
 					_dmgLabel->runAction(seq);
 				}
@@ -1466,7 +1477,8 @@ void GameLayer::SplitSkill(CCObject* pObject)
 
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+				CCHide *hideMe = CCHide::create();
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 
 				_dmgLabel->runAction(seq);
 			}
@@ -1484,7 +1496,8 @@ void GameLayer::SplitSkill(CCObject* pObject)
 
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+				CCHide *hideMe = CCHide::create();
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 
 				_dmgLabel->runAction(seq);
 			}
@@ -1616,7 +1629,8 @@ void GameLayer::circleSkill(CCObject* pObject)
 
 						CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 						CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-						CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+						CCHide *hideMe = CCHide::create();
+						CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 						_dmgLabel->runAction(seq);
 					}
 				}
@@ -1634,7 +1648,8 @@ void GameLayer::circleSkill(CCObject* pObject)
 
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					CCHide *hideMe = CCHide::create();
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 					_dmgLabel->runAction(seq);
 				}
 			}
@@ -1651,7 +1666,8 @@ void GameLayer::circleSkill(CCObject* pObject)
 
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut, NULL);
+					CCHide *hideMe = CCHide::create();
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
 					_dmgLabel->runAction(seq);
 				}
 			}
