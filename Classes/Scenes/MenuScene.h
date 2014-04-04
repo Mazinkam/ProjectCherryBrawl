@@ -13,6 +13,9 @@
 class MenuScene: public cocos2d::CCScene
 {
 public:
+    MenuScene(void);
+	virtual ~MenuScene(void);
+
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
 
@@ -21,12 +24,18 @@ public:
 
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
-    void DisplayScene();
-
-    MenuScene(void);
-	virtual ~MenuScene(void);
+    void DisplayScene(CCObject* pSender);
+    void displayTutorial(CCObject* pSender);
+    void closeTutorial(CCObject* pSender);
 
     CREATE_FUNC(MenuScene);
+
+    bool tutorialOn;
+
+    CC_SYNTHESIZE(cocos2d::CCSprite*, _tutorialBG, TutorialBG);
+    CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _menuBackButton, MenuBackButton);
+    CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _playButton, PlayButton);
+    CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _controlsButton, ControlsButton);
 
     CC_SYNTHESIZE(cocos2d::CCParticleSystemQuad*, _cherryParticles, CherryParticles);
     CC_SYNTHESIZE(cocos2d::CCParticleSystemQuad*, _fenemyParticles, FenemyParticles);

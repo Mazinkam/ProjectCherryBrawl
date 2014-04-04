@@ -52,6 +52,7 @@ static const char s_Skill_4_On[] = "SKILL4_on.png";
 static const char s_Skill_4_Off[] = "SKILL4_off.png";
 
 static const char s_Stars[] = "stars.png";
+static const char s_EnemyBall[] = "fenemyBall.png";
 static const char s_GrayscaleStars[] = "stars-grayscale.png";
 
 static const char s_CherryLogo[] = "splash_logo.png";
@@ -104,5 +105,9 @@ static const char s_BossSmallCoin[] = "koin_small001.png";
 static const char s_SpookyCoins[] = "SpookyPeas.plist";
 static const char s_Phoenix[] = "Phoenix.plist";
 static const char s_GameShadow[] = "shadow.png";
+
+static const char s_backOff[] = "back_off.png";
+static const char s_backOn[] = "back_on.png";
+static const char s_contorlsPic[] = "controls.png";
 
 #endif /* GAMERESOURCES_H_ */

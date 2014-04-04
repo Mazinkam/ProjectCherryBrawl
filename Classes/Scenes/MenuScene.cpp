@@ -13,7 +13,11 @@ using namespace cocos2d;
 
 MenuScene::MenuScene(void)
 {
-
+	_tutorialBG = NULL;
+	_menuBackButton = NULL;
+	_playButton = NULL;
+	_controlsButton = NULL;
+	tutorialOn = false;
 }
 
 MenuScene::~MenuScene(void)
@@ -55,11 +59,11 @@ bool MenuScene::init()
 		CC_BREAK_IF(!_closeButton);
 		_closeButton->setPosition(ccp(SCREEN.width - 25, SCREEN.height-25));
 
-		CCMenuItemImage *_playButton = CCMenuItemImage::create(s_PlayOff, s_PlayOn, this, menu_selector(MenuScene::DisplayScene));
+		_playButton = CCMenuItemImage::create(s_PlayOff, s_PlayOn, this, menu_selector(MenuScene::DisplayScene));
 		CC_BREAK_IF(!_playButton);
 		_playButton->setPosition(ccp(SCREEN.width/2, SCREEN.height/3.2));
 
-		CCMenuItemImage *_controlsButton = CCMenuItemImage::create(s_ControlsOff, s_ControlsOn, this, menu_selector(MenuScene::DisplayScene));
+		_controlsButton = CCMenuItemImage::create(s_ControlsOff, s_ControlsOn, this, menu_selector(MenuScene::displayTutorial));
 		CC_BREAK_IF(!_controlsButton);
 		_controlsButton->setPosition(ccp(SCREEN.width/2, SCREEN.height/7));
 
@@ -97,8 +101,24 @@ bool MenuScene::init()
 		_fenemyParticles->setEndSize(30.0f);
 		_fenemyParticles->setEndSizeVar(5.0f);
 		_fenemyParticles->retain();
-		_fenemyParticles->setTexture(CCTextureCache::sharedTextureCache()->addImage("fenemyBall.png"));
+		_fenemyParticles->setTexture(CCTextureCache::sharedTextureCache()->addImage(s_EnemyBall));
 		_fenemyParticles->setPosition(50, 100);
+
+		// Add the menu to MenuScene layer as a child layer.G
+		_tutorialBG = CCSprite::create(s_contorlsPic);
+		CC_BREAK_IF(!_tutorialBG);
+		_tutorialBG->setPosition(CENTER);
+		_tutorialBG->setVisible(false);
+
+		_menuBackButton = CCMenuItemImage::create(s_backOff, s_backOn, this, menu_selector(MenuScene::closeTutorial));
+		CC_BREAK_IF(!_menuBackButton);
+		_menuBackButton->setVisible(false);
+		_menuBackButton->setPosition(ccp(80, SCREEN.height-30));
+
+		// Create a menu with the "close" menu item, it's an auto release object.
+		CCMenu* _tutorialMenu = CCMenu::create(_menuBackButton, NULL);
+		_tutorialMenu->setPosition(CCPointZero);
+		CC_BREAK_IF(!_tutorialMenu);
 
 		this->addChild(_menuBG, -1);
 		this->addChild(_pMenu, 1);
@@ -106,14 +126,33 @@ bool MenuScene::init()
 		this->addChild(_fenemyParticles, 10);
 		this->addChild(_menuLogo, 12);
 
+		this->addChild(_tutorialBG, 20);
+		this->addChild(_tutorialMenu, 21);
+
 		bRet = true;
 	} while (0);
 
 	return bRet;
 }
-void MenuScene::DisplayScene()
+void MenuScene::DisplayScene(CCObject* pSender)
 {
 	CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, GameScene::scene(), ccBLACK));
+}
+void MenuScene::displayTutorial(CCObject* pSender)
+{
+	_menuBackButton->setVisible(true);
+	_tutorialBG->setVisible(true);
+
+	_playButton->setVisible(false);
+	_controlsButton->setVisible(false);
+}
+void MenuScene::closeTutorial(CCObject* pSender)
+{
+	_menuBackButton->setVisible(false);
+	_tutorialBG->setVisible(false);
+
+	_playButton->setVisible(true);
+	_controlsButton->setVisible(true);
 }
 
 void MenuScene::menuCloseCallback(CCObject* pSender)
