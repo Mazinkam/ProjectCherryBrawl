@@ -8,7 +8,7 @@
 #ifndef OBJECTSHADOW_H_
 #define OBJECTSHADOW_H_
 
-#include "ActionSprite.h"
+#include "ActorSprite.h"
 
 class ObjectShadow: public ActionSprite
 {

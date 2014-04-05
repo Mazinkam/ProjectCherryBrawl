@@ -8,7 +8,7 @@
 #ifndef ENEMYFEMALE_H_
 #define ENEMYFEMALE_H_
 
-#include "ActionSprite.h"
+#include "ActorSprite.h"
 
 class EnemyFemale: public ActionSprite
 {

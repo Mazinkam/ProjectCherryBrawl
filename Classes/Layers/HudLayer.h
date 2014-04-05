@@ -9,7 +9,7 @@
 #define HUDLAYER_H_
 
 #include "cocos2d.h"
-#include "../GameObjects/SimpleDPad.h"
+#include "../GameObjects/GameDPad.h"
 #include "../GameObjects/Cherry.h"
 #include "../GameObjects/EnemyFemale.h"
 #include "../Scenes/MenuScene.h"
@@ -28,7 +28,7 @@ class HudLayer: public cocos2d::CCLayer
 		void fenemyTalks(bool isTalking, int chosenFrame);
 
 		CREATE_FUNC (HudLayer);
-		CC_SYNTHESIZE(SimpleDPad*, _dPad, DPad);
+		CC_SYNTHESIZE(GameDPad*, _dPad, DPad);
 
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _dialougeBox , DialougeBox);
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _hpBackground, HpBackground);

@@ -14,11 +14,11 @@
 #include "../GameObjects/EnemyBoss.h"
 #include "../GameObjects/EnemyBossWings.h"
 #include "../GameObjects/ObjectShadow.h"
-#include "../GameObjects/SimpleDPad.h"
+#include "../GameObjects/GameDPad.h"
 #include "../Layers/HudLayer.h"
 #include "../GameResources.h"
 
-class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
+class GameLayer: public cocos2d::CCLayer, public GameDPadDelegate
 {
 	public:
 		GameLayer(void);
@@ -48,9 +48,9 @@ class GameLayer: public cocos2d::CCLayer, public SimpleDPadDelegate
 		void demoDone();
 
 		virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
-		virtual void didChangeDirectionTo(SimpleDPad *simpleDPad, cocos2d::CCPoint direction);
-		virtual void isHoldingDirection(SimpleDPad *simpleDPad, cocos2d::CCPoint direction);
-		virtual void simpleDPadTouchEnded(SimpleDPad *simpleDPad);
+		virtual void didChangeDirectionTo(GameDPad *simpleDPad, cocos2d::CCPoint direction);
+		virtual void isHoldingDirection(GameDPad *simpleDPad, cocos2d::CCPoint direction);
+		virtual void simpleDPadTouchEnded(GameDPad *simpleDPad);
 
 		void mainMenu(CCObject* pObject);
 		void nothing(CCObject* pObject);

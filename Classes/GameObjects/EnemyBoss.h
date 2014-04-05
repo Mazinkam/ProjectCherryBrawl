@@ -8,7 +8,7 @@
 #ifndef ENEMYBOSS_H_
 #define ENEMYBOSS_H_
 
-#include "ActionSprite.h"
+#include "ActorSprite.h"
 
 class EnemyBoss: public ActionSprite
 {

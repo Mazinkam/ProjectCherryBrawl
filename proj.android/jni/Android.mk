@@ -8,7 +8,7 @@ LOCAL_MODULE_FILENAME := libhellocpp
 
 LOCAL_SRC_FILES := game/main.cpp \
                    ../../Classes/AppDelegate.cpp \
-                   ../../Classes/GameObjects/ActionSprite.cpp \
+                   ../../Classes/GameObjects/ActorSprite.cpp \
                    ../../Classes/Layers/GameLayer.cpp \
                    ../../Classes/Scenes/GameScene.cpp \
                    ../../Classes/Scenes/SplashScene.cpp \
@@ -19,7 +19,7 @@ LOCAL_SRC_FILES := game/main.cpp \
                    ../../Classes/GameObjects/ObjectShadow.cpp \
                    ../../Classes/Layers/HudLayer.cpp \
                    ../../Classes/GameObjects/Cherry.cpp \
-                   ../../Classes/GameObjects/SimpleDPad.cpp
+                   ../../Classes/GameObjects/GameDPad.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

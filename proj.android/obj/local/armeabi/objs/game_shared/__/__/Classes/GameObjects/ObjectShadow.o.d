@@ -1,7 +1,7 @@
 obj/local/armeabi/objs/game_shared/__/__/Classes/GameObjects/ObjectShadow.o: \
  jni/../../Classes/GameObjects/ObjectShadow.cpp \
  jni/../../Classes/GameObjects/ObjectShadow.h \
- jni/../../Classes/GameObjects/ActionSprite.h \
+ jni/../../Classes/GameObjects/ActorSprite.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/include/cocos2d.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/include/ccConfig.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/platform/CCPlatformConfig.h \
@@ -210,7 +210,7 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/GameObjects/ObjectShadow.o: \
 
 jni/../../Classes/GameObjects/ObjectShadow.h:
 
-jni/../../Classes/GameObjects/ActionSprite.h:
+jni/../../Classes/GameObjects/ActorSprite.h:
 
 /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/include/cocos2d.h:
 

@@ -204,7 +204,8 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Scenes/SplashScene.o: \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/data_support/uthash.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponent.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h \
- jni/../../Classes/Scenes/SplashScene.h
+ jni/../../Classes/Scenes/SplashScene.h \
+ jni/../../Classes/Scenes/../Defines.h
 
 jni/../../Classes/Scenes/MenuScene.h:
 
@@ -615,3 +616,5 @@ jni/../../Classes/Scenes/MenuScene.h:
 /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h:
 
 jni/../../Classes/Scenes/SplashScene.h:
+
+jni/../../Classes/Scenes/../Defines.h:

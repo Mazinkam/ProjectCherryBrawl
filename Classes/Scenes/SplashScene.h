@@ -9,6 +9,7 @@
 #define SPLASHSCENE_H_
 
 #include "cocos2d.h"
+#include "../Defines.h"
 #include "MenuScene.h"
 
 class SplashScene: public cocos2d::CCScene

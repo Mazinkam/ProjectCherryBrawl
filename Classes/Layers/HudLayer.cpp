@@ -45,7 +45,7 @@ bool HudLayer::init()
 		_hpPool = new CCArray;
 		CC_BREAK_IF(!_hpPool);
 
-		_dPad = SimpleDPad::dPadWithFile(CCString::create(s_DpadBG), 75);
+		_dPad = GameDPad::dPadWithFile(CCString::create(s_DpadBG), 75);
 		CC_BREAK_IF(!_dPad);
 		_dPad->setPosition(ccp(95.0, 95.0));
 

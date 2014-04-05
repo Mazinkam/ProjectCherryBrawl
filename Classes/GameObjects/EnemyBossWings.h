@@ -8,7 +8,7 @@
 #ifndef ENEMYBOSSWINGS_H_
 #define ENEMYBOSSWINGS_H_
 
-#include "ActionSprite.h"
+#include "ActorSprite.h"
 
 class EnemyBossWings: public ActionSprite
 {

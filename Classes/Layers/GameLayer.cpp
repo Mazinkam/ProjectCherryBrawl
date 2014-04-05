@@ -538,7 +538,7 @@ void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
 }
 
-void GameLayer::didChangeDirectionTo(SimpleDPad *simpleDPad, CCPoint direction)
+void GameLayer::didChangeDirectionTo(GameDPad *simpleDPad, CCPoint direction)
 {
 	if (!_dialougeState)
 		_cherry->walkWithDirection(direction);
@@ -546,7 +546,7 @@ void GameLayer::didChangeDirectionTo(SimpleDPad *simpleDPad, CCPoint direction)
 		_cherry->idle();
 }
 
-void GameLayer::isHoldingDirection(SimpleDPad *simpleDPad, CCPoint direction)
+void GameLayer::isHoldingDirection(GameDPad *simpleDPad, CCPoint direction)
 {
 	if (!_dialougeState)
 		_cherry->walkWithDirection(direction);
@@ -555,7 +555,7 @@ void GameLayer::isHoldingDirection(SimpleDPad *simpleDPad, CCPoint direction)
 
 }
 
-void GameLayer::simpleDPadTouchEnded(SimpleDPad *simpleDPad)
+void GameLayer::simpleDPadTouchEnded(GameDPad *simpleDPad)
 {
 	if (_cherry->getActionState() == kActionStateWalk)
 	{

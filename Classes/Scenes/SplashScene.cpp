@@ -42,24 +42,23 @@ bool SplashScene::init()
 
 		CC_BREAK_IF(!CCScene::init());
 
-		CCSize size = CCDirector::sharedDirector()->getWinSize();
 
 		CCSprite* pSprite = CCSprite::create("splash.png");
 		CC_BREAK_IF(!pSprite);
 
 		// Place the sprite on the center of the screen
-		pSprite->setPosition(ccp(size.width/2, size.height/2));
+		pSprite->setPosition(ccp(SCREEN.width/2, SCREEN.height/2));
 
 		// Add the sprite to SplashScene layer as a child layer.
 		this->addChild(pSprite, 0);
 
 		//CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, MenuScene::scene(), ccWHITE));
 
-		CCCallFunc* moveCallback = CCCallFunc::create(this, callfunc_selector(SplashScene::DisplayScene));
+		CCCallFunc* changeScene = CCCallFunc::create(this, callfunc_selector(SplashScene::DisplayScene));
 
 		CCDelayTime* delayAction = CCDelayTime::create(2.0f);
 
-		this->runAction(CCSequence::create(delayAction, moveCallback, NULL));
+		this->runAction(CCSequence::create(delayAction, changeScene, NULL));
 
 		bRet = true;
 

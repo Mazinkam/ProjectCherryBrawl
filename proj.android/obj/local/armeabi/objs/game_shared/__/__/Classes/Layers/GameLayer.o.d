@@ -205,16 +205,16 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Layers/GameLayer.o: \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponent.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/Cherry.h \
- jni/../../Classes/Layers/../Layers/../GameObjects/ActionSprite.h \
+ jni/../../Classes/Layers/../Layers/../GameObjects/ActorSprite.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/../Defines.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/../GameResources.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/EnemyFemale.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/EnemyBoss.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/EnemyBossWings.h \
  jni/../../Classes/Layers/../Layers/../GameObjects/ObjectShadow.h \
- jni/../../Classes/Layers/../Layers/../GameObjects/SimpleDPad.h \
+ jni/../../Classes/Layers/../Layers/../GameObjects/GameDPad.h \
  jni/../../Classes/Layers/../Layers/../Layers/HudLayer.h \
- jni/../../Classes/Layers/../Layers/../Layers/../GameObjects/SimpleDPad.h \
+ jni/../../Classes/Layers/../Layers/../Layers/../GameObjects/GameDPad.h \
  jni/../../Classes/Layers/../Layers/../Layers/../GameObjects/Cherry.h \
  jni/../../Classes/Layers/../Layers/../Layers/../GameObjects/EnemyFemale.h \
  jni/../../Classes/Layers/../Layers/../Layers/../Scenes/MenuScene.h \
@@ -635,7 +635,7 @@ jni/../../Classes/Layers/../Layers/GameLayer.h:
 
 jni/../../Classes/Layers/../Layers/../GameObjects/Cherry.h:
 
-jni/../../Classes/Layers/../Layers/../GameObjects/ActionSprite.h:
+jni/../../Classes/Layers/../Layers/../GameObjects/ActorSprite.h:
 
 jni/../../Classes/Layers/../Layers/../GameObjects/../Defines.h:
 
@@ -649,11 +649,11 @@ jni/../../Classes/Layers/../Layers/../GameObjects/EnemyBossWings.h:
 
 jni/../../Classes/Layers/../Layers/../GameObjects/ObjectShadow.h:
 
-jni/../../Classes/Layers/../Layers/../GameObjects/SimpleDPad.h:
+jni/../../Classes/Layers/../Layers/../GameObjects/GameDPad.h:
 
 jni/../../Classes/Layers/../Layers/../Layers/HudLayer.h:
 
-jni/../../Classes/Layers/../Layers/../Layers/../GameObjects/SimpleDPad.h:
+jni/../../Classes/Layers/../Layers/../Layers/../GameObjects/GameDPad.h:
 
 jni/../../Classes/Layers/../Layers/../Layers/../GameObjects/Cherry.h:
 

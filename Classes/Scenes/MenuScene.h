@@ -30,8 +30,6 @@ public:
 
     CREATE_FUNC(MenuScene);
 
-    bool tutorialOn;
-
     CC_SYNTHESIZE(cocos2d::CCSprite*, _tutorialBG, TutorialBG);
     CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _menuBackButton, MenuBackButton);
     CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _playButton, PlayButton);

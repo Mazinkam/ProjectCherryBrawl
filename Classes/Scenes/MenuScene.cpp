@@ -17,7 +17,6 @@ MenuScene::MenuScene(void)
 	_menuBackButton = NULL;
 	_playButton = NULL;
 	_controlsButton = NULL;
-	tutorialOn = false;
 }
 
 MenuScene::~MenuScene(void)

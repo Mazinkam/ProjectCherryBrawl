@@ -204,9 +204,9 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Layers/HudLayer.o: \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/data_support/uthash.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponent.h \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h \
- jni/../../Classes/Layers/../GameObjects/SimpleDPad.h \
+ jni/../../Classes/Layers/../GameObjects/GameDPad.h \
  jni/../../Classes/Layers/../GameObjects/Cherry.h \
- jni/../../Classes/Layers/../GameObjects/ActionSprite.h \
+ jni/../../Classes/Layers/../GameObjects/ActorSprite.h \
  jni/../../Classes/Layers/../GameObjects/../Defines.h \
  jni/../../Classes/Layers/../GameObjects/../GameResources.h \
  jni/../../Classes/Layers/../GameObjects/EnemyFemale.h \
@@ -621,11 +621,11 @@ jni/../../Classes/Layers/HudLayer.h:
 
 /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h:
 
-jni/../../Classes/Layers/../GameObjects/SimpleDPad.h:
+jni/../../Classes/Layers/../GameObjects/GameDPad.h:
 
 jni/../../Classes/Layers/../GameObjects/Cherry.h:
 
-jni/../../Classes/Layers/../GameObjects/ActionSprite.h:
+jni/../../Classes/Layers/../GameObjects/ActorSprite.h:
 
 jni/../../Classes/Layers/../GameObjects/../Defines.h:
 

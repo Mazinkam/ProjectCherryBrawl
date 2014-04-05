@@ -8,7 +8,7 @@
 #ifndef CHERRY_H_
 #define CHERRY_H_
 
-#include "ActionSprite.h"
+#include "ActorSprite.h"
 
 class Cherry : public ActionSprite
 {

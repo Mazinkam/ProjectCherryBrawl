@@ -206,16 +206,16 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Scenes/GameScene.o: \
  /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../cocos2dx/support/component/CCComponentContainer.h \
  jni/../../Classes/Scenes/../Layers/GameLayer.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/Cherry.h \
- jni/../../Classes/Scenes/../Layers/../GameObjects/ActionSprite.h \
+ jni/../../Classes/Scenes/../Layers/../GameObjects/ActorSprite.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/../Defines.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/../GameResources.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/EnemyFemale.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/EnemyBoss.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/EnemyBossWings.h \
  jni/../../Classes/Scenes/../Layers/../GameObjects/ObjectShadow.h \
- jni/../../Classes/Scenes/../Layers/../GameObjects/SimpleDPad.h \
+ jni/../../Classes/Scenes/../Layers/../GameObjects/GameDPad.h \
  jni/../../Classes/Scenes/../Layers/../Layers/HudLayer.h \
- jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/SimpleDPad.h \
+ jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/GameDPad.h \
  jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/Cherry.h \
  jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/EnemyFemale.h \
  jni/../../Classes/Scenes/../Layers/../Layers/../Scenes/MenuScene.h \
@@ -634,7 +634,7 @@ jni/../../Classes/Scenes/../Layers/GameLayer.h:
 
 jni/../../Classes/Scenes/../Layers/../GameObjects/Cherry.h:
 
-jni/../../Classes/Scenes/../Layers/../GameObjects/ActionSprite.h:
+jni/../../Classes/Scenes/../Layers/../GameObjects/ActorSprite.h:
 
 jni/../../Classes/Scenes/../Layers/../GameObjects/../Defines.h:
 
@@ -648,11 +648,11 @@ jni/../../Classes/Scenes/../Layers/../GameObjects/EnemyBossWings.h:
 
 jni/../../Classes/Scenes/../Layers/../GameObjects/ObjectShadow.h:
 
-jni/../../Classes/Scenes/../Layers/../GameObjects/SimpleDPad.h:
+jni/../../Classes/Scenes/../Layers/../GameObjects/GameDPad.h:
 
 jni/../../Classes/Scenes/../Layers/../Layers/HudLayer.h:
 
-jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/SimpleDPad.h:
+jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/GameDPad.h:
 
 jni/../../Classes/Scenes/../Layers/../Layers/../GameObjects/Cherry.h:
 
