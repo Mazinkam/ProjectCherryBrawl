@@ -1,7 +1,7 @@
 #include "../Layers/GameLayer.h"
 #include "../GameObjects/EnemyFemale.h"
 #include "../Scenes/GameScene.h"
-//#include "SimpleAudioEngine.h"
+#include "SimpleAudioEngine.h"
 #include "../Defines.h"
 #include <string>
 #include <sstream>
@@ -52,9 +52,10 @@ bool GameLayer::init()
 		CC_BREAK_IF(!CCLayer::init());
 
 		// Load audio
-		//		CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("superd_theme.ogg");
-		//		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("superd_theme.ogg", true);
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic(s_MainTheme);
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic(s_BossTheme);
 
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(s_MainTheme, true);
 		_projectiles = new CCArray;
 		CC_BREAK_IF(!_projectiles);
 		_bossProjectiles = new CCArray;
@@ -428,6 +429,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 
 		if (_sceneTwo == 1)
 		{
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 			LOG("%i",_sceneTwo);
 			_cherry->walkLeftThenIdle();
 			_hud->cherryTalks(false,1);
@@ -438,6 +440,7 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		}
 		if (_sceneTwo == 2)
 		{
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(s_BossTheme, true);
 			LOG("%i",_sceneTwo);
 			_hud->cherryTalks(true,2);
 			_hud->fenemyTalks(false,2);
@@ -901,7 +904,7 @@ void GameLayer::updateBoss(float dt)
 			//cocos2d::CCLog("distanceSQ: %lf", distanceSQ);
 			//LOG("distanceSQ %fl", distanceSQ);
 			//3 distance for attacks, code needs to be rewritted for more enemies
-			LOG("distanceSQ: %fl",distanceSQ);
+			//LOG("distanceSQ: %fl",distanceSQ);
 			if (distanceSQ <= bossAttackRange)
 			{
 				_reachedBoss = true;
@@ -911,7 +914,6 @@ void GameLayer::updateBoss(float dt)
 				}
 				_eBoss->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.2) * 1000);
 				randomChoice = random_range(0, 1);
-
 
 				if (randomChoice == 0)
 				{

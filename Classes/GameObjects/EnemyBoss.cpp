@@ -102,7 +102,7 @@ bool EnemyBoss::init()
 		this->setWalkSpeed(200.0);
 		this->setCenterToBottom(39.0);
 		this->setCenterToSides(29.0);
-		this->setHitPoints(500.0);
+		this->setHitPoints(1000.0);
 		this->setDamage(10.0);
 		this->setProjectileDamage(5.0);
 

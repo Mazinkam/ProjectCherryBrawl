@@ -223,6 +223,8 @@ obj/local/armeabi/objs/game_shared/__/__/Classes/Layers/GameLayer.o: \
  jni/../../Classes/Layers/../Scenes/GameScene.h \
  jni/../../Classes/Layers/../Scenes/../Layers/GameLayer.h \
  jni/../../Classes/Layers/../Scenes/../Layers/HudLayer.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../CocosDenshion/android/../include/SimpleAudioEngine.h \
+ /c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../CocosDenshion/android/../include/Export.h \
  jni/../../Classes/Layers/../Defines.h
 
 jni/../../Classes/Layers/../Layers/GameLayer.h:
@@ -670,5 +672,9 @@ jni/../../Classes/Layers/../Scenes/GameScene.h:
 jni/../../Classes/Layers/../Scenes/../Layers/GameLayer.h:
 
 jni/../../Classes/Layers/../Scenes/../Layers/HudLayer.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../CocosDenshion/android/../include/SimpleAudioEngine.h:
+
+/c/development/cocos2d-x-2.2.2/samples/Cpp/ProjectCherry/proj.android/../../../../CocosDenshion/android/../include/Export.h:
 
 jni/../../Classes/Layers/../Defines.h:

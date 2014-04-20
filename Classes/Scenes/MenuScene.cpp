@@ -7,6 +7,7 @@
 
 #include "MenuScene.h"
 #include "GameScene.h"
+#include "SimpleAudioEngine.h"
 #include "../Defines.h"
 
 using namespace cocos2d;
@@ -53,7 +54,10 @@ bool MenuScene::init()
 	{
 
 		CC_BREAK_IF(!CCScene::init());
-
+		if(CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+		{
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+		}
 		CCMenuItemImage *_closeButton = CCMenuItemImage::create(s_PauseOff, s_PauseOn, this, menu_selector(MenuScene::menuCloseCallback));
 		CC_BREAK_IF(!_closeButton);
 		_closeButton->setPosition(ccp(SCREEN.width - 25, SCREEN.height-25));

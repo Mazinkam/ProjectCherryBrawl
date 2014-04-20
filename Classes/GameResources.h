@@ -111,4 +111,7 @@ static const char s_backOn[] = "back_on.png";
 static const char s_contorlsPic[] = "controls.png";
 static const char s_ExplainPic[] = "explanation.png";
 
+static const char s_MainTheme[] = "572013_quotStrawberryquot.ogg";
+static const char s_BossTheme[] = "547412_Retribution-ver2-sh.ogg";
+
 #endif /* GAMERESOURCES_H_ */
