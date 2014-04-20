@@ -10,7 +10,7 @@
 
 #include "ActorSprite.h"
 
-class Cherry : public ActionSprite
+class Cherry : public ActorSprite
 {
 public:
 	Cherry(void);

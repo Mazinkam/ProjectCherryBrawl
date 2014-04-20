@@ -22,7 +22,7 @@ bool EnemyFemale::init()
 	bool bRet = false;
 	do
 	{
-		CC_BREAK_IF(!ActionSprite::initWithSpriteFrameName("fenemy_idle001.png"));
+		CC_BREAK_IF(!ActorSprite::initWithSpriteFrameName("fenemy_idle001.png"));
 
 		int i;
 		//idle animation
@@ -98,7 +98,7 @@ bool EnemyFemale::init()
 		this->setCenterToBottom(39.0);
 		this->setCenterToSides(29.0);
 		this->setHitPoints(100.0);
-		this->setDamage(5.0);
+		this->setDamage(2.5);
 
 		this->setSpriteType("Common");
 
@@ -118,7 +118,7 @@ bool EnemyFemale::init()
 
 void EnemyFemale::knockout()
 {
-	ActionSprite::knockout();
+	ActorSprite::knockout();
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("death.wav");
 }
 

@@ -1,5 +1,5 @@
 /*
- * ActionSprite.cpp
+ * ActorSprite.cpp
  *
  *  Created on: 24.2.2014
  *      Author: user
@@ -10,7 +10,7 @@
 
 using namespace cocos2d;
 
-ActionSprite::ActionSprite(void)
+ActorSprite::ActorSprite(void)
 {
 
 	//behaviour
@@ -31,11 +31,11 @@ ActionSprite::ActionSprite(void)
 
 }
 
-ActionSprite::~ActionSprite(void)
+ActorSprite::~ActorSprite(void)
 {
 }
 
-void ActionSprite::idle()
+void ActorSprite::idle()
 {
 	if (_actionState != kActionStateIdle)
 	{
@@ -46,7 +46,19 @@ void ActionSprite::idle()
 	}
 }
 
-void ActionSprite::walkLeftThenIdle()
+void ActorSprite::pushBack()
+{
+	if (_actionState != kActionStateKnockedOut)
+	{
+		CCMoveBy *moveBy = CCMoveBy::create(1.0f, ccp(-2000, 0));
+		this->runAction(moveBy);
+		_actionState = kActionStateWalk;
+
+	}
+}
+
+
+void ActorSprite::walkLeftThenIdle()
 {
 	if (_actionState == kActionStateIdle)
 	{
@@ -57,12 +69,11 @@ void ActionSprite::walkLeftThenIdle()
 		this->runAction(spawn);
 
 		_actionState = kActionStateDialougeWalk;
-
 	}
 
 }
 //add more states for different atks and sword movements
-void ActionSprite::attack()
+void ActorSprite::attack()
 {
 	_attackDone = true;
 	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack || _actionState == kActionStateWalk)
@@ -74,7 +85,7 @@ void ActionSprite::attack()
 	}
 }
 
-void ActionSprite::circleAttack()
+void ActorSprite::circleAttack()
 {
 	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack || _actionState == kActionStateWalk)
 	{
@@ -84,7 +95,7 @@ void ActionSprite::circleAttack()
 	}
 }
 
-void ActionSprite::projectileAttack()
+void ActorSprite::projectileAttack()
 {
 	if (_actionState == kActionStateIdle || _actionState != kActionStateAttack || _actionState == kActionStateWalk)
 	{
@@ -94,7 +105,7 @@ void ActionSprite::projectileAttack()
 	}
 }
 
-void ActionSprite::hurtWithDamage(float damage)
+void ActorSprite::hurtWithDamage(float damage)
 {
 	if (_actionState != kActionStateKnockedOut)
 	{
@@ -108,7 +119,7 @@ void ActionSprite::hurtWithDamage(float damage)
 	}
 }
 
-void ActionSprite::knockout()
+void ActorSprite::knockout()
 {
 	this->stopAllActions();
 	this->runAction(_knockedOutAction);
@@ -116,7 +127,7 @@ void ActionSprite::knockout()
 	_actionState = kActionStateKnockedOut; // k prefix is konstant!, _ for memeber variables
 }
 
-void ActionSprite::splitEnemy()
+void ActorSprite::splitEnemy()
 {
 	if (_SpriteType == "Common")
 	{
@@ -131,7 +142,7 @@ void ActionSprite::splitEnemy()
 	}
 }
 
-void ActionSprite::walkWithDirection(CCPoint direction)
+void ActorSprite::walkWithDirection(CCPoint direction)
 {
 	if (_actionState == kActionStateIdle)
 	{
@@ -159,7 +170,7 @@ void ActionSprite::walkWithDirection(CCPoint direction)
 	}
 }
 
-void ActionSprite::update(float dt)
+void ActorSprite::update(float dt)
 {
 	if (_actionState == kActionStateWalk || _actionState == kActionStateDialougeWalk)
 	{
@@ -167,7 +178,7 @@ void ActionSprite::update(float dt)
 	}
 }
 
-BoundingBox ActionSprite::createBoundingBoxWithOrigin(CCPoint origin, CCSize size)
+BoundingBox ActorSprite::createBoundingBoxWithOrigin(CCPoint origin, CCSize size)
 {
 	BoundingBox boundingBox;
 	boundingBox.original.origin = origin;
@@ -177,7 +188,7 @@ BoundingBox ActionSprite::createBoundingBoxWithOrigin(CCPoint origin, CCSize siz
 	return boundingBox;
 }
 //here for different attacks
-void ActionSprite::transformBoxes()
+void ActorSprite::transformBoxes()
 {
 	_hitBox.actual.origin = ccpAdd(this->getPosition(), ccp(_hitBox.original.origin.x, _hitBox.original.origin.y));
 
@@ -193,13 +204,13 @@ void ActionSprite::transformBoxes()
 
 }
 
-void ActionSprite::setPosition(CCPoint position)
+void ActorSprite::setPosition(CCPoint position)
 {
 	CCSprite::setPosition(position);
 	this->transformBoxes();
 }
 
-void ActionSprite::cleanup()
+void ActorSprite::cleanup()
 {
 //	CC_SAFE_RELEASE_NULL(_idleAction);
 //	CC_SAFE_RELEASE_NULL(_attackAction);

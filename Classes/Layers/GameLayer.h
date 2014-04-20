@@ -106,7 +106,7 @@ class GameLayer: public cocos2d::CCLayer, public GameDPadDelegate
 		bool _bInit;
 		bool _dialougeState;
 		int _sceneOne, _sceneTwo;
-		bool _checkPointOne, _checkPointTwo, _cutsceneOneDone, _cutsceneTwoDone, _enemyBeaten, _enemyCanMove, _bFirstCheck;
+		bool _checkPointOne, _checkPointTwo, _cutsceneOneDone, _cutsceneTwoDone, _enemyBeaten, _enemyCanMove, _bFirstCheck,_controlCheck;
 		bool _checkPointOneSceneTwo, _checkPointTwoSceneTwo, _reachedBoss, _bossTalk, _bossCanMove, _bossDead,_stopCamUpdate;
 
 };

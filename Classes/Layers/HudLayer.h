@@ -23,6 +23,7 @@ class HudLayer: public cocos2d::CCLayer
 		bool init();
 		void dialougeModeOn();
 		void dialougeModeOff();
+		void everythingOn();
 
 		void cherryTalks(bool isTalking, int chosenFrame);
 		void fenemyTalks(bool isTalking, int chosenFrame);
@@ -41,6 +42,7 @@ class HudLayer: public cocos2d::CCLayer
 
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameCherryNameTag, DisplayCherryNameTag);
 		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameOtherNameTag, DisplayOtherNameTag);
+		CC_SYNTHESIZE(cocos2d::CCSprite*, _gameExplanation, DisplayGameExplain);
 
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _goBack , GoBack);
 		CC_SYNTHESIZE(cocos2d::CCMenuItemImage*, _tapToContinue , TapToContinue);

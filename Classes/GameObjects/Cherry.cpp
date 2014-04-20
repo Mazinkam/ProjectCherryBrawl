@@ -24,7 +24,7 @@ bool Cherry::init()
 	bool bRet = false;
 	do
 	{
-		CC_BREAK_IF(!ActionSprite::initWithSpriteFrameName("idle001.png"));
+		CC_BREAK_IF(!ActorSprite::initWithSpriteFrameName("idle001.png"));
 
 		int i;
 		//idle animation
@@ -142,7 +142,7 @@ bool Cherry::init()
 
 void Cherry::knockout()
 {
-	ActionSprite::knockout();
+	ActorSprite::knockout();
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("death.wav");
 }
 

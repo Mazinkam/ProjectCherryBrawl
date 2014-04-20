@@ -33,6 +33,7 @@ GameLayer::GameLayer(void) :
 	_checkPointOneSceneTwo = false;
 	_checkPointTwoSceneTwo = false;
 	_stopCamUpdate = false;
+	_controlCheck = false;
 
 }
 
@@ -144,6 +145,11 @@ void GameLayer::initStartCutscene()
 	_hud->getGameDisplayOther()->setVisible(false);
 	_hud->getDisplayOtherNameTag()->setVisible(false);
 
+	_hud->getDisplayGameExplain()->setVisible(true);
+
+	_hud->dialougeModeOff();
+	_hud->getDisplayGameExplain()->setPosition(ccp(SCREEN.width/2, SCREEN.height/2));
+
 	CCMenu* pMenu = CCMenu::create(_hud->getTapToContinue(), NULL);
 	pMenu->setPosition(CCPointZero);
 
@@ -220,7 +226,7 @@ void GameLayer::initSingleObjects()
 }
 void GameLayer::initEnemies()
 {
-	int enemyCount = 10;
+	int enemyCount = 20;
 
 	this->setEnemies(CCArray::createWithCapacity(enemyCount));
 	this->setEnemiesShadow(CCArray::createWithCapacity(enemyCount));
@@ -290,7 +296,7 @@ void GameLayer::initSkillBar()
 			{
 				_manaOrb->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaEmpty));
 			}
-			_manaOrb->setPosition(ccp(SCREEN.width/3.35+ ((s_manaSize * i) + (s_manaSpaceSize*i)), SCREEN.height/11));
+			_manaOrb->setPosition(ccp(SCREEN.width/3.35+ ((s_manaSize * i) + (s_manaSpaceSize*i)), SCREEN.height/5.8));
 			_manaOrb->setTag(i);
 			_hud->getManaPool()->addObject(_manaOrb);
 			_hud->addChild(_manaOrb, 11);
@@ -303,7 +309,7 @@ void GameLayer::initSkillBar()
 			{
 				_hpBlip->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_HpBlip));
 			}
-			_hpBlip->setPosition(ccp(SCREEN.width/3.29+ ((s_blipSize * i) + (s_blipSpaceSize*i)) - s_horizPadding, SCREEN.height/4.8));
+			_hpBlip->setPosition(ccp(SCREEN.width/3.29+ ((s_blipSize * i) + (s_blipSpaceSize*i)) - s_horizPadding, SCREEN.height/3.5));
 			_hpBlip->setTag(i);
 			_hud->getHpPool()->addObject(_hpBlip);
 			_hud->addChild(_hpBlip, 7);
@@ -337,11 +343,15 @@ void GameLayer::updateCutscenes(CCObject* pObject)
 		{
 			LOG("%i",_sceneOne);
 			_cherry->walkLeftThenIdle();
+			_controlCheck = true;
+			_hud->getDisplayGameExplain()->setVisible(false);
 
 		}
 		if (_sceneOne == 2)
 		{
 			LOG("%i",_sceneOne);
+			_hud->dialougeModeOn();
+			_hud->getDisplayGameExplain()->setVisible(false);
 			_hud->getGameDialouge()->setVisible(true);
 			_hud->cherryTalks(true,1);
 			_hud->fenemyTalks(false,1);
@@ -566,6 +576,11 @@ void GameLayer::simpleDPadTouchEnded(GameDPad *simpleDPad)
 void GameLayer::update(float dt)
 {
 	_cherry->update(dt);
+	if (_cherry->getHitPoints() <= 0)
+	{
+		_cherry->setActionState(kActionStateKnockedOut);
+		_cherry->knockout();
+	}
 
 	this->updatePositions();
 	this->updateEnemies(dt);
@@ -615,7 +630,7 @@ void GameLayer::updateProjectiles()
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 					CCHide *hideMe = CCHide::create();
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 					_dmgLabel->runAction(seq);
 				}
 			}
@@ -637,7 +652,7 @@ void GameLayer::updateProjectiles()
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 				CCHide *hideMe = CCHide::create();
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 				_dmgLabel->runAction(seq);
 			}
 		}
@@ -657,7 +672,7 @@ void GameLayer::updateProjectiles()
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 				CCHide *hideMe = CCHide::create();
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 				_dmgLabel->runAction(seq);
 			}
 		}
@@ -798,7 +813,7 @@ void GameLayer::updateUI()
 				s->setDisplayFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(s_ManaEmpty));
 			}
 		}
-		if (_dialougeState)
+		if (_dialougeState && _controlCheck)
 			s->setVisible(false);
 		else
 			s->setVisible(true);
@@ -820,7 +835,7 @@ void GameLayer::updateUI()
 				s->setOpacity(10);
 			}
 		}
-		if (_dialougeState)
+		if (_dialougeState && _controlCheck)
 			s->setVisible(false);
 		else
 			s->setVisible(true);
@@ -829,7 +844,16 @@ void GameLayer::updateUI()
 	if (!_dialougeState)
 		_hud->dialougeModeOff();
 	if (_dialougeState)
-		_hud->dialougeModeOn();
+	{
+		if (!_controlCheck)
+		{
+			_hud->everythingOn();
+
+		} else
+		{
+			_hud->dialougeModeOn();
+		}
+	}
 
 }
 
@@ -854,7 +878,7 @@ void GameLayer::reorderActors()
 	CCObject *pObject = NULL;
 	CCARRAY_FOREACH(_actorsAtlas->getChildren(), pObject)
 	{
-		ActionSprite *sprite = (ActionSprite*) pObject;
+		ActorSprite *sprite = (ActorSprite*) pObject;
 		_actorsAtlas->reorderChild(sprite, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - sprite->getPosition().y);
 	}
 }
@@ -877,6 +901,7 @@ void GameLayer::updateBoss(float dt)
 			//cocos2d::CCLog("distanceSQ: %lf", distanceSQ);
 			//LOG("distanceSQ %fl", distanceSQ);
 			//3 distance for attacks, code needs to be rewritted for more enemies
+			LOG("distanceSQ: %fl",distanceSQ);
 			if (distanceSQ <= bossAttackRange)
 			{
 				_reachedBoss = true;
@@ -886,6 +911,7 @@ void GameLayer::updateBoss(float dt)
 				}
 				_eBoss->setNextDecisionTime(CURTIME + frandom_range(0.1, 0.2) * 1000);
 				randomChoice = random_range(0, 1);
+
 
 				if (randomChoice == 0)
 				{
@@ -899,10 +925,7 @@ void GameLayer::updateBoss(float dt)
 
 					//4
 					_eBoss->setNextDecisionTime(_eBoss->getNextDecisionTime() + frandom_range(0.1,0.2) * 2000);
-
-					randomChoice = random_range(0, 8);
-
-					if (randomChoice == 1)
+					if (distanceSQ <= 6000)
 					{
 						_eBoss->attack();
 
@@ -913,6 +936,7 @@ void GameLayer::updateBoss(float dt)
 								if (_cherry->getHitbox().actual.intersectsRect(_eBoss->getAttackBox().actual) && _hud->getChildByTag(100) == NULL)
 								{
 									_cherry->hurtWithDamage(_eBoss->getDamage());
+									_cherry->pushBack();
 									int printNum = _eBoss->getDamage();
 									CCLabelTTF *_dmgLabel = CCLabelTTF::create(CCString::createWithFormat("%i", printNum)->getCString(), "Marker Felt", 24);
 									addChild(_dmgLabel);
@@ -922,23 +946,28 @@ void GameLayer::updateBoss(float dt)
 									CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 									CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 									CCHide *hideMe = CCHide::create();
-									CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+									CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 									_dmgLabel->runAction(seq);
 
 								}
 							}
 						}
-					} else if (randomChoice == 2)
-					{
-						this->bossSecondSkill();
-					} else if (randomChoice == 3)
-					{
-						this->bossFirstSkill();
+
 					} else
 					{
-						CCPoint moveDirection = ccpNormalize(ccpSub(_cherry->getPosition(), _eBoss->getPosition()));
-						_eBoss->walkWithDirection(moveDirection);
-						//_eBossWings->walkWithDirection(moveDirection);
+						randomChoice = random_range(0, 4);
+						if (randomChoice == 2)
+						{
+							this->bossSecondSkill();
+						} else if (randomChoice == 3)
+						{
+							this->bossFirstSkill();
+						} else
+						{
+							CCPoint moveDirection = ccpNormalize(ccpSub(_cherry->getPosition(), _eBoss->getPosition()));
+							_eBoss->walkWithDirection(moveDirection);
+							//_eBossWings->walkWithDirection(moveDirection);
+						}
 					}
 				} else
 				{
@@ -1129,7 +1158,7 @@ void GameLayer::updateEnemies(float dt)
 									CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 									CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 									CCHide *hideMe = CCHide::create();
-									CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+									CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 									_dmgLabel->runAction(seq);
 
 								}
@@ -1232,7 +1261,7 @@ void GameLayer::updateEnemies(float dt)
 										CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 										CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 										CCHide *hideMe = CCHide::create();
-										CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+										CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 										_dmgLabel->runAction(seq);
 
 										//end game
@@ -1296,7 +1325,7 @@ void GameLayer::updateEnemies(float dt)
 
 void GameLayer::firstSkill(CCObject* pObject)
 {
-	if (_cherry->getActionState() != kActionStateKnockedOut)
+	if (_cherry->getActionState() != kActionStateKnockedOut && !_dialougeState)
 	{
 		_cherry->attack();
 
@@ -1366,8 +1395,7 @@ void GameLayer::firstSkill(CCObject* pObject)
 							CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 							CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 							CCHide *hideMe = CCHide::create();
-							CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
-
+							CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 
 							_dmgLabel->runAction(seq);
 
@@ -1389,7 +1417,7 @@ void GameLayer::firstSkill(CCObject* pObject)
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 					CCHide *hideMe = CCHide::create();
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 
 					_dmgLabel->runAction(seq);
 				}
@@ -1412,7 +1440,7 @@ void GameLayer::firstSkill(CCObject* pObject)
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 					CCHide *hideMe = CCHide::create();
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 
 					_dmgLabel->runAction(seq);
 				}
@@ -1423,7 +1451,7 @@ void GameLayer::firstSkill(CCObject* pObject)
 
 void GameLayer::SplitSkill(CCObject* pObject)
 {
-	if (_cherry->getManaPool() >= 4 && _cherry->getActionState() != kActionStateKnockedOut)
+	if (_cherry->getManaPool() >= 4 && _cherry->getActionState() != kActionStateKnockedOut && !_dialougeState)
 	{
 		_cherry->setManaPool(_cherry->getManaPool() - 4);
 		_cherry->circleAttack();
@@ -1458,7 +1486,7 @@ void GameLayer::SplitSkill(CCObject* pObject)
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 					CCHide *hideMe = CCHide::create();
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 
 					_dmgLabel->runAction(seq);
 				}
@@ -1478,7 +1506,7 @@ void GameLayer::SplitSkill(CCObject* pObject)
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 				CCHide *hideMe = CCHide::create();
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 
 				_dmgLabel->runAction(seq);
 			}
@@ -1497,7 +1525,7 @@ void GameLayer::SplitSkill(CCObject* pObject)
 				CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 				CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 				CCHide *hideMe = CCHide::create();
-				CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+				CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 
 				_dmgLabel->runAction(seq);
 			}
@@ -1509,7 +1537,7 @@ void GameLayer::SplitSkill(CCObject* pObject)
 
 void GameLayer::projectileSkill(CCObject* pObject)
 {
-	if (_cherry->getManaPool() >= 2 && _cherry->getActionState() != kActionStateKnockedOut)
+	if (_cherry->getManaPool() >= 2 && _cherry->getActionState() != kActionStateKnockedOut && !_dialougeState)
 	{
 		_cherry->setManaPool(_cherry->getManaPool() - 2);
 		_cherry->projectileAttack();
@@ -1566,7 +1594,7 @@ void GameLayer::projectileSkill(CCObject* pObject)
 
 void GameLayer::circleSkill(CCObject* pObject)
 {
-	if (_cherry->getManaPool() >= 3 && _cherry->getActionState() != kActionStateKnockedOut)
+	if (_cherry->getManaPool() >= 3 && _cherry->getActionState() != kActionStateKnockedOut && !_dialougeState)
 	{
 		_cherry->setManaPool(_cherry->getManaPool() - 3);
 		//		updateUI();
@@ -1630,7 +1658,7 @@ void GameLayer::circleSkill(CCObject* pObject)
 						CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 						CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 						CCHide *hideMe = CCHide::create();
-						CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+						CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 						_dmgLabel->runAction(seq);
 					}
 				}
@@ -1649,7 +1677,7 @@ void GameLayer::circleSkill(CCObject* pObject)
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 					CCHide *hideMe = CCHide::create();
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 					_dmgLabel->runAction(seq);
 				}
 			}
@@ -1667,7 +1695,7 @@ void GameLayer::circleSkill(CCObject* pObject)
 					CCMoveBy *moveBy = CCMoveBy::create(0.5, ccp(0, 60));
 					CCFadeOut *fadeOut = CCFadeOut::create(0.5);
 					CCHide *hideMe = CCHide::create();
-					CCSequence *seq = CCSequence::create(moveBy, fadeOut,hideMe, NULL);
+					CCSequence *seq = CCSequence::create(moveBy, fadeOut, hideMe, NULL);
 					_dmgLabel->runAction(seq);
 				}
 			}

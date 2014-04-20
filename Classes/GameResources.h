@@ -109,5 +109,6 @@ static const char s_GameShadow[] = "shadow.png";
 static const char s_backOff[] = "back_off.png";
 static const char s_backOn[] = "back_on.png";
 static const char s_contorlsPic[] = "controls.png";
+static const char s_ExplainPic[] = "explanation.png";
 
 #endif /* GAMERESOURCES_H_ */

@@ -1,5 +1,5 @@
 /*
- * ActionSprite.h
+ * ActorSprite.h
  *
  *  Created on: 24.2.2014
  *      Author: user
@@ -12,11 +12,11 @@
 #include "../Defines.h"
 #include "../GameResources.h"
 
-class ActionSprite: public cocos2d::CCSprite
+class ActorSprite: public cocos2d::CCSprite
 {
 	public:
-		ActionSprite(void);
-		virtual ~ActionSprite(void);
+		ActorSprite(void);
+		virtual ~ActorSprite(void);
 
 		//action methods
 		void idle();
@@ -34,6 +34,7 @@ class ActionSprite: public cocos2d::CCSprite
 
 
 		void walkLeftThenIdle();
+		void pushBack();
 
 		//scheduled methods
 		void update(float dt);

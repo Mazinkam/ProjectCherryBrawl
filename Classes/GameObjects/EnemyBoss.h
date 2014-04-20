@@ -10,7 +10,7 @@
 
 #include "ActorSprite.h"
 
-class EnemyBoss: public ActionSprite
+class EnemyBoss: public ActorSprite
 {
 	public:
 	EnemyBoss(void);

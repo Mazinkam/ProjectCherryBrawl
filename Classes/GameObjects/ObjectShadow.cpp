@@ -25,7 +25,7 @@ bool ObjectShadow::init()
 	bool bRet = false;
 	do
 	{
-		CC_BREAK_IF(!ActionSprite::initWithSpriteFrameName(s_GameShadow));
+		CC_BREAK_IF(!ActorSprite::initWithSpriteFrameName(s_GameShadow));
 
 		int i;
 		//idle animation
@@ -56,6 +56,6 @@ bool ObjectShadow::init()
 
 void ObjectShadow::knockout()
 {
-	ActionSprite::knockout();
+	ActorSprite::knockout();
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("death.wav");
 }

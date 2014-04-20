@@ -55,11 +55,11 @@ bool HudLayer::init()
 
 		_hpBackground = CCSprite::create(s_HpBG);
 		CC_BREAK_IF(!_hpBackground);
-		_hpBackground->setPosition(ccp(SCREEN.width/2 - s_horizPadding, SCREEN.height/4.8));
+		_hpBackground->setPosition(ccp(SCREEN.width/2 - s_horizPadding, SCREEN.height/3.5));
 
 		_hpBorder = CCSprite::create(s_HpBorder);
 		CC_BREAK_IF(!_hpBorder);
-		_hpBorder->setPosition(ccp(SCREEN.width/2 - s_horizPadding, SCREEN.height/4.8));
+		_hpBorder->setPosition(ccp(SCREEN.width/2 - s_horizPadding, SCREEN.height/3.5));
 
 		_gameDialouge = CCSprite::create(s_Dialouge1);
 		CC_BREAK_IF(!_gameDialouge);
@@ -84,6 +84,10 @@ bool HudLayer::init()
 		_gameOtherNameTag = CCSprite::create(s_UnknownNameTag);
 		CC_BREAK_IF(!_gameOtherNameTag);
 		this->addChild(_gameOtherNameTag, 62);
+
+		_gameExplanation = CCSprite::create(s_ExplainPic);
+		CC_BREAK_IF(!_gameExplanation);
+		this->addChild(_gameExplanation, 63);
 
 		_gameDialouge->setVisible(false);
 		_gameDisplayCherry->setVisible(false);
@@ -157,6 +161,38 @@ void HudLayer::dialougeModeOff()
 		_gameOtherNameTag->setVisible(false);
 	if (_tapToContinue != NULL)
 		_tapToContinue->setVisible(false);
+
+	if (_skillOne != NULL)
+		_skillOne->setVisible(true);
+	if (_skillTwo != NULL)
+		_skillTwo->setVisible(true);
+	if (_skillThree != NULL)
+		_skillThree->setVisible(true);
+	if (_skillFour != NULL)
+		_skillFour->setVisible(true);
+}
+void HudLayer::everythingOn()
+{
+//	_dialougeBox->setVisible(true);
+	if (_dPad != NULL)
+		_dPad->setVisible(true);
+	if (_hpBackground != NULL)
+		_hpBackground->setVisible(true);
+	if (_hpBorder != NULL)
+		_hpBorder->setVisible(true);
+
+	if (_gameDialouge != NULL)
+		_gameDialouge->setVisible(false);
+	if (_gameDisplayCherry != NULL)
+		_gameDisplayCherry->setVisible(false);
+	if (_gameDisplayOther != NULL)
+		_gameDisplayOther->setVisible(false);
+	if (_gameCherryNameTag != NULL)
+		_gameCherryNameTag->setVisible(false);
+	if (_gameOtherNameTag != NULL)
+		_gameOtherNameTag->setVisible(false);
+	if (_tapToContinue != NULL)
+		_tapToContinue->setVisible(true);
 
 	if (_skillOne != NULL)
 		_skillOne->setVisible(true);

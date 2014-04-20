@@ -24,7 +24,7 @@ bool EnemyBoss::init()
 	bool bRet = false;
 	do
 	{
-		CC_BREAK_IF(!ActionSprite::initWithSpriteFrameName("boss_idle001.png"));
+		CC_BREAK_IF(!ActorSprite::initWithSpriteFrameName("boss_idle001.png"));
 
 		int i;
 		//idle animation
@@ -124,7 +124,7 @@ bool EnemyBoss::init()
 
 void EnemyBoss::knockout()
 {
-	ActionSprite::knockout();
+	ActorSprite::knockout();
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("death.wav");
 	_animDone = true;
 }

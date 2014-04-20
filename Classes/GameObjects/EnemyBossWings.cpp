@@ -24,7 +24,7 @@ bool EnemyBossWings::init()
 	bool bRet = false;
 	do
 	{
-		CC_BREAK_IF(!ActionSprite::initWithSpriteFrameName("wing_001.png"));
+		CC_BREAK_IF(!ActorSprite::initWithSpriteFrameName("wing_001.png"));
 
 		int i;
 		//idle animation
@@ -62,6 +62,6 @@ bool EnemyBossWings::init()
 
 void EnemyBossWings::knockout()
 {
-	ActionSprite::knockout();
+	ActorSprite::knockout();
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("death.wav");
 }

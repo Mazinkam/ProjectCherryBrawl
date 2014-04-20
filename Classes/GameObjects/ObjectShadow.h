@@ -10,7 +10,7 @@
 
 #include "ActorSprite.h"
 
-class ObjectShadow: public ActionSprite
+class ObjectShadow: public ActorSprite
 {
 	public:
 		ObjectShadow();
