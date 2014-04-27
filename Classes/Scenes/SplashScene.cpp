@@ -69,6 +69,6 @@ bool SplashScene::init()
 
 void SplashScene::DisplayScene()
 {
-	CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, MenuScene::scene(), ccBLACK));
+	CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, MenuScene::scene(), ccWHITE));
 }
 
